@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./adminPanelB.css";
-import Logo from "../../chatComponents/assets/chat.svg";
+import Logo from "../../logo.svg";
 import { useRecoilState } from "recoil";
 import selectedDarkThemeAtom from "../../chatComponents/stateManager/atoms/selectedDarkThemeAtom";
 
@@ -131,7 +131,8 @@ const AdminPanelB = ({ isAdmin, setIsAdmin }) => {
                   </svg>
                 </button>
                 <a href="#0" aria-label="admin logo" className="logo">
-                  <img src={Logo} alt="" />
+                  <img className="bxl-c-plus-plus" src={Logo} alt="" />
+                  <p style={{ marginLeft: 2 }}>RUM Admin</p>
                 </a>
 
                 <ul
