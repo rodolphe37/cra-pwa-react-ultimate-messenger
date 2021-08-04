@@ -24,10 +24,10 @@ import exampleClickedAtom from "./chatComponents/stateManager/atoms/exampleClick
 import isLanguageAtom from "./chatComponents/stateManager/atoms/isLanguageAtom";
 import Alert from "./chatComponents/customAlert/Alert";
 import roomIdAtom from "./chatComponents/stateManager/atoms/roomIdAtom";
-import AdminPanel from "./adminDashboard/AdminPanel";
+import AdminPanel from "./adminDashboard/adminPanelB/AdminPanelB";
 // import clickedOffChatAtom from "./chatComponents/stateManager/atoms/clickedOffChatAtom";
 import LoginIcon from "./chatComponents/assets/reglages.svg";
-import AdminPanel2 from "./adminDashboard/AdminPanel2";
+import AdminPanel2 from "./adminDashboard/adminPanelA/AdminPanelA";
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);

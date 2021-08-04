@@ -1,15 +1,15 @@
 import { Fragment, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import "./adminPanel.css";
-import Logo from "../chatComponents/assets/chat.svg";
+import "./adminPanelB.css";
+import Logo from "../../chatComponents/assets/chat.svg";
 import { useRecoilState } from "recoil";
-import selectedDarkThemeAtom from "../chatComponents/stateManager/atoms/selectedDarkThemeAtom";
+import selectedDarkThemeAtom from "../../chatComponents/stateManager/atoms/selectedDarkThemeAtom";
 
-import useMobile from "../chatComponents/hooks/useMobile";
-import usernameAtom from "../chatComponents/stateManager/atoms/usernameAtom";
-import passwordAtom from "../chatComponents/stateManager/atoms/passwordAtom";
+import useMobile from "../../chatComponents/hooks/useMobile";
+import usernameAtom from "../../chatComponents/stateManager/atoms/usernameAtom";
+import passwordAtom from "../../chatComponents/stateManager/atoms/passwordAtom";
 
-const AdminPanel = ({ isAdmin, setIsAdmin }) => {
+const AdminPanelB = ({ isAdmin, setIsAdmin }) => {
   let history = useHistory();
   const [expandMenu, setExpandMenu] = useState(false);
   const [name] = useRecoilState(usernameAtom);
@@ -317,4 +317,4 @@ const AdminPanel = ({ isAdmin, setIsAdmin }) => {
   );
 };
 
-export default AdminPanel;
+export default AdminPanelB;
