@@ -1,0 +1,65 @@
+{
+  "short_name": "React Ultimate Messenger",
+  "name": "Create React App RUM template",
+  "shortcuts": [
+      {
+        "name": "Chat",
+        "short_name": "Chat section",
+        "description": "Go to message section",
+        "url": "/intro",
+        "icons": [{ "src": "/logo192.png", "sizes": "192x192" }]
+      },
+      {
+        "name": "Home Page",
+        "short_name": "Home Page",
+        "description": "Go to home page",
+        "url": "/",
+        "icons": [{ "src": "/logo192.png", "sizes": "192x192" }]
+      },
+      {
+        "name": "Admin",
+        "short_name": "Admin session app",
+        "description": "Go to Feety Settings section",
+        "url": "/login",
+        "icons": [{ "src": "/logo192.png", "sizes": "192x192" }]
+      }
+    ],
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "share_target": {
+    "action": "/share-photo",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "name",
+      "text": "description",
+      "url": "link",
+      "files": [
+        {
+          "name": "photos",
+          "accept": "image/png"
+        }
+      ]
+    }
+    },
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#7e30db",
+    "background_color": "#282c34"
+}
