@@ -1,22 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import "./adminPanelA.css";
-import LogoAdmin from "../../logo.svg";
-import SunglassesIcon from "../images/sunglasses.jpg";
-import JeansIcon from "../images/jeans.jpg";
-import NikeIcon from "../images/nike.jpg";
-import Scarves from "../images/scarves.jpg";
-import BlueBag from "../images/blueBag.jpg";
-import BagIcon from "../images/bag.jpg";
-import Addidas from "../images/addidas.jpg";
-import Shirt from "../images/shirt.jpg";
+import "./adminPanel2.css";
+import LogoAdmin from "../logo.svg";
+import SunglassesIcon from "./images/sunglasses.jpg";
+import JeansIcon from "./images/jeans.jpg";
+import NikeIcon from "./images/nike.jpg";
+import Scarves from "./images/scarves.jpg";
+import BlueBag from "./images/blueBag.jpg";
+import BagIcon from "./images/bag.jpg";
+import Addidas from "./images/addidas.jpg";
+import Shirt from "./images/shirt.jpg";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import usernameAtom from "../../chatComponents/stateManager/atoms/usernameAtom";
-import passwordAtom from "../../chatComponents/stateManager/atoms/passwordAtom";
-import useAxios from "../../chatComponents/hooks/useAxios";
+import usernameAtom from "../chatComponents/stateManager/atoms/usernameAtom";
+import passwordAtom from "../chatComponents/stateManager/atoms/passwordAtom";
+import useAxios from "../chatComponents/hooks/useAxios";
 
-const AdminPanelA = ({ isAdmin, setIsAdmin }) => {
+const AdminPanel2 = ({ isAdmin, setIsAdmin }) => {
+  // eslint-disable-next-line no-unused-vars
   const { response } = useAxios({
     method: "GET",
     url: "/users",
@@ -104,7 +105,7 @@ const AdminPanelA = ({ isAdmin, setIsAdmin }) => {
           <li>
             <a href="#">
               <i className="bx bx-heart"></i>
-              <span className="links_name">Favorites</span>
+              <span className="links_name">Favrorites</span>
             </a>
           </li>
           <li>
@@ -321,4 +322,4 @@ const AdminPanelA = ({ isAdmin, setIsAdmin }) => {
   );
 };
 
-export default AdminPanelA;
+export default AdminPanel2;

@@ -1,15 +1,15 @@
 import { Fragment, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import "./adminPanelB.css";
-import Logo from "../../logo.svg";
+import "./adminPanel.css";
+import Logo from "../chatComponents/assets/chat.svg";
 import { useRecoilState } from "recoil";
-import selectedDarkThemeAtom from "../../chatComponents/stateManager/atoms/selectedDarkThemeAtom";
+import selectedDarkThemeAtom from "../chatComponents/stateManager/atoms/selectedDarkThemeAtom";
 
-import useMobile from "../../chatComponents/hooks/useMobile";
-import usernameAtom from "../../chatComponents/stateManager/atoms/usernameAtom";
-import passwordAtom from "../../chatComponents/stateManager/atoms/passwordAtom";
+import useMobile from "../chatComponents/hooks/useMobile";
+import usernameAtom from "../chatComponents/stateManager/atoms/usernameAtom";
+import passwordAtom from "../chatComponents/stateManager/atoms/passwordAtom";
 
-const AdminPanelB = ({ isAdmin, setIsAdmin }) => {
+const AdminPanel = ({ isAdmin, setIsAdmin }) => {
   let history = useHistory();
   const [expandMenu, setExpandMenu] = useState(false);
   const [name] = useRecoilState(usernameAtom);
@@ -131,8 +131,7 @@ const AdminPanelB = ({ isAdmin, setIsAdmin }) => {
                   </svg>
                 </button>
                 <a href="#0" aria-label="admin logo" className="logo">
-                  <img className="bxl-c-plus-plus" src={Logo} alt="" />
-                  <p style={{ marginLeft: 2 }}>RUM Admin</p>
+                  <img src={Logo} alt="" />
                 </a>
 
                 <ul
@@ -318,4 +317,4 @@ const AdminPanelB = ({ isAdmin, setIsAdmin }) => {
   );
 };
 
-export default AdminPanelB;
+export default AdminPanel;
