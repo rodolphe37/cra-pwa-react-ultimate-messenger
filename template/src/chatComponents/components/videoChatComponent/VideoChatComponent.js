@@ -119,6 +119,7 @@ const VideoChatComponent = () => {
                         autoPlay
                         style={{
                           width: "240px",
+                          height: "240px",
                           paddingLeft: 22,
                           paddingRight: 22,
                         }}
