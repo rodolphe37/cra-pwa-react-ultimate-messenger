@@ -72,8 +72,7 @@ const Join = ({ isAdmin, setIsAdmin }) => {
       <div className="joinOuterContainer">
         <div className="messagesLogin">
           <Alert
-            title={`${t("adminAlertTitle")}`}
-            subTitle={`${t("adminAlertSubtitle")}`}
+            title={`${t("adminAlertTitle")} ${t("adminAlertSubtitle")}`}
             buttonNo={`${t("adminAlertButton")}`}
           />
         </div>
