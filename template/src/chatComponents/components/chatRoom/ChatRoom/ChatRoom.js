@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 // MODULES IMPORTS
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -11,7 +10,6 @@ import { useTranslation } from "react-i18next";
 import { isAndroid, isIOS, isBrowser } from "react-device-detect";
 // import { v4 as uuidv4 } from "uuid";
 // CSS IMPORTS
-
 import "./ChatRoom.css";
 // HOOKS & SERVICES IMPORTS
 import useChat from "../../../hooks/useChat";
@@ -57,6 +55,7 @@ import activateDeleteConvAtom from "../../checkboxAlert/activateDeleteConvAtom";
 import clickedOffChatAtom from "../../../stateManager/atoms/clickedOffChatAtom";
 import VideoChatComponent from "../../videoChatComponent/VideoChatComponent";
 import openVideoChatAtom from "../../../stateManager/atoms/openVideoChatAtom";
+import useWebPush from "../../../hooks/useWebPush";
 
 const ChatRoom = (props) => {
   const { t } = useTranslation();
@@ -68,49 +67,6 @@ const ChatRoom = (props) => {
   const [isSoundNotification, setIsSoundNotification] = useRecoilState(
     isSoundNotificationsAtom
   );
-
-  // const { me } = useVideoChat();
-  // if you want to catch roomId from URL
-  // const { roomId } = props.match.params; // Gets roomId from URL
-
-  // USE UUIDV4 FOR GENERATE ID ROOM FOR CHAT IF YOU WANT
-  // useEffect(() => {
-  //   if (!roomToken) {
-  //     setRoomToken(uuidv4());
-  //   }else{
-
-  //   }
-  //   return () => {
-  //     setRoomToken("");
-  //   };
-  // }, []);
-
-  useEffect(() => {
-    if (!roomToken && sessionStorage.getItem("roomName") !== null) {
-      setRoomToken(sessionStorage.getItem("roomName"));
-    }
-    if (roomToken) {
-      sessionStorage.setItem("roomName", roomToken);
-    }
-    if (!roomToken && !sessionStorage.getItem("roomName")) {
-      const roomId = props.match.params; // Gets roomId from URL
-      setRoomToken(roomId.roomToken);
-    }
-    if (isLoaded) {
-      //   setIsSoundNotification(false);
-      setTimeout(() => {
-        setIsLoaded(false);
-      }, 3500);
-      //   setTimeout(() => {
-      //     setIsSoundNotification(true);
-      //   }, 4600);
-    }
-    return () => {
-      setRoomToken("");
-      sessionStorage.removeItem("roomName");
-    };
-  }, []);
-
   let roomId = { roomToken };
   const [username, setUsername] = useRecoilState(usernameAtom);
   // const { customAlert, ok } = useCustomAlert();
@@ -169,8 +125,76 @@ const ChatRoom = (props) => {
   const [toggleDeleteButton, setToggleDeleteButton] = useState(false);
   const [isSendThumb, setIsSendThumb] = useState(false);
 
+  // const { me } = useVideoChat();
+  // if you want to catch roomId from URL
+  // const { roomId } = props.match.params; // Gets roomId from URL
+
+  // USE UUIDV4 FOR GENERATE ID ROOM FOR CHAT IF YOU WANT
+  // useEffect(() => {
+  //   if (!roomToken) {
+  //     setRoomToken(uuidv4());
+  //   }else{
+
+  //   }
+  //   return () => {
+  //     setRoomToken("");
+  //   };
+  // }, []);
+
   let d = new Date();
   let n = d.toLocaleString();
+
+  // CUSTOM WEBPUSH SECTION
+  const { customWebPush } = useWebPush();
+
+  useEffect(() => {
+    // CHECK THE MESSAGE CONTENT
+    const youAreCalled = messages.map((res) => res.body);
+    // CHECK THE USERNAME FROM USERNAMEATOM STATE
+    const yourUserName = username;
+    // ONLY IF THE CHAT WINDOW IS REDUCED
+    if (clickedOffChat === true) {
+      // THIS WEBPUSH IS WHEN THE OTHER USER CALL YOU IN MESSAGE CHAT
+      if (messages.length > 0) {
+        if (youAreCalled.includes(`${yourUserName}`)) {
+          console.log("on parle de toi!!!");
+          customWebPush({
+            NotificationMessage:
+              "Une personne a écrit votre nom d'utilisateur dans le chat !",
+          });
+        }
+      }
+    }
+    // FOR IPHONE - IMPLEMENT WHAT YOU WANT
+    if (isIOS) {
+      // alert("This is an Iphone")
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [username, messages]);
+  // END OF WEBPUSH SECTION
+
+  useEffect(() => {
+    if (!roomToken && sessionStorage.getItem("roomName") !== null) {
+      setRoomToken(sessionStorage.getItem("roomName"));
+    }
+    if (roomToken) {
+      sessionStorage.setItem("roomName", roomToken);
+    }
+    if (!roomToken && !sessionStorage.getItem("roomName")) {
+      const roomId = props.match.params; // Gets roomId from URL
+      setRoomToken(roomId.roomToken);
+    }
+    if (isLoaded) {
+      setTimeout(() => {
+        setIsLoaded(false);
+      }, 3500);
+    }
+    return () => {
+      setRoomToken("");
+      sessionStorage.removeItem("roomName");
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -186,6 +210,7 @@ const ChatRoom = (props) => {
         window.location.replace(`/video/${roomToken}`);
       }, 1200);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages, userAllInfos]);
 
   const handleNewMessageChange = (event) => {
@@ -307,6 +332,7 @@ const ChatRoom = (props) => {
         setNewMessage("");
       }, 300);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newMessage]);
 
   function allInfos() {
@@ -357,6 +383,7 @@ const ChatRoom = (props) => {
 
     allInfos();
     sessionStorage.setItem("infos user", JSON.stringify(userAllInfos));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     messages,
     chosenEmoji,
@@ -413,92 +440,15 @@ const ChatRoom = (props) => {
     if (speechToTextConversion !== "") {
       setNewMessage(speechToTextConversion);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speechToTextConversion]);
 
   useEffect(() => {
     if (newMessage.includes("#")) {
       setMessageForBot(newMessage);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newMessage, messageForBot]);
-
-  // WEB PUSH SECTION
-  useEffect(() => {
-    // THIS WEBPUSH APPEAR ONLY IF IS BROWSER OR ANDROID PHONES
-    if (isBrowser || isAndroid) {
-      // THIS FIRST WEBPUSH IS WELCOME MESSAGE
-      if (sessionStorage.getItem("hello") === null) {
-        Notification.requestPermission((result) => {
-          if (result === "granted") {
-            showNotification(
-              "Bienvenue sur l'application React Ultimate Chat!"
-            );
-          }
-        });
-
-        function showNotification(title, message) {
-          if ("Notification" in window) {
-            navigator.serviceWorker.ready.then((registration) => {
-              registration.showNotification(title, {
-                body: message,
-                tag: "vibration-sample",
-              });
-            });
-          }
-        }
-        setTimeout(() => {
-          sessionStorage.setItem("hello", true);
-        }, 1200);
-      }
-    }
-    return () => {
-      sessionStorage.removeItem("hello");
-    };
-  }, []);
-
-  useEffect(() => {
-    // CHECK THE MESSAGE CONTENT
-    const youAreCalled = messages.map((res) => res.body);
-    // CHECK THE USERNAME FROM USERNAMEATOM STATE
-    const yourUserName = username;
-    // ONLY IF THE CHAT WINDOW IS REDUCED
-    if (clickedOffChat === true) {
-      // FOR BROWSERS & ANDROID PHONE ONLY
-      if (isBrowser || isAndroid) {
-        // THIS WEBPUSH IS WHEN THE OTHER USER CALL YOU IN MESSAGE CHAT
-        if (messages.length > 0) {
-          if (youAreCalled.includes(`${yourUserName}`)) {
-            console.log("on parle de toi!!!");
-            Notification.requestPermission((result) => {
-              if (result === "granted") {
-                showNotification(
-                  "Une personne a écrit votre nom d'utilisateur dans le chat !"
-                );
-              }
-            });
-
-            function showNotification(title, message) {
-              if ("Notification" in window) {
-                navigator.serviceWorker.ready.then((registration) => {
-                  registration.showNotification(title, {
-                    body: message,
-                    tag: "vibration-sample",
-                  });
-                });
-              }
-            }
-          }
-        }
-      }
-    }
-    // FOR IPHONE - IMPLEMENT WHAT YOU WANT
-    if (isIOS) {
-      // alert("This is an Iphone")
-    }
-    // console.log("yourUserName ", yourUserName);
-    // console.log("youAreCalled ", youAreCalled);
-    // console.log(youAreCalled.includes(`${yourUserName}`));
-  }, [username, messages]);
-  // END OF WEBPUSH SECTION
 
   // DELETE MESSAGE SECTION
   const [idForDeleteButton, setIdForDeleteButton] = useState("");
@@ -534,6 +484,7 @@ const ChatRoom = (props) => {
       // setIsSoundNotification(true);
     }
     // console.log("id for button :", idForDeleteButton);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messageIdToDelete, idForDeleteButton]);
 
   // END OF DELETE MESSAGE SECTION

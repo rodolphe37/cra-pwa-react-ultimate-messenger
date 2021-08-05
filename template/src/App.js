@@ -25,9 +25,9 @@ import isLanguageAtom from "./chatComponents/stateManager/atoms/isLanguageAtom";
 import Alert from "./chatComponents/customAlert/Alert";
 import roomIdAtom from "./chatComponents/stateManager/atoms/roomIdAtom";
 import AdminPanel from "./adminDashboard/AdminPanel";
-// import clickedOffChatAtom from "./chatComponents/stateManager/atoms/clickedOffChatAtom";
 import LoginIcon from "./chatComponents/assets/reglages.svg";
 import AdminPanel2 from "./adminDashboard/AdminPanel2";
+import useWebPush from "./chatComponents/hooks/useWebPush";
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -46,7 +46,26 @@ const App = () => {
   const [exampleState] = useRecoilState(exampleSelector);
   const [clickedExample, setClickedExample] =
     useRecoilState(exampleClickedAtom);
-  // const [clickedOffChat] = useRecoilState(clickedOffChatAtom);
+  const { customWebPush } = useWebPush();
+
+  useEffect(() => {
+    // THIS WEBPUSH APPEAR ONLY IF IS BROWSER OR ANDROID PHONES
+
+    // THIS FIRST WEBPUSH IS WELCOME MESSAGE
+    if (sessionStorage.getItem("hello") === null) {
+      customWebPush({
+        NotificationMessage: "Bienvenue sur React Ultimate Chat!",
+      });
+      setTimeout(() => {
+        sessionStorage.setItem("hello", true);
+      }, 1200);
+    }
+
+    return () => {
+      sessionStorage.removeItem("hello");
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleClickExampleSelector = () => {
     if (!clickedExample) {
@@ -94,14 +113,6 @@ const App = () => {
 
   useEffect(() => {
     console.log("is admin :", isAdmin);
-    // if (!isAdmin) {
-    //   setIsAdmin(true);
-
-    //   console.log("isAdmin :", isAdmin);
-    // }
-    // return () => {
-    //   setIsAdmin(false);
-    // };
   }, [isAdmin, setIsAdmin]);
 
   return (
@@ -203,7 +214,6 @@ const App = () => {
           <Route exact path="/">
             {isAdmin ? <Redirect to="/login" /> : <ButtonChat />}
           </Route>
-
           <Route path="/login">
             <Join isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
           </Route>
