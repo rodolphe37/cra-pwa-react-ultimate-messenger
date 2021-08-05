@@ -7,7 +7,6 @@ import Picker, { SKIN_TONE_MEDIUM_LIGHT } from "emoji-picker-react";
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { useTranslation } from "react-i18next";
-import { isAndroid, isIOS, isBrowser } from "react-device-detect";
 // import { v4 as uuidv4 } from "uuid";
 // CSS IMPORTS
 import "./ChatRoom.css";
@@ -165,10 +164,7 @@ const ChatRoom = (props) => {
         }
       }
     }
-    // FOR IPHONE - IMPLEMENT WHAT YOU WANT
-    if (isIOS) {
-      // alert("This is an Iphone")
-    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username, messages]);
   // END OF WEBPUSH SECTION

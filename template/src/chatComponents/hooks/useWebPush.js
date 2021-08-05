@@ -1,4 +1,4 @@
-import { isAndroid, isBrowser } from "react-device-detect";
+import { isAndroid, isIOS, isBrowser } from "react-device-detect";
 
 const useWebPush = () => {
   // WEB PUSH SECTION
@@ -22,6 +22,10 @@ const useWebPush = () => {
           });
         }
       }
+    }
+    // FOR IPHONE - IMPLEMENT WHAT YOU WANT
+    if (isIOS) {
+      // alert("This is an Iphone")
     }
   };
 
