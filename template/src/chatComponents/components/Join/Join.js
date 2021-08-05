@@ -51,7 +51,7 @@ const Join = ({ isAdmin, setIsAdmin }) => {
     console.log(decryptedData);
     return () => {
       // setEncryptPassword("");
-      // sessionStorage.removeItem("password");
+      sessionStorage.removeItem("password");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [password]);
