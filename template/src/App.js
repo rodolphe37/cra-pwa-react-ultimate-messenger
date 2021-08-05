@@ -110,8 +110,9 @@ const App = () => {
         <Fragment>
           {!loadWelcomeAlert && sessionStorage.getItem("welcome") === null ? (
             <Alert
-              title={`${t("exampleReUseAlertTitle")}`}
-              subTitle={`${t("exampleReUseAlertMood")}`}
+              title={`${t("exampleReUseAlertTitle")} ${t(
+                "exampleReUseAlertMood"
+              )}`}
               confirmMessage={`${t("exampleReUseAlertconfirmMood")}`}
               buttonYes={`${t("exampleReUseAlertGoesWell")}`}
               buttonNo={`${t("exampleReUseAlertPissesOff")}`}

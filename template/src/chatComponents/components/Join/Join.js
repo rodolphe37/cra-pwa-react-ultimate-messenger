@@ -70,6 +70,14 @@ const Join = ({ isAdmin, setIsAdmin }) => {
   return (
     <div className="join-container">
       <div className="joinOuterContainer">
+        <div className="messagesLogin">
+          <Alert
+            title={`${t("adminAlertTitle")}`}
+            subTitle={`${t("adminAlertSubtitle")}`}
+            buttonNo={`${t("adminAlertButton")}`}
+          />
+        </div>
+
         <div className="joinInnerContainer">
           <div className="title-login">
             <h1 className="heading">{t("loginTitle")}</h1>
@@ -176,16 +184,7 @@ const Join = ({ isAdmin, setIsAdmin }) => {
             </div>
           </form>
           <Link
-            onClick={(e) =>
-              !name || !password
-                ? e.preventDefault() && (
-                    <Alert
-                      title={"Vous devez entrer Vos Username et password"}
-                      buttonNo={"ok, j'ai compris"}
-                    />
-                  )
-                : null
-            }
+            onClick={(e) => (!name || !password ? e.preventDefault() : null)}
             to={`/admin/name=${name}&password=${ciphertext}`}
           >
             <button className="button mt-20" type="submit">

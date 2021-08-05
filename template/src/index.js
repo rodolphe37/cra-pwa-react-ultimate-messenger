@@ -15,13 +15,13 @@ const options = {
 };
 
 ReactDom.render(
-  <Router>
-    <RecoilRoot>
-      <Provider template={AlertTemplate} {...options}>
+  <Provider template={AlertTemplate} {...options}>
+    <Router>
+      <RecoilRoot>
         <App />
-      </Provider>
-    </RecoilRoot>
-  </Router>,
+      </RecoilRoot>
+    </Router>
+  </Provider>,
   document.querySelector("#root")
 );
 serviceWorkerRegistration.register();

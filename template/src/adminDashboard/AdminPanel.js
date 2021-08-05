@@ -8,6 +8,7 @@ import selectedDarkThemeAtom from "../chatComponents/stateManager/atoms/selected
 import useMobile from "../chatComponents/hooks/useMobile";
 import usernameAtom from "../chatComponents/stateManager/atoms/usernameAtom";
 import passwordAtom from "../chatComponents/stateManager/atoms/passwordAtom";
+import Loader from "../chatComponents/components/loader/Loader";
 
 const AdminPanel = ({ isAdmin, setIsAdmin }) => {
   let history = useHistory();
@@ -17,6 +18,7 @@ const AdminPanel = ({ isAdmin, setIsAdmin }) => {
   const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
   const [collapseMenu, setCollapseMenu] = useState(false);
   const { isMobile } = useMobile();
+  const [isLoaded, setIsLoaded] = useState(true);
 
   const handleToggleExpandMenu = () => {
     if (expandMenu) {
@@ -39,6 +41,14 @@ const AdminPanel = ({ isAdmin, setIsAdmin }) => {
   useEffect(() => {
     console.log(collapseMenu);
   }, [collapseMenu]);
+
+  useEffect(() => {
+    if (isLoaded) {
+      setTimeout(() => {
+        setIsLoaded(false);
+      }, 1000);
+    }
+  }, [isLoaded]);
 
   return (
     <Fragment>
@@ -251,65 +261,86 @@ const AdminPanel = ({ isAdmin, setIsAdmin }) => {
                 </ul>
               </nav>
             </header>
-            <section
-              className={
-                collapseMenu
-                  ? "collapsed-page-content page-content"
-                  : "page-content"
-              }
-            >
-              <section className="search-and-user">
-                <form>
-                  <input type="search" placeholder="Search Pages..." />
-                  <button type="submit" aria-label="submit form">
-                    <svg aria-hidden="true">
-                      <use href="#search"></use>
-                    </svg>
-                  </button>
-                </form>
-                <div className="admin-profile">
-                  <div
-                    className={
-                      isMobile
-                        ? "admin-avatar-text-mobile"
-                        : "admin-avatar-text"
-                    }
-                  >
-                    <span className="greeting">Hello admin</span>
-                    <p style={{ fontSize: 12 }}>Click on avatar to log out</p>
-                  </div>
-                  <div
-                    onClick={() => {
-                      setIsAdmin(false);
-                      sessionStorage.removeItem("password");
-                      history.push("/");
-                    }}
-                    className="notifications"
-                  >
-                    <span className="badge">1</span>
+            {!isLoaded ? (
+              <section
+                className={
+                  collapseMenu
+                    ? "collapsed-page-content page-content"
+                    : "page-content"
+                }
+              >
+                <section className="search-and-user">
+                  <form>
+                    <input type="search" placeholder="Search Pages..." />
+                    <button type="submit" aria-label="submit form">
+                      <svg aria-hidden="true">
+                        <use href="#search"></use>
+                      </svg>
+                    </button>
+                  </form>
+                  <div className="admin-profile">
+                    <div
+                      className={
+                        isMobile
+                          ? "admin-avatar-text-mobile"
+                          : "admin-avatar-text"
+                      }
+                    >
+                      <span className="greeting">Hello admin</span>
+                      <p style={{ fontSize: 12 }}>Click on avatar to log out</p>
+                    </div>
+                    <div
+                      onClick={() => {
+                        setIsAdmin(false);
+                        sessionStorage.removeItem("password");
+                        history.push("/");
+                      }}
+                      className="notifications"
+                    >
+                      <span className="badge">1</span>
 
-                    <img
-                      className="admin-avatar"
-                      src="https://avatars.githubusercontent.com/u/50537655?s=400&u=d37301e7f3d4a819b2be2da2460a1fba3b3d8d7a&v=4"
-                      alt=""
-                    />
+                      <img
+                        className="admin-avatar"
+                        src="https://avatars.githubusercontent.com/u/50537655?s=400&u=d37301e7f3d4a819b2be2da2460a1fba3b3d8d7a&v=4"
+                        alt=""
+                      />
+                    </div>
                   </div>
-                </div>
+                </section>
+                <section className="grid">
+                  <article>Section 1</article>
+                  <article>Section 2</article>
+                  <article>Section 3</article>
+                  <article>Section 4</article>
+                  <article>Section 5</article>
+                  <article>Section 6</article>
+                  <article>Section 7</article>
+                  <article>Section 8</article>
+                </section>
+                <footer className="page-footer">
+                  <span>made by </span>: Rodolphe Augusto with React & love
+                </footer>
               </section>
-              <section className="grid">
-                <article>Section 1</article>
-                <article>Section 2</article>
-                <article>Section 3</article>
-                <article>Section 4</article>
-                <article>Section 5</article>
-                <article>Section 6</article>
-                <article>Section 7</article>
-                <article>Section 8</article>
-              </section>
-              <footer className="page-footer">
-                <span>made by </span>: Rodolphe Augusto with React & love
-              </footer>
-            </section>
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "49%",
+                  height: "100vh",
+                  marginLeft: "30%",
+                  marginRight: "auto",
+                }}
+                className={`${
+                  !selectedDarkTheme
+                    ? "messages-container messages-container-spiner light-background"
+                    : "messages-container messages-container-spiner dark-background"
+                }`}
+              >
+                <Loader />
+              </div>
+            )}
           </div>
         </div>
       )}

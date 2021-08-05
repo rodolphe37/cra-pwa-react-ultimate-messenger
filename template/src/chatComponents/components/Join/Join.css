@@ -145,3 +145,11 @@ body {
   background-size: 22px;
   background-origin: content-box;
 }
+.messagesLogin
+  > .container
+  > #react-confirm-alert
+  > .react-confirm-alert-overlay
+  > .react-confirm-alert
+  > .react-confirm-alert-body {
+  width: 50% !important;
+}

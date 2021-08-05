@@ -51,13 +51,16 @@
   "erasedBubbles":"Your conversations will be deleted",
   "notErasedBubbles":"Your conversations will not be deleted",
   "exampleReUseAlertTitle":"Hi, how are you?",
-  "exampleReUseAlertMood":"What mood are you in today?",
-  "exampleReUseAlertconfirmMood":"Confirm your mood!",
-  "exampleReUseAlertGoesWell":"it goes well!",
-  "exampleReUseAlertPissesOff":"it p***** me off!!!!!!",
+  "exampleReUseAlertMood":"This is an example of re-use of the Alert component",
+  "exampleReUseAlertconfirmMood":"You will find this same component on the login page, and when you close the chat window",
+  "exampleReUseAlertGoesWell":"cool",
+  "exampleReUseAlertPissesOff":"mouai",
   "loginTitle":"Connexion to your Admin Dashboard",
   "loginUsername":"Enter your username :",
   "loginPassword":"Enter your Password :",
   "loginDeletePassword":"Click to delete your password",
-  "loginButton":"Sign In"
+  "loginButton":"Sign In",
+  "adminAlertTitle":"You must enter Username and password.",
+  "adminAlertSubtitle":"If you have already tried the chat, your username is already pre-filled. Put what you want in password",
+  "adminAlertButton":"ok, I understand"
 }

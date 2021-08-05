@@ -77,9 +77,11 @@ const Alert = ({
                   alt="logo"
                 />
                 <h1>
-                  {title}{" "}
+                  {title} <br /> {subTitle && !clickedAlert ? subTitle : null}
                   {isMessages && isMessages.length > 0 && activateDeleteConv
-                    ? `${subTitle}`
+                    ? subTitle
+                      ? `${subTitle}`
+                      : null
                     : ""}
                 </h1>
               </div>
@@ -105,22 +107,26 @@ const Alert = ({
               )}
               <p>{confirmMessage}</p>
               <div className="react-confirm-alert-button-group">
-                <button
-                  onClick={() => {
-                    onClose();
-                    stepConfirm();
-                  }}
-                >
-                  {buttonYes}
-                </button>
-                <button
-                  onClick={() => {
-                    setClickedAlert(false);
-                    onClose();
-                  }}
-                >
-                  {buttonNo}
-                </button>
+                {buttonYes ? (
+                  <button
+                    onClick={() => {
+                      onClose();
+                      stepConfirm();
+                    }}
+                  >
+                    {buttonYes}
+                  </button>
+                ) : null}
+                {buttonNo ? (
+                  <button
+                    onClick={() => {
+                      setClickedAlert(false);
+                      onClose();
+                    }}
+                  >
+                    {buttonNo}
+                  </button>
+                ) : null}
               </div>
             </div>
           );

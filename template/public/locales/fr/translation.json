@@ -50,14 +50,17 @@
   "youHaveCopiedId":"Vous avez copié l'Id ",
   "erasedBubbles": "Vos conversations seront effacées",
   "notErasedBubbles":"Vos conversations ne seront pas effacées",
-  "exampleReUseAlertTitle":"Coucou, comment va ??",
-  "exampleReUseAlertMood":"De quelle humeur es-tu aujourd'hui ?",
-  "exampleReUseAlertconfirmMood":"Confirme ton humeur !",
-  "exampleReUseAlertGoesWell":"ça va bien",
-  "exampleReUseAlertPissesOff":"ça me fais c**** !!!",
+  "exampleReUseAlertTitle":"Coucou, comment va ?",
+  "exampleReUseAlertMood":"Ceci est un exemple de ré-utilisation du composant Alert",
+  "exampleReUseAlertconfirmMood":"Vous retrouverez ce même composant à la page login, et quand vous fermez la fenêtre de chat ",
+  "exampleReUseAlertGoesWell":"Cool",
+  "exampleReUseAlertPissesOff":"Mouai !!!",
   "loginTitle":"Connexion à votre tableau de bord administrateur",
   "loginUsername":"Entrez votre nom d'utilisateur :",
   "loginPassword":"Entrez votre mot de passe :",
   "loginDeletePassword":"Cliquez pour supprimer votre mot de passe",
-  "loginButton":"Se connecter"
+  "loginButton":"Se connecter",
+  "adminAlertTitle":"Pour devez entrer Username et password.",
+  "adminAlertSubtitle":"Si vous avez déjà essayé le chat, votre username est déjà pré-remplis. Mettez ce que vous voulez en password",
+  "adminAlertButton":"ok, j'ai compris"
 }
