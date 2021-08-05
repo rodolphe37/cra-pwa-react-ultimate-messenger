@@ -23,7 +23,7 @@
 }
 @media screen and (min-width: 750px) {
   .react-confirm-alert {
-    max-width: 36%;
+    max-width: 32%;
   }
 }
 @keyframes slide-in-top {
