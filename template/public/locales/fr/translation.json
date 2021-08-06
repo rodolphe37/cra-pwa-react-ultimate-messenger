@@ -62,5 +62,6 @@
   "loginButton":"Se connecter",
   "adminAlertTitle":"Pour devez entrer Username et password.",
   "adminAlertSubtitle":"Si vous avez déjà essayé le chat, votre username est déjà pré-remplis. Mettez ce que vous voulez en password",
-  "adminAlertButton":"ok, j'ai compris"
+  "adminAlertButton":"ok, j'ai compris",
+  "offlineMessage": "Vous êtes hors ligne ou il y a un souci de Connexion!"
 }

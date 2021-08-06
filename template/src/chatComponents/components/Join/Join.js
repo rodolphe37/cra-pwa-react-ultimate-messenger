@@ -3,8 +3,10 @@ import { useTranslation } from "react-i18next";
 import { Link, useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import Alert from "../../customAlert/Alert";
+import isOnlineAtom from "../../stateManager/atoms/isOnlineAtom";
 import passwordAtom from "../../stateManager/atoms/passwordAtom";
 import usernameAtom from "../../stateManager/atoms/usernameAtom";
+import OfflineMessage from "../offlineMessage/OfflineMessage";
 
 import "./Join.css";
 var CryptoJS = require("crypto-js");
@@ -18,6 +20,8 @@ const Join = ({ isAdmin, setIsAdmin }) => {
   const [notShowPass, setNotShowPass] = useState(true);
   // eslint-disable-next-line no-unused-vars
   const [forDecrypt, setForDecrypt] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const [isOnline, setIsOnline] = useRecoilState(isOnlineAtom);
 
   var ciphertext = CryptoJS.AES.encrypt(
     JSON.stringify(password),
@@ -69,6 +73,11 @@ const Join = ({ isAdmin, setIsAdmin }) => {
   };
   return (
     <div className="join-container">
+      <div style={{ width: "100%", position: "absolute", zIndex: 888, top: 0 }}>
+        {isOnline === "offline" ? (
+          <OfflineMessage type="danger" content={`${t("offlineMessage")}`} />
+        ) : null}
+      </div>
       <div className="joinOuterContainer">
         <div className="messagesLogin">
           <Alert

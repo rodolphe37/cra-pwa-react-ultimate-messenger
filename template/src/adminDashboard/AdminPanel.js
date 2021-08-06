@@ -9,6 +9,7 @@ import useMobile from "../chatComponents/hooks/useMobile";
 import usernameAtom from "../chatComponents/stateManager/atoms/usernameAtom";
 import passwordAtom from "../chatComponents/stateManager/atoms/passwordAtom";
 import Loader from "../chatComponents/components/loader/Loader";
+import isOnlineAtom from "../chatComponents/stateManager/atoms/isOnlineAtom";
 
 const AdminPanel = ({ isAdmin, setIsAdmin }) => {
   let history = useHistory();
@@ -19,6 +20,8 @@ const AdminPanel = ({ isAdmin, setIsAdmin }) => {
   const [collapseMenu, setCollapseMenu] = useState(false);
   const { isMobile } = useMobile();
   const [isLoaded, setIsLoaded] = useState(true);
+  // eslint-disable-next-line no-unused-vars
+  const [isOnline, setIsOnline] = useRecoilState(isOnlineAtom);
 
   const handleToggleExpandMenu = () => {
     if (expandMenu) {

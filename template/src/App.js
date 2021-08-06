@@ -29,6 +29,9 @@ import LoginIcon from "./chatComponents/assets/reglages.svg";
 import AdminPanel2 from "./adminDashboard/AdminPanel2";
 import useWebPush from "./chatComponents/hooks/useWebPush";
 import pwaPass from "./chatComponents/assets/pwa-pass-3.svg";
+import isOnlineAtom from "./chatComponents/stateManager/atoms/isOnlineAtom";
+import OfflineMessage from "./chatComponents/components/offlineMessage/OfflineMessage";
+import clickedOffChatAtom from "./chatComponents/stateManager/atoms/clickedOffChatAtom";
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -42,12 +45,14 @@ const App = () => {
     setLanguage(lng);
   };
   const [roomId] = useRecoilState(roomIdAtom);
-
+  // eslint-disable-next-line no-unused-vars
+  const [isOnline, setIsOnline] = useRecoilState(isOnlineAtom);
   // EXAMPLE OF HOW TO USE RECOIL (ATOM AND SELECTOR) WITH EASE
   const [exampleState] = useRecoilState(exampleSelector);
   const [clickedExample, setClickedExample] =
     useRecoilState(exampleClickedAtom);
   const { customWebPush } = useWebPush();
+  const [clickedOffChat] = useRecoilState(clickedOffChatAtom);
 
   useEffect(() => {
     // THIS WEBPUSH APPEAR ONLY IF IS BROWSER OR ANDROID PHONES
@@ -89,8 +94,9 @@ const App = () => {
     handleLoadAlert();
     console.log("selector :", exampleState);
     console.log("clicked :", clickedExample);
-    console.log("roomId :", roomId);
-  }, [exampleState, roomId, clickedExample]);
+    console.log("clicked off :", clickedOffChat);
+    console.log("isOnline :", isOnline);
+  }, [exampleState, clickedOffChat, clickedExample, isOnline]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -183,6 +189,9 @@ const App = () => {
                   : "App-header dark-background "
               }
             >
+              {isOnline === "offline" && clickedOffChat ? (
+                <OfflineMessage type="danger" content="offlineMessage" />
+              ) : null}
               <div className="card-ribbon pwa-ribbon">
                 <span className="pwa">
                   <img

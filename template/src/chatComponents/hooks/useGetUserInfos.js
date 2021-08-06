@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import visitorInfo from "visitor-info";
+import { useRecoilState } from "recoil";
+import isOnlineAtom from "../stateManager/atoms/isOnlineAtom";
 
 const useGetUserInfos = () => {
   const [latitude, setLatitude] = useState(0);
@@ -11,6 +13,8 @@ const useGetUserInfos = () => {
   const [userInfos, setUserInfos] = useState([]);
   const [ipAddress, setIpAddress] = useState([]);
   const [clickedOnApp, setClickedOnApp] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [isOnline, setIsOnline] = useRecoilState(isOnlineAtom);
 
   // Get current position of the user
   useEffect(() => {
@@ -27,6 +31,7 @@ const useGetUserInfos = () => {
         const response = await axios.get("https://api.ipify.org?format=json");
         setIpAddress(response.data);
       } catch (error) {
+        setIsOnline("offline");
         console.error(error);
       }
     }

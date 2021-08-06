@@ -62,5 +62,6 @@
   "loginButton":"Sign In",
   "adminAlertTitle":"You must enter Username and password.",
   "adminAlertSubtitle":"If you have already tried the chat, your username is already pre-filled. Put what you want in password",
-  "adminAlertButton":"ok, I understand"
+  "adminAlertButton":"ok, I understand",
+  "offlineMessage": "You are offline or there is a connection problem!"
 }

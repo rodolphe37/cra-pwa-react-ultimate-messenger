@@ -55,6 +55,8 @@ import clickedOffChatAtom from "../../../stateManager/atoms/clickedOffChatAtom";
 import VideoChatComponent from "../../videoChatComponent/VideoChatComponent";
 import openVideoChatAtom from "../../../stateManager/atoms/openVideoChatAtom";
 import useWebPush from "../../../hooks/useWebPush";
+import isOnlineAtom from "../../../stateManager/atoms/isOnlineAtom";
+import OfflineMessage from "../../offlineMessage/OfflineMessage";
 
 const ChatRoom = (props) => {
   const { t } = useTranslation();
@@ -123,6 +125,8 @@ const ChatRoom = (props) => {
   const [idChatInvitation, setIdChatInvitation] = useState("");
   const [toggleDeleteButton, setToggleDeleteButton] = useState(false);
   const [isSendThumb, setIsSendThumb] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [isOnline, setIsOnline] = useRecoilState(isOnlineAtom);
 
   // const { me } = useVideoChat();
   // if you want to catch roomId from URL
@@ -557,6 +561,9 @@ const ChatRoom = (props) => {
             </div>
           </div>
         </span>
+        {isOnline === "offline" ? (
+          <OfflineMessage type="warning" content="offlineMessage" />
+        ) : null}
         {openVideoChat && window.location.replace(`/video/${roomToken}`)}
         {isLoaded ? (
           <div

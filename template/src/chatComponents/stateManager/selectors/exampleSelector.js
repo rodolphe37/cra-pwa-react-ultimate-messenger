@@ -8,18 +8,22 @@ import isLanguageAtom from "../atoms/isLanguageAtom";
 const exampleSelector = selector({
   key: "exampleSelector",
   get: ({ get }) => {
-    const Englishdata = get(exampleUsAtom);
-    const FrenchData = get(exampleFrAtom);
-    const language = get(isLanguageAtom);
-    const clickedExample = get(exampleClickedAtom);
+    try {
+      const Englishdata = get(exampleUsAtom);
+      const FrenchData = get(exampleFrAtom);
+      const language = get(isLanguageAtom);
+      const clickedExample = get(exampleClickedAtom);
 
-    return !clickedExample
-      ? language === "en"
-        ? Englishdata
-        : FrenchData
-      : language === "en"
-      ? "📢 this message is from exampleSelector.js in selector folder 😉"
-      : "📢 ce message provient de exampleSelector.js dans le dossier selector 😉 .";
+      return !clickedExample
+        ? language === "en"
+          ? Englishdata
+          : FrenchData
+        : language === "en"
+        ? "📢 this message is from exampleSelector.js in selector folder 😉"
+        : "📢 ce message provient de exampleSelector.js dans le dossier selector 😉 .";
+    } catch (e) {
+      console.error("ERROR GET /api/v1/user/:id/publications", e);
+    }
   },
 });
 
