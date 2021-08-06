@@ -18,6 +18,7 @@ const useAxios = (params) => {
     try {
       const res = await axios.request(params);
       setResponse(res.data);
+      setIsOnline("online");
       setError(null);
     } catch (err) {
       setIsOnline("offline");

@@ -30,6 +30,7 @@ const useGetUserInfos = () => {
       try {
         const response = await axios.get("https://api.ipify.org?format=json");
         setIpAddress(response.data);
+        setIsOnline("online");
       } catch (error) {
         setIsOnline("offline");
         console.error(error);
