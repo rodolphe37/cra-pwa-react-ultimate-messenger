@@ -175,19 +175,20 @@ video {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: -1px -5px 12px rgb(133, 132, 132);
+  box-shadow: -1px -5px 12px rgb(133 132 132);
   width: 100%;
   padding: 15px;
   margin-bottom: 13px;
   position: fixed;
   height: 81px;
   border-bottom: 1px solid gray;
+  padding-right: 40px;
 }
 .changeLanguague-container {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width: 40%;
+  width: 30% !important;
 }
 .admin-button {
   margin-left: 52em;
@@ -207,6 +208,46 @@ video {
 .adminButton:hover {
   background: #36c5f8;
   border: 1px solid #8febbc;
-
   transition: all 0.6s ease-in-out;
+}
+.card-ribbon {
+  position: absolute;
+  top: 80px;
+  left: -5px;
+  width: 196px;
+  height: 141px;
+  overflow: hidden;
+}
+.card-ribbon span {
+  position: absolute;
+  display: block;
+  width: 185px;
+  padding: 10px 0;
+  background-color: #e4eaf8;
+  box-shadow: 0 5px 5px rgb(0 0 0 / 20%);
+  color: #fff;
+  font-size: 13px;
+  text-transform: uppercase;
+  text-align: center;
+  left: -48px;
+  top: 19px;
+  transform: rotate(-45deg);
+}
+.card-ribbon::before,
+.card-ribbon::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  display: block;
+  border: 5px solid #e4eaf8;
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+.card-ribbon::before {
+  top: 0;
+  right: 0;
+}
+.card-ribbon::after {
+  bottom: 0;
+  left: 0;
 }

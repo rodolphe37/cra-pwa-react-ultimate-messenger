@@ -28,6 +28,7 @@ import AdminPanel from "./adminDashboard/AdminPanel";
 import LoginIcon from "./chatComponents/assets/reglages.svg";
 import AdminPanel2 from "./adminDashboard/AdminPanel2";
 import useWebPush from "./chatComponents/hooks/useWebPush";
+import pwaPass from "./chatComponents/assets/pwa-pass-3.svg";
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -182,6 +183,15 @@ const App = () => {
                   : "App-header dark-background "
               }
             >
+              <div className="card-ribbon pwa-ribbon">
+                <span className="pwa">
+                  <img
+                    style={{ width: 80, marginLeft: -4, marginTop: 6 }}
+                    src={pwaPass}
+                    alt="pwa-logo"
+                  />
+                </span>
+              </div>
               <p>
                 {t("editAppText")} <code>src/App.js</code> {t("saveAppText")}
               </p>
