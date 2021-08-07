@@ -42,7 +42,7 @@ const App = () => {
   // function for changing languages
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
-    // setLanguage(lng);
+    setLanguage(lng);
   };
   // Natif hook for loading during the render of the app page i18n language in language global state
   useEffect(() => {
