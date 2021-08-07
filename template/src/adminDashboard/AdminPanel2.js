@@ -19,7 +19,6 @@ import Loader from "../chatComponents/components/loader/Loader";
 import selectedDarkThemeAtom from "../chatComponents/stateManager/atoms/selectedDarkThemeAtom";
 import isOnlineAtom from "../chatComponents/stateManager/atoms/isOnlineAtom";
 import OfflineMessage from "../chatComponents/components/offlineMessage/OfflineMessage";
-import { useTranslation } from "react-i18next";
 
 const AdminPanel2 = ({ isAdmin, setIsAdmin }) => {
   const { response } = useAxios({
@@ -37,7 +36,6 @@ const AdminPanel2 = ({ isAdmin, setIsAdmin }) => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [isOnline, setIsOnline] = useRecoilState(isOnlineAtom);
-  const { t } = useTranslation();
 
   const handleToggleSidebar = () => {
     if (toggleSidebar) {

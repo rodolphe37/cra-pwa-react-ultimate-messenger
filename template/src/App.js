@@ -42,8 +42,14 @@ const App = () => {
   // function for changing languages
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
-    setLanguage(lng);
+    // setLanguage(lng);
   };
+  // Natif hook for loading during the render of the app page i18n language in language global state
+  useEffect(() => {
+    setLanguage(i18n.language);
+    console.log("lng :", language);
+  }, [language, setLanguage, i18n]);
+
   const [roomId] = useRecoilState(roomIdAtom);
   // eslint-disable-next-line no-unused-vars
   const [isOnline, setIsOnline] = useRecoilState(isOnlineAtom);
