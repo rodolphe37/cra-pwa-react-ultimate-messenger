@@ -1,42 +1,30 @@
+/* eslint-disable no-unused-vars */
 import React, { Fragment, useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from "react-router-dom";
-import HomeChat from "./chatComponents/components/chatRoom/HomeChat/HomeChat";
 import logo from "./logo.svg";
 import "./App.css";
-import ChatRoom from "./chatComponents/components/chatRoom/ChatRoom/ChatRoom";
-import Join from "./chatComponents/components/Join/Join";
-import ButtonChat from "./chatComponents/components/ButtonChat";
+import Routes from "./Utils/routes";
 import { useRecoilState } from "recoil";
 import selectedDarkThemeAtom from "./chatComponents/stateManager/atoms/selectedDarkThemeAtom";
-import VideoChatComponent from "./chatComponents/components/videoChatComponent/VideoChatComponent";
-import Loader from "./chatComponents/components/loader/Loader";
 import { useTranslation } from "react-i18next";
-import BottomDrawer from "./chatComponents/components/bottomDrawer/BottomDrawer";
-import Weather from "./chatComponents/components/weatherComponent/WeatherComponent";
-// THIS TWO IMPORTS ARE ONLY FOR THE EXAMPLE
-import exampleSelector from "./chatComponents/stateManager/selectors/exampleSelector";
-import exampleClickedAtom from "./chatComponents/stateManager/atoms/exampleClicked";
 import isLanguageAtom from "./chatComponents/stateManager/atoms/isLanguageAtom";
 import Alert from "./chatComponents/customAlert/Alert";
 import roomIdAtom from "./chatComponents/stateManager/atoms/roomIdAtom";
-import AdminPanel from "./adminDashboard/AdminPanel";
-import LoginIcon from "./chatComponents/assets/reglages.svg";
-import AdminPanel2 from "./adminDashboard/AdminPanel2";
 import useWebPush from "./chatComponents/hooks/useWebPush";
 import pwaPass from "./chatComponents/assets/pwa-pass-3.svg";
 import isOnlineAtom from "./chatComponents/stateManager/atoms/isOnlineAtom";
 import OfflineMessage from "./chatComponents/components/offlineMessage/OfflineMessage";
 import clickedOffChatAtom from "./chatComponents/stateManager/atoms/clickedOffChatAtom";
+import { getToken, removeUserSession, setUserSession } from "./Utils/Common";
+import axios from "axios";
+import registerUserAtom from "./chatComponents/stateManager/atoms/registeruserAtom";
+import isAdminAtom from "./chatComponents/stateManager/atoms/isAdminAtom";
+import HeaderApp from "./components/HeaderApp";
+import RecoilSimpleExample from "./components/RecoilSimpleExample";
+import { withRecoilExample } from "./postInstallConfig/withRecoilExample";
 
 const App = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useRecoilState(isAdminAtom);
   const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
-  // eslint-disable-next-line no-unused-vars
   const [language, setLanguage] = useRecoilState(isLanguageAtom);
   const { i18n, t } = useTranslation();
   // function for changing languages
@@ -50,17 +38,18 @@ const App = () => {
     console.log("lng :", language);
   }, [language, setLanguage, i18n]);
 
-  const [roomId] = useRecoilState(roomIdAtom);
   // eslint-disable-next-line no-unused-vars
   const [isOnline, setIsOnline] = useRecoilState(isOnlineAtom);
-  // EXAMPLE OF HOW TO USE RECOIL (ATOM AND SELECTOR) WITH EASE
-  const [exampleState] = useRecoilState(exampleSelector);
-  const [clickedExample, setClickedExample] =
-    useRecoilState(exampleClickedAtom);
+
   const { customWebPush } = useWebPush();
   const [clickedOffChat] = useRecoilState(clickedOffChatAtom);
+  const [registerUser] = useRecoilState(registerUserAtom);
+
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("token");
     // THIS WEBPUSH APPEAR ONLY IF IS BROWSER OR ANDROID PHONES
 
     // THIS FIRST WEBPUSH IS WELCOME MESSAGE
@@ -79,18 +68,10 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleClickExampleSelector = () => {
-    if (!clickedExample) {
-      setClickedExample(true);
-    }
-    if (clickedExample) {
-      setClickedExample(false);
-    }
-  };
-  // END OF EXAMPLE RECOIL STATE MANAGMENT
   const [loadWelcomeAlert, setLoadWelcomeAlert] = useState(true);
 
   const handleLoadAlert = () => {
+    setIsAdmin(false);
     setTimeout(() => {
       setLoadWelcomeAlert(false);
     }, 2000);
@@ -98,11 +79,11 @@ const App = () => {
 
   useEffect(() => {
     handleLoadAlert();
-    console.log("selector :", exampleState);
-    console.log("clicked :", clickedExample);
     console.log("clicked off :", clickedOffChat);
     console.log("isOnline :", isOnline);
-  }, [exampleState, clickedOffChat, clickedExample, isOnline]);
+    console.log("register from App :", registerUser);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clickedOffChat, registerUser, isOnline]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -125,8 +106,24 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log("is admin :", isAdmin);
-  }, [isAdmin, setIsAdmin]);
+    const token = getToken();
+    if (!token) {
+      return;
+    }
+
+    axios
+      .get(
+        `${process.env.REACT_APP_UPLOAD_WEBSERVICE}/verifyToken?token=${token}`
+      )
+      .then((response) => {
+        setUserSession(response.data.token, response.data.user);
+        setAuthLoading(false);
+      })
+      .catch((error) => {
+        removeUserSession();
+        setAuthLoading(false);
+      });
+  }, []);
 
   return (
     <Fragment>
@@ -149,45 +146,10 @@ const App = () => {
                 : "App  dark-background"
             }
           >
-            <div className="header-headContent">
-              <div className="changeLanguague-container">
-                <span
-                  className="buttonLanguage"
-                  style={{
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    position: "absolute",
-                    zIndex: "888",
-                    width: 87,
-                  }}
-                >
-                  <span
-                    className="tradButtonfr"
-                    style={{ marginRight: "15px" }}
-                    onClick={() => changeLanguage("fr")}
-                  >
-                    <span role="img" aria-label="france flag">
-                      🇨🇵
-                    </span>
-                  </span>
-                  <span
-                    className="tradButtonen"
-                    onClick={() => changeLanguage("en")}
-                  >
-                    <span role="img" aria-label="england flag">
-                      🇬🇧
-                    </span>
-                  </span>
-                </span>
-              </div>
-              <div className="admin-button">
-                <button onClick={handleClickIsAdmin} className="adminButton">
-                  <img src={LoginIcon} alt="" />
-                </button>
-              </div>
-            </div>
+            <HeaderApp
+              changeLanguage={changeLanguage}
+              handleClickIsAdmin={handleClickIsAdmin}
+            />
             <header
               className={
                 selectedDarkTheme
@@ -219,58 +181,18 @@ const App = () => {
                 {t("learnAppText")}
               </a>
               <br />
-              <span
-                style={{ cursor: "pointer" }}
-                onClick={handleClickExampleSelector}
-              >
-                <img src={logo} className="App-logo" alt="logo" />
-              </span>
-              <p style={{ fontSize: 18, maxWidth: 300, marginBottom: 22 }}>
-                {t("exampleRecoil")}
-              </p>
-              <p style={{ fontSize: 15, maxWidth: 300 }}>{exampleState}</p>
+              {withRecoilExample ? (
+                <RecoilSimpleExample t={t} logo={logo} />
+              ) : (
+                <span style={{ cursor: "pointer" }}>
+                  <img src={logo} className="App-logo" alt="logo" />
+                </span>
+              )}
             </header>
           </div>
         </Fragment>
       ) : null}
-
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            {isAdmin ? <Redirect to="/login" /> : <ButtonChat />}
-          </Route>
-          <Route path="/login">
-            <Join isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
-          </Route>
-          <Route path="/home">
-            <HomeChat />
-          </Route>
-          <Route path={`/chat/${roomId}`}>
-            <ChatRoom />
-          </Route>
-          <Route path={`/video/${roomId}`}>
-            <VideoChatComponent roomId={roomId} />
-          </Route>
-          <Route path="/load">
-            <Loader />
-          </Route>
-          <Route path="/intro">
-            <BottomDrawer />
-          </Route>
-          <Route path="/meteo">
-            <Weather />
-          </Route>
-          <Route path="/admin">
-            <AdminPanel2 isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
-          </Route>
-          <Route path="/admin-alternate">
-            <AdminPanel isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
-          </Route>
-          <Route path="/alert">
-            <Alert />
-          </Route>
-        </Switch>
-      </Router>
+      <Routes />
     </Fragment>
   );
 };

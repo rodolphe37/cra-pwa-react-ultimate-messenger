@@ -65,6 +65,7 @@ button {
   height: 60px;
   border-top: 1px solid lightgray;
   margin-top: 4px;
+  position: relative;
 }
 
 .messages-container {
@@ -99,14 +100,16 @@ button {
   resize: none;
   border: none;
   height: 58px;
-  width: 209px;
+  width: 229px;
+  border-radius: 0 0 0 26px;
+  text-indent: 10px;
 }
 .message-item {
   width: 55%;
   margin: 8px;
   padding: 12px 8px;
   word-break: break-word;
-  border-radius: 1.1em;
+  /* border-radius: 1.1em; */
   box-shadow: 0 0 2px 0 rgb(0 0 0 / 5%), 0 8px 16px 0 rgb(0 0 0 / 10%);
   color: white;
   justify-content: center;
@@ -121,6 +124,7 @@ button {
   margin-left: auto;
   font-size: 17px;
   right: 10px;
+  border-radius: 10px 10px 0 10px;
 }
 .my-message-name {
   margin-left: auto;
@@ -147,15 +151,26 @@ button {
   margin-right: auto;
   font-size: 17px;
   left: 10px;
+  border-radius: 0 10px 10px 10px;
 }
 
+.send-message-button:hover {
+  /* background: #e2e0e0; */
+  border: 1px solid #00a2f3ff;
+}
 .send-message-button {
   font-size: 19px;
   font-weight: 600;
   color: white;
-  background: none;
-  padding: 14px 12px;
-  border: none;
+  background: transparent;
+  padding: 13px 15px 11px 27px;
+  border: 1px solid gray;
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 20px;
+  height: 49px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
 .messages-container,
@@ -228,7 +243,7 @@ button {
   width: 299px !important;
 }
 .emoji-chat-closed > .emoji-picker-react > .emoji-categories {
-  filter: opacity(0.1);
+  filter: opacity(0);
 }
 .emoji-chat-closed aside.emoji-picker-react {
   height: 3px !important;
@@ -880,6 +895,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 59px;
+  margin-top: 5px;
 }
 .idForCallInvitation {
   border: 1px solid white;
@@ -1055,4 +1072,13 @@ button {
     transform: scale(1);
     opacity: 1;
   }
+}
+.margin-right14 {
+  margin-right: 14px;
+  margin-top: 6px;
+  padding-left: 5px;
+}
+.ml37-mt5 {
+  margin-left: 37px;
+  margin-top: 5px;
 }

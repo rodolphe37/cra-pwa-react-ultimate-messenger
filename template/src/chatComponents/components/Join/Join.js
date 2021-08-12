@@ -1,76 +1,66 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import Alert from "../../customAlert/Alert";
 import isOnlineAtom from "../../stateManager/atoms/isOnlineAtom";
-import passwordAtom from "../../stateManager/atoms/passwordAtom";
-import usernameAtom from "../../stateManager/atoms/usernameAtom";
 import OfflineMessage from "../offlineMessage/OfflineMessage";
+import axios from "axios";
+import { setUserSession } from "../../../Utils/Common";
 
 import "./Join.css";
-var CryptoJS = require("crypto-js");
 
-const Join = ({ isAdmin, setIsAdmin }) => {
+const Join = ({ isAdmin, setIsAdmin, ...props }) => {
   let history = useHistory();
   const { t } = useTranslation();
-  const [name, setName] = useRecoilState(usernameAtom);
-  const [encryptPassword, setEncryptPassword] = useRecoilState(passwordAtom);
-  const [password, setPassword] = useState("");
-  const [notShowPass, setNotShowPass] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const username = useFormInput("");
+  const password = useFormInput("");
+  const [error, setError] = useState(null);
   // eslint-disable-next-line no-unused-vars
-  const [forDecrypt, setForDecrypt] = useState("");
-  // eslint-disable-next-line no-unused-vars
-  const [isOnline, setIsOnline] = useRecoilState(isOnlineAtom);
+  const [authToken, setAuthToken] = useState("");
+  const [isOnline] = useRecoilState(isOnlineAtom);
 
-  var ciphertext = CryptoJS.AES.encrypt(
-    JSON.stringify(password),
-    "my-secret-key@123"
-  ).toString();
+  // handle button click of login form
+  const handleLogin = () => {
+    setError(null);
+    setLoading(true);
 
-  // Decrypt
-  var bytes = CryptoJS.AES.decrypt(ciphertext, "my-secret-key@123");
-  var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    axios
+      .post(`${process.env.REACT_APP_UPLOAD_WEBSERVICE}/users/signin`, {
+        username: username.value,
+        password: password.value,
+      })
+      .then((response) => {
+        setUserSession(response.data.token, response.data.user);
+        setAuthToken(response.data.token);
+        setIsAdmin(true);
+        console.log(response.data);
+        setTimeout(() => {
+          setLoading(false);
+          history.push("/admin");
+        }, 2000);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setIsAdmin(true);
+        console.log(error.message);
+        if (error.message.status === 400)
+          setError("All fields must be completed");
+        else setError("Your password or your username is Wrong.");
+      });
+  };
+
+  const handleCloseLogin = () => {
+    setIsAdmin(false);
+    setTimeout(() => {
+      history.push("/");
+    }, 50);
+  };
 
   useEffect(() => {
-    if (password) {
-      setEncryptPassword(ciphertext);
-    }
-    if (sessionStorage.getItem("password") !== null) {
-      setForDecrypt(sessionStorage.getItem("password"));
-      setPassword(password);
-    }
-    if (localStorage.getItem("username") !== null) {
-      setName(localStorage.getItem("username"));
-    }
-    sessionStorage.setItem("password", encryptPassword);
-    console.log("name :", name);
-    //log encrypted data
-    console.log("Encrypt Data -");
-    console.log(ciphertext);
-    console.log(password);
-    console.log("encrypt Password :", encryptPassword);
-    //log decrypted Data
-    console.log("decrypted Data -");
-    console.log(decryptedData);
-    return () => {
-      // setEncryptPassword("");
-      sessionStorage.removeItem("password");
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [password]);
-
-  const handleShowPass = () => {
-    if (notShowPass) {
-      setNotShowPass(false);
-    }
-    if (!notShowPass) {
-      setNotShowPass(true);
-      setTimeout(() => {
-        setNotShowPass(false);
-      }, 2500);
-    }
-  };
+    console.log("isOnline:", isOnline);
+  }, [isOnline]);
   return (
     <div className="join-container">
       <div style={{ width: "100%", position: "absolute", zIndex: 888, top: 0 }}>
@@ -79,7 +69,10 @@ const Join = ({ isAdmin, setIsAdmin }) => {
         ) : null}
       </div>
       <div className="joinOuterContainer">
-        <div className="messagesLogin">
+        <div
+          className="messagesLogin"
+          style={{ textTransform: "lowercase !important" }}
+        >
           <Alert
             title={`${t("adminAlertTitle")} ${t("adminAlertSubtitle")}`}
             buttonNo={`${t("adminAlertButton")}`}
@@ -89,13 +82,7 @@ const Join = ({ isAdmin, setIsAdmin }) => {
         <div className="joinInnerContainer">
           <div className="title-login">
             <h1 className="heading">{t("loginTitle")}</h1>
-            <button
-              onClick={() => {
-                setIsAdmin(false);
-                history.push("/");
-              }}
-              className="closeJoinButton"
-            >
+            <button onClick={handleCloseLogin} className="closeJoinButton">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 48 48"
@@ -138,71 +125,61 @@ const Join = ({ isAdmin, setIsAdmin }) => {
             </button>
           </div>
           <form>
-            <div style={{ marginTop: 22 }}>
-              <b style={{ color: "#fff" }}>{t("loginUsername")}</b>
+            <div className="loginForm" style={{ color: "#fff" }}>
+              <br />
+              <br />
+              <div>
+                Username
+                <br />
+                <input
+                  type="text"
+                  {...username}
+                  placeholder="admin"
+                  autoComplete="new-password"
+                />
+              </div>
+              <div style={{ marginTop: 10 }}>
+                Password
+                <br />
+                <input
+                  placeholder="p@ssword"
+                  type="password"
+                  {...password}
+                  autoComplete="new-password"
+                />
+              </div>
+              {error && (
+                <Fragment>
+                  <small style={{ color: "red" }}>{error}</small>
+                  <br />
+                </Fragment>
+              )}
+              <br />
               <input
-                placeholder=""
-                className="joinInput"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
+                type="button"
+                value={loading ? "Loading..." : "Login"}
+                onClick={handleLogin}
+                disabled={loading}
               />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-                marginTop: 12,
-                position: "relative",
-              }}
-            >
-              <b style={{ color: "#fff", marginTop: 12, marginBottom: -22 }}>
-                {t("loginPassword")}
-              </b>
-              <input
-                onClick={handleShowPass}
-                placeholder=""
-                className="joinInput mt-20"
-                type={notShowPass ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                // autoComplete="current password"
-                required
-                id="funkystyling"
-              />
-
-              <p
-                onClick={() => {
-                  sessionStorage.removeItem("password");
-                  setEncryptPassword("");
-                  setPassword("");
-                }}
-                style={{
-                  fontSize: 10,
-                  color: "#fff",
-                  marginTop: 10,
-                  cursor: "pointer",
-                }}
-              >
-                {t("loginDeletePassword")}
-              </p>
+              <br />
             </div>
           </form>
-          <Link
-            onClick={(e) => (!name || !password ? e.preventDefault() : null)}
-            to={`/admin/name=${name}&password=${ciphertext}`}
-          >
-            <button className="button mt-20" type="submit">
-              {t("loginButton")}
-            </button>
-          </Link>
         </div>
       </div>
     </div>
   );
+};
+
+const useFormInput = (initialValue) => {
+  const [value, setValue] = useState(initialValue);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+  return {
+    value,
+    onChange: handleChange,
+  };
 };
 
 export default Join;

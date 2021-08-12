@@ -6,16 +6,16 @@ import { useRecoilState } from "recoil";
 import selectedDarkThemeAtom from "../chatComponents/stateManager/atoms/selectedDarkThemeAtom";
 
 import useMobile from "../chatComponents/hooks/useMobile";
-import usernameAtom from "../chatComponents/stateManager/atoms/usernameAtom";
-import passwordAtom from "../chatComponents/stateManager/atoms/passwordAtom";
+// import usernameAtom from "../chatComponents/stateManager/atoms/usernameAtom";
+// import passwordAtom from "../chatComponents/stateManager/atoms/passwordAtom";
 import Loader from "../chatComponents/components/loader/Loader";
 import isOnlineAtom from "../chatComponents/stateManager/atoms/isOnlineAtom";
 
 const AdminPanel = ({ isAdmin, setIsAdmin }) => {
   let history = useHistory();
   const [expandMenu, setExpandMenu] = useState(false);
-  const [name] = useRecoilState(usernameAtom);
-  const [encryptedPassword] = useRecoilState(passwordAtom);
+  // const [name] = useRecoilState(usernameAtom);
+  // const [encryptedPassword] = useRecoilState(passwordAtom);
   const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
   const [collapseMenu, setCollapseMenu] = useState(false);
   const { isMobile } = useMobile();
@@ -52,6 +52,16 @@ const AdminPanel = ({ isAdmin, setIsAdmin }) => {
       }, 1000);
     }
   }, [isLoaded]);
+
+  const handleCloseAdmin2 = () => {
+    setIsAdmin(false);
+    sessionStorage.removeItem("password");
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("token");
+    setTimeout(() => {
+      history.push("/");
+    }, 20);
+  };
 
   return (
     <Fragment>
@@ -156,14 +166,7 @@ const AdminPanel = ({ isAdmin, setIsAdmin }) => {
                     <h3>Admin</h3>
                   </li>
                   <li>
-                    <a
-                      onClick={() =>
-                        history.push(
-                          `/admin/name=${name}&password=${encryptedPassword}`
-                        )
-                      }
-                      href="#0"
-                    >
+                    <a onClick={() => history.push(`/admin`)} href="#0">
                       <svg>
                         <use href="#pages"></use>
                       </svg>
@@ -292,14 +295,7 @@ const AdminPanel = ({ isAdmin, setIsAdmin }) => {
                       <span className="greeting">Hello admin</span>
                       <p style={{ fontSize: 12 }}>Click on avatar to log out</p>
                     </div>
-                    <div
-                      onClick={() => {
-                        setIsAdmin(false);
-                        sessionStorage.removeItem("password");
-                        history.push("/");
-                      }}
-                      className="notifications"
-                    >
+                    <div onClick={handleCloseAdmin2} className="notifications">
                       <span className="badge">1</span>
 
                       <img

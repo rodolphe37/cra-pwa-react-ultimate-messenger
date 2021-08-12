@@ -928,8 +928,12 @@ const ChatRoom = (props) => {
             onClick={handlePlusSection}
             className={
               !plusSection
-                ? "plusBottomChat margin-left37"
-                : "plusBottomChat margin-right10"
+                ? selectedDarkTheme
+                  ? "plusBottomChat ml37-mt5 dark-background"
+                  : "plusBottomChat ml37-mt5 light-background"
+                : selectedDarkTheme
+                ? "plusBottomChat margin-right14 dark-background"
+                : "plusBottomChat margin-right14 light-background"
             }
           >
             <img style={{ width: 25 }} src={plus} alt="plus" />
@@ -962,7 +966,7 @@ const ChatRoom = (props) => {
               onClick={handleSendThumb}
             >
               <img
-                style={{ width: 27, cursor: "pointer" }}
+                style={{ width: 27, cursor: "pointer", marginRight: 15 }}
                 src={Thumb}
                 alt="thumb"
               />
@@ -989,7 +993,7 @@ const ChatRoom = (props) => {
                   >
                     <g
                       transform="translate(-5.000000, -5.000000)"
-                      fill="#8a8d91"
+                      fill={selectedDarkTheme ? "#ffffff" : "#4d4d4d"}
                     >
                       <g>
                         <g transform="translate(5.000000, 5.000000)">

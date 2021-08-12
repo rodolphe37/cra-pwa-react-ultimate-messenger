@@ -76,7 +76,7 @@ const Alert = ({
                   src={Logo}
                   alt="logo"
                 />
-                <h1>
+                <h1 className="titleAlert">
                   {title} <br /> {subTitle && !clickedAlert ? subTitle : null}
                   {isMessages && isMessages.length > 0 && activateDeleteConv
                     ? subTitle

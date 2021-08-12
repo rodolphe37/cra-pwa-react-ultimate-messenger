@@ -445,3 +445,18 @@ i.bx.bx-menu.sidebarBtn:hover {
   background: lightgray;
   border-radius: 12px;
 }
+.content-ButtonChat {
+  position: relative;
+  width: 100%;
+  height: 55px;
+}
+.buttonChatAdmin {
+  position: fixed;
+  left: 0;
+}
+.top-sales-details
+  > .drawer-content
+  > #footerSlideContainer
+  > #footerSlideContent-closed {
+  display: inherit !important;
+}

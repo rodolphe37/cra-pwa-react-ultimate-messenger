@@ -48,10 +48,11 @@
   margin-left: 22px;
 }
 .reduceInput {
-  width: 105px;
-  margin-right: 4px;
+  width: 142px;
+  margin-right: -23px;
   transition: all 0.4s ease-in-out;
   overflow: hidden;
+  border-radius: 0 0 0 10px;
 }
 .margin-right10 {
   margin-right: 10px;

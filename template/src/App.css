@@ -251,3 +251,14 @@ video {
   bottom: 0;
   left: 0;
 }
+
+.titleAlert {
+  text-transform: lowercase !important;
+}
+.loginForm input {
+  height: 33px;
+  width: 90%;
+  border-radius: 4px;
+  box-shadow: 1px 1px 3px #000;
+  text-indent: 15px;
+}

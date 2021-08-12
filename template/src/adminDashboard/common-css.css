@@ -1,0 +1,18 @@
+.content-page-admin {
+  width: 100%;
+  height: auto;
+  padding-top: 99px;
+  padding-left: 22px;
+}
+.title-page-admin {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.content-page-admin i {
+  font-size: 32px;
+}
+.nav-links a {
+  cursor: pointer;
+}
