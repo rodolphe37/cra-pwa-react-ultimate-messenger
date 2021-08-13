@@ -1,6 +1,6 @@
 {
   "exampleRecoil":"👇🏼👇🏼👇🏼 Il s'agit d'un exemple d'utilisation de Recoil (Atom & Selector) 👇🏼👇🏼👇🏼 :",
-  "subTitle": "Un service Open sources",
+  "subTitle": "La version PWA",
   "sendPicture":"Vous avez envoyé une image",
   "receivePicture":"Vous avez reçu une image",
   "desactivatePicture":"Vous avez désactivé la fonction image!",
@@ -61,7 +61,7 @@
   "loginDeletePassword":"Cliquez pour supprimer votre mot de passe",
   "loginButton":"Se connecter",
   "adminAlertTitle":"Pour devez entrer Username et password.",
-  "adminAlertSubtitle":"Si vous avez déjà essayé le chat, votre username est déjà pré-remplis. Mettez ce que vous voulez en password",
+  "adminAlertSubtitle":"Le username par défaut est: 'admin' et le mot de passe est 'p@ssword'",
   "adminAlertButton":"ok, j'ai compris",
   "offlineMessage": "Vous êtes hors ligne ou il y a un souci de Connexion!"
 }
