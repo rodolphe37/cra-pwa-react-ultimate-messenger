@@ -21,7 +21,7 @@ import isAdminAtom from "./chatComponents/stateManager/atoms/isAdminAtom";
 import HeaderApp from "./components/HeaderApp";
 import RecoilSimpleExample from "./components/RecoilSimpleExample";
 import { withRecoilExample } from "./postInstallConfig/withRecoilExample";
-import { useGeolocation } from "./hooks/useGelolocation";
+import { useGeolocation } from "./hooks/useGeolocation";
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useRecoilState(isAdminAtom);
