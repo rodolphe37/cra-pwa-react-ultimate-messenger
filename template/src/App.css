@@ -262,17 +262,3 @@ video {
   box-shadow: 1px 1px 3px #000;
   text-indent: 15px;
 }
-.geoLocationExample {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  font-size: 21px;
-  width: 100%;
-  margin-bottom: 22px;
-}
-
-@media screen and (max-width: 750px) {
-  .geoLocationExample {
-    flex-direction: column;
-  }
-}

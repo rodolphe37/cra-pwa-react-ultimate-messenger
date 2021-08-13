@@ -57,6 +57,7 @@ import openVideoChatAtom from "../../../stateManager/atoms/openVideoChatAtom";
 import useWebPush from "../../../hooks/useWebPush";
 import isOnlineAtom from "../../../stateManager/atoms/isOnlineAtom";
 import OfflineMessage from "../../offlineMessage/OfflineMessage";
+import { useGeolocation } from "../../../../hooks/useGeolocation";
 
 const ChatRoom = (props) => {
   const { t } = useTranslation();
@@ -71,6 +72,10 @@ const ChatRoom = (props) => {
   let roomId = { roomToken };
   const [username, setUsername] = useRecoilState(usernameAtom);
   // const { customAlert, ok } = useCustomAlert();
+  const geoObj = useGeolocation();
+  const [cityLocation, setCityLocation] = useState(
+    JSON.parse(localStorage.getItem("cityInfos"))
+  );
   const {
     messages,
     setMessages,
@@ -487,6 +492,15 @@ const ChatRoom = (props) => {
   }, [messageIdToDelete, idForDeleteButton]);
 
   // END OF DELETE MESSAGE SECTION
+
+  useEffect(() => {
+    if (geoObj) {
+      console.log("geo lat :", geoObj.lat);
+      console.log("geo long :", geoObj.lng);
+      console.log("cityLocation", cityLocation);
+      console.log("cityLocation", cityLocation);
+    }
+  }, [cityLocation, geoObj]);
 
   return (
     <Fragment>

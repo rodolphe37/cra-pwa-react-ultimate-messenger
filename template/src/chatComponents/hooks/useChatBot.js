@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 // MODULES IMPORTS
 import { useState, useEffect } from "react";
+import { isMobile } from "react-device-detect";
 import { useRecoilState } from "recoil";
 // CONSTANTS IMPORTS
 import {
@@ -27,6 +28,9 @@ const useChatBot = () => {
   const [roomToken] = useRecoilState(roomIdAtom);
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useRecoilState(weatherAtom);
+  const [cityLocation, setCityLocation] = useState(
+    JSON.parse(localStorage.getItem("cityInfos"))
+  );
 
   let product;
   // GET HOUR FOR HORLOGE COMMAND TO BOTCHAT
@@ -95,12 +99,25 @@ const useChatBot = () => {
   } else if (text.match(/calendrier|quel jour/gi)) {
     product = `Nous somme le ${n}`;
   } else if (text.match(/qui je suis|qui suis-je|j'suis qui/gi)) {
-    infosUser &&
-      (product = `Tu t'appelle : ${userName}, ton drapeau est ${infosUser.flag},
+    !isMobile &&
+      infosUser &&
+      (product = `Tu t'appelle : ${userName}, ton pays est ${infosUser.flag} - ${cityLocation.results[0].locations[0].adminArea1},
+    ta ville est :${cityLocation.results[0].locations[0].adminArea5}, code postal : ${cityLocation.results[0].locations[0].postalCode},
+    ta rue est :${cityLocation.results[0].locations[0].street},
     ton ip est : ${infosUser.ip},
     ton navigateur est  ${infosUser.navigator},
-    ton Système d'exploitation est ${infosUser.os}
-    et ta time zone est : ${infosUser.timezone}`);
+    ton Système d'exploitation est ${infosUser.os} 😊😎`);
+    isMobile &&
+      infosUser &&
+      (product = `Tu t'appelle : ${userName}, ton pays est ${infosUser.flag} - ${cityLocation.results[0].locations[0].adminArea1},
+    ta ville est :${cityLocation.results[0].locations[0].adminArea5}, code postal : ${cityLocation.results[0].locations[0].postalCode},
+    ta rue est :${cityLocation.results[0].locations[0].street},
+    ton ip est : ${infosUser.ip},
+    ton Téléphone est ${infosUser.device}
+    de marque : ${infosUser.trade},
+    ton OS est : ${infosUser.os},
+    ton navigateur est  ${infosUser.navigator} 😊😎,
+    `);
   } else if (text.match(/fuck/gi)) {
     product = "Fuck toi même, petit impoli 🖕🏼🖕🏼";
   } else if (text.match(/(corona|covid|virus)/gi)) {
