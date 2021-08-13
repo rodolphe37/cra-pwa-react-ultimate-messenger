@@ -8,6 +8,7 @@ import selectedDarkThemeAtom from "./chatComponents/stateManager/atoms/selectedD
 import { useTranslation } from "react-i18next";
 import isLanguageAtom from "./chatComponents/stateManager/atoms/isLanguageAtom";
 import Alert from "./chatComponents/customAlert/Alert";
+import roomIdAtom from "./chatComponents/stateManager/atoms/roomIdAtom";
 import useWebPush from "./chatComponents/hooks/useWebPush";
 import pwaPass from "./chatComponents/assets/pwa-pass-3.svg";
 import isOnlineAtom from "./chatComponents/stateManager/atoms/isOnlineAtom";
@@ -20,13 +21,16 @@ import isAdminAtom from "./chatComponents/stateManager/atoms/isAdminAtom";
 import HeaderApp from "./components/HeaderApp";
 import RecoilSimpleExample from "./components/RecoilSimpleExample";
 import { withRecoilExample } from "./postInstallConfig/withRecoilExample";
-import { useGeolocation } from "./hooks/useGeolocation";
+import { useGeolocation } from "./hooks/useGelolocation";
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useRecoilState(isAdminAtom);
   const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
   const [language, setLanguage] = useRecoilState(isLanguageAtom);
   const { i18n, t } = useTranslation();
+  const [cityLocation, setCityLocation] = useState(
+    JSON.parse(localStorage.getItem("locaTest"))
+  );
 
   const geoObj = useGeolocation();
   if (geoObj) {
@@ -43,7 +47,7 @@ const App = () => {
       )
         .then((response) => response.json())
         .then((responseJson) => {
-          localStorage.setItem("cityInfos", JSON.stringify(responseJson));
+          localStorage.setItem("locaTest", JSON.stringify(responseJson));
         });
     };
     fetchLocationName();
@@ -58,7 +62,13 @@ const App = () => {
   useEffect(() => {
     setLanguage(i18n.language);
     console.log("lng :", language);
-  }, [language, setLanguage, i18n]);
+    if (geoObj) {
+      console.log("geo lat :", geoObj.lat);
+      console.log("geo long :", geoObj.lng);
+      console.log("cityLocation", cityLocation);
+      console.log("cityLocation", cityLocation);
+    }
+  }, [language, setLanguage, i18n, geoObj]);
 
   // eslint-disable-next-line no-unused-vars
   const [isOnline, setIsOnline] = useRecoilState(isOnlineAtom);
@@ -190,6 +200,16 @@ const App = () => {
                     alt="pwa-logo"
                   />
                 </span>
+              </div>
+              <div className="geoLocationExample">
+                <h1>
+                  Country :{cityLocation.results[0].locations[0].adminArea1}
+                </h1>
+                <h2>City :{cityLocation.results[0].locations[0].adminArea5}</h2>
+                <h3>Street :{cityLocation.results[0].locations[0].street}</h3>
+                <h4>
+                  PostalCode :{cityLocation.results[0].locations[0].postalCode}
+                </h4>
               </div>
               <p>
                 {t("editAppText")} <code>src/App.js</code> {t("saveAppText")}
