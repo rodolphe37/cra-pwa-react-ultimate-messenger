@@ -285,6 +285,13 @@ button {
   width: 60px;
   height: 60px;
   box-shadow: 0 0 2px 0 rgb(0 0 0 / 7%), 0 11px 9px 0 rgb(0 0 0 / 20%);
+  transform: scale(0.8);
+  transition: all 0.5s ease-in-out;
+}
+
+.chat-button:hover {
+  transform: scale(1.1);
+  transition: all 0.5s ease-in-out;
 }
 .buttonDark {
   background: #2e2e2e !important;
