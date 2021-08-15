@@ -14,10 +14,21 @@
 }
 
 .video-chat-container-mobile {
-  right: -56px !important;
+  right: -72px !important;
   top: 1px !important;
   height: 90vh;
+  width: 96%;
 }
+@media screen and (max-width: 750px) {
+  .myId {
+    width: 100% !important;
+    margin-right: 0 !important;
+    border-radius: 5px !important;
+    padding: 2rem !important;
+    box-shadow: 1px 1px 4px lightgrey;
+  }
+}
+
 .video-chat-container-mobile-calling {
   top: -59px !important;
 }
