@@ -12,7 +12,6 @@ import { useTranslation } from "react-i18next";
 import "./ChatRoom.css";
 // HOOKS & SERVICES IMPORTS
 import useChat from "../../../hooks/useChat";
-import useVideoChat from "../../../hooks/useVideoChat";
 import UploadService from "../../../services/FileUploadService";
 import useGetUserInfos from "../../../hooks/useGetUserInfos";
 // STATEMANAGMENT IMPORTS
@@ -50,14 +49,11 @@ import DeleteConvButton from "../../../assets/x-button.svg";
 import Alert from "../../../customAlert/Alert";
 import clickedAlertAtom from "../../../customAlert/clickedAlertAtom";
 import { useAlert } from "react-alert";
-import activateDeleteConvAtom from "../../checkboxAlert/activateDeleteConvAtom";
 import clickedOffChatAtom from "../../../stateManager/atoms/clickedOffChatAtom";
-import VideoChatComponent from "../../videoChatComponent/VideoChatComponent";
 import openVideoChatAtom from "../../../stateManager/atoms/openVideoChatAtom";
 import useWebPush from "../../../hooks/useWebPush";
 import isOnlineAtom from "../../../stateManager/atoms/isOnlineAtom";
 import OfflineMessage from "../../offlineMessage/OfflineMessage";
-import { useGeolocation } from "../../../../hooks/useGeolocation";
 
 const ChatRoom = (props) => {
   const { t } = useTranslation();
@@ -66,16 +62,9 @@ const ChatRoom = (props) => {
   const messagesEndRef = useRef(null);
   const [roomToken, setRoomToken] = useRecoilState(roomIdAtom);
   const [isLoaded, setIsLoaded] = useState(true);
-  const [isSoundNotification, setIsSoundNotification] = useRecoilState(
-    isSoundNotificationsAtom
-  );
   let roomId = { roomToken };
   const [username, setUsername] = useRecoilState(usernameAtom);
   // const { customAlert, ok } = useCustomAlert();
-  const geoObj = useGeolocation();
-  const [cityLocation, setCityLocation] = useState(
-    JSON.parse(localStorage.getItem("cityInfos"))
-  );
   const {
     messages,
     setMessages,
@@ -493,15 +482,6 @@ const ChatRoom = (props) => {
 
   // END OF DELETE MESSAGE SECTION
 
-  useEffect(() => {
-    if (geoObj) {
-      console.log("geo lat :", geoObj.lat);
-      console.log("geo long :", geoObj.lng);
-      console.log("cityLocation", cityLocation);
-      console.log("cityLocation", cityLocation);
-    }
-  }, [cityLocation, geoObj]);
-
   return (
     <Fragment>
       {clickedAlert && (
@@ -821,7 +801,8 @@ const ChatRoom = (props) => {
                             alt="thumb"
                           />
                         )}
-                        {message.body.includes("&météo") ? (
+                        {message.body.includes("&météo") ||
+                        message.body.includes("&weather") ? (
                           <div
                             className={
                               message.ownedByCurrentUser

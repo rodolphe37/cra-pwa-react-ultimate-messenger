@@ -42,7 +42,7 @@
   "joinRoom":"Join room",
   "roomNameReq":"You must enter a room name",
   "politic":"By continuing as a guest, you agree to the Terms and Conditions Terms and Conditions. Learn more about how we collect, use and share share your data in our Data Use Policy, and how we use and how we use cookies and other similar technologies in our technologies in our Cookie Usage Policy. Policy.",
-  "botMess":"I am ChatBot, but unfortunately, I only speak French for the moment!  My creator is working on it right now.😉",
+  "botMess":"I'm ChatBot, you can call me by typing #botchat or # bootedchat. Any conversation that starts with # is automatically addressed to me, you can ask me questions, wish me a good day... and everything! Just type the chat...!",
   "botTips":"See you soon",
   "alertCloseChatTitle": "By closing this window you will exit the room",
   "alertMessIfMessagesList": "and delete your message history...",
@@ -63,5 +63,6 @@
   "adminAlertTitle":"You must enter Username and password.",
   "adminAlertSubtitle":"The default username is: 'admin' and the password is 'p@ssword'.",
   "adminAlertButton":"ok, I understand",
-  "offlineMessage": "You are offline or there is a connection problem!"
+  "offlineMessage": "You are offline or there is a connection problem!",
+   "chatbot":"botchat"
 }

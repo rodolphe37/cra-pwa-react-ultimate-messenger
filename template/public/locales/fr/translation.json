@@ -42,8 +42,8 @@
   "joinRoom":"Joindre la room",
   "roomNameReq":"Vous devez obligatoirement entrer un nom de room",
   "politic":"En continuant en tant qu’invité(e), vous acceptez les Conditions générales du site. Découvrez comment nous collectons, utilisons et partageons vos données dans notre Politique d’utilisation des données, et comment nous utilisons les cookies et autres technologies similaires dans notre Politique d’utilisation des cookies.",
-  "botMess":"Je suis ChatBot, tu peut m'appeler en tapant #chatbot. Toute conversation qui commence par # s'adresse automatiquement à moi, tu peut me poser des questions, me souhaiter une bonne journée... et tout et tout! Taper la discute quoi...!",
-  "botTips":"Astuce : Tapez &météo pour connaitre la météo de la ville que vous souhaitez !",
+  "botMess":"Je suis ChatBot, mais malheureusement, je ne parle que l'anglais pour le moment !  Pour que cette démo soit démonstrative pour le plus grand nombre de personne, mon créateur à choisi la langue anglaise.😉.",
+  "botTips":"Astuce : Tapez &météo ou &weather pour connaitre la météo de la ville que vous souhaitez !",
   "alertCloseChatTitle": "En fermant cette fenêtre vous allez sortir de la room",
   "alertMessIfMessagesList":"et effacer l'historique de vos messages...",
   "confirmActionCloseChat":"Souhaitez vous vraiment faire cette action ?",
@@ -63,5 +63,6 @@
   "adminAlertTitle":"Pour devez entrer Username et password.",
   "adminAlertSubtitle":"Le username par défaut est: 'admin' et le mot de passe est 'p@ssword'",
   "adminAlertButton":"ok, j'ai compris",
-  "offlineMessage": "Vous êtes hors ligne ou il y a un souci de Connexion!"
+  "offlineMessage": "Vous êtes hors ligne ou il y a un souci de Connexion!",
+  "chatbot":"chatbot"
 }

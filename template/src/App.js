@@ -21,6 +21,7 @@ import HeaderApp from "./components/HeaderApp";
 import RecoilSimpleExample from "./components/RecoilSimpleExample";
 import { withRecoilExample } from "./postInstallConfig/withRecoilExample";
 import { useGeolocation } from "./hooks/useGeolocation";
+import Drops from "./components/drops/Drops";
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useRecoilState(isAdminAtom);
@@ -35,7 +36,7 @@ const App = () => {
 
     const fetchLocationName = async () => {
       await fetch(
-        "https://www.mapquestapi.com/geocoding/v1/reverse?key=G1moSFJkXvMTf7kCVqTOPMh1SxtvJaGi&location=" +
+        process.env.REACT_APP_CITY_LOCATION +
           lat +
           "%2C" +
           lng +
@@ -190,7 +191,11 @@ const App = () => {
                     alt="pwa-logo"
                   />
                 </span>
+                <div className="drop-container">
+                  <Drops />
+                </div>
               </div>
+
               <p>
                 {t("editAppText")} <code>src/App.js</code> {t("saveAppText")}
               </p>
