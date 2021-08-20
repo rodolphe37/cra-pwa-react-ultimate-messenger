@@ -1,0 +1,150 @@
+.MobileMenu-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.s-28px {
+  height: 28px;
+  width: 28px;
+}
+.stroke-red-pale {
+  stroke: #ea4f74;
+}
+.fill-blue-primary {
+  fill: #004dff;
+}
+.text-center {
+  text-align: center;
+}
+.flex-1 {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 0%;
+  flex: 1 1 0%;
+}
+
+.font-obviously-narrow {
+  font-family: Obviously Variable, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-stretch: 320%;
+}
+.font-medium {
+  font-weight: 380;
+}
+.lowercase {
+  text-transform: lowercase;
+}
+.text-11 {
+  font-size: 0.6875rem;
+}
+.leading-tight {
+  line-height: 1.25;
+}
+.bg-white {
+  background-color: #fff;
+}
+.z-80 {
+  z-index: 80;
+}
+.w-full {
+  width: 100%;
+}
+.left-0 {
+  left: 0;
+}
+.top-0 {
+  top: 0;
+}
+/* .fixed {
+  position: fixed;
+} */
+.h-full {
+  height: 100%;
+}
+.text-black {
+  color: #000;
+}
+.text-gray-500 {
+  color: grey;
+}
+.p-2 {
+  padding: 0.5rem;
+}
+.block {
+  display: block;
+}
+.z-2 {
+  z-index: 2;
+}
+.relative {
+  position: relative;
+}
+.overflow-visible {
+  overflow: visible;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.MobileMenu-container a {
+  background-color: transparent;
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.MobileMenu-container ol,
+.MobileMenu-container ul {
+  list-style: none;
+}
+.MobileMenu-container fieldset,
+.MobileMenu-container ol,
+.MobileMenu-container ul {
+  margin: 0;
+  padding: 0;
+}
+.z-20 {
+  z-index: 20;
+}
+.z-80 {
+  z-index: 80;
+}
+*,
+:after,
+:before {
+  border: 0 solid;
+}
+.nav-bar-publish__link {
+  position: relative;
+}
+.nav-bar-publish__icon {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 100px;
+  width: 50px;
+  height: 50px;
+  margin: -20px auto -2px;
+  border: 1px solid #e3e3e3;
+}
+.nav-bar-publish__icon:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+}
+.font-medium {
+  font-weight: 380;
+}
+.s-34px {
+  height: 34px;
+  width: 34px;
+}
+.fill-yellow-sun {
+  fill: #fdd330;
+}
+.relative {
+  position: relative;
+}

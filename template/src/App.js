@@ -22,6 +22,9 @@ import RecoilSimpleExample from "./components/RecoilSimpleExample";
 import { withRecoilExample } from "./postInstallConfig/withRecoilExample";
 import { useGeolocation } from "./hooks/useGeolocation";
 import Drops from "./components/drops/Drops";
+import { isMobile } from "react-device-detect";
+import BottomMenu from "./components/bottomMenu/BottomMenu";
+import { withBottomMenu } from "./postInstallConfig/withBottomMenu";
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useRecoilState(isAdminAtom);
@@ -55,7 +58,7 @@ const App = () => {
     i18n.changeLanguage(lng);
     setLanguage(lng);
   };
-  // Natif hook for loading during the render of the app page i18n language in language global state
+  // primitif hook for loading during the render of the app page i18n language in language global state
   useEffect(() => {
     setLanguage(i18n.language);
     console.log("lng :", language);
@@ -217,6 +220,7 @@ const App = () => {
               )}
             </header>
           </div>
+          {withBottomMenu && isMobile ? <BottomMenu /> : null}
         </Fragment>
       ) : null}
       <Routes />
