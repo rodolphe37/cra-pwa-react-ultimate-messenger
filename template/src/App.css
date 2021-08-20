@@ -174,7 +174,7 @@ video {
 .header-headContent {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   box-shadow: -1px -5px 12px rgb(133 132 132);
   width: 100%;
   padding: 15px;
@@ -182,17 +182,17 @@ video {
   position: fixed;
   height: 81px;
   border-bottom: 1px solid gray;
-  padding-right: 40px;
 }
+
 .changeLanguague-container {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   width: 30% !important;
 }
-.admin-button {
+/* .admin-button {
   margin-left: 52em;
-}
+} */
 .admin-button > button > img {
   width: 37%;
   margin-top: 6px;
