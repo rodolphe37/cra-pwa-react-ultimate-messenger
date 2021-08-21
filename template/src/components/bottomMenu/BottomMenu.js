@@ -3,7 +3,7 @@ const BottomMenu = () => {
   return (
     <div className="MobileMenu-container z-80">
       <nav className="nav-bar fixed bg-white  is-fixed inset-x-0 bottom-0 lg:static lg:w-18 z-20 border-t border-gray-300 lg:border-0">
-        <ul className="flex lg:block font-obviously-narrow font-medium lowercase text-11 lg:text-10 leading-tight">
+        <ul className=" inner-content-nav flex lg:block font-obviously-narrow font-medium lowercase text-11 lg:text-10 leading-tight">
           <li className="flex-1 lg:my-4 text-center ">
             <a href="/" className="nav-bar__link block p-2 text-black">
               <svg

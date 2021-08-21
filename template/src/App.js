@@ -25,6 +25,8 @@ import Drops from "./components/drops/Drops";
 import { isMobile } from "react-device-detect";
 import BottomMenu from "./components/bottomMenu/BottomMenu";
 import { withBottomMenu } from "./postInstallConfig/withBottomMenu";
+import { withRadialMenu } from "./postInstallConfig/withRadialMenu";
+import RadialMenu from "./components/radialMenu/RadialMenu";
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useRecoilState(isAdminAtom);
@@ -221,6 +223,7 @@ const App = () => {
             </header>
           </div>
           {withBottomMenu && isMobile ? <BottomMenu /> : null}
+          {withRadialMenu && isMobile ? <RadialMenu /> : null}
         </Fragment>
       ) : null}
       <Routes />
