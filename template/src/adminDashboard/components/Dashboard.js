@@ -1,15 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import SunglassesIcon from "../images/sunglasses.jpg";
-import JeansIcon from "../images/jeans.jpg";
-import NikeIcon from "../images/nike.jpg";
-import Scarves from "../images/scarves.jpg";
-import BlueBag from "../images/blueBag.jpg";
-import BagIcon from "../images/bag.jpg";
-import Addidas from "../images/addidas.jpg";
-import Shirt from "../images/shirt.jpg";
 import useAxios from "../../chatComponents/hooks/useAxios";
 import OfflineMessage from "../../chatComponents/components/offlineMessage/OfflineMessage";
 import useAdmin from "../hooks/useAdmin";
+import { DataProduct } from "../constants/DataProduct";
 
 const Dashboard = () => {
   const { isOnline } = useAdmin();
@@ -80,7 +73,9 @@ const Dashboard = () => {
               {response &&
                 response.map((res) => (
                   <li key={res.id}>
-                    <a href="#">02/01/21</a>
+                    <a style={{ fontSize: 15, fontWeight: "bold" }} href="#">
+                      02/01/21
+                    </a>
                   </li>
                 ))}
             </ul>
@@ -89,7 +84,10 @@ const Dashboard = () => {
               {response &&
                 response.map((res) => (
                   <li key={res.id}>
-                    <a href="#">{`${res.username}`}</a>
+                    <a
+                      style={{ fontSize: 15, fontWeight: "bold" }}
+                      href="#"
+                    >{`${res.username}`}</a>
                   </li>
                 ))}
             </ul>
@@ -98,7 +96,9 @@ const Dashboard = () => {
               {response &&
                 response.map((res) => (
                   <li key={res.id}>
-                    <a href="#">{res.email}</a>
+                    <a style={{ fontSize: 14 }} href="#">
+                      {res.email}
+                    </a>
                   </li>
                 ))}
             </ul>
@@ -107,7 +107,9 @@ const Dashboard = () => {
               {response &&
                 response.map((res) => (
                   <li key={res.id}>
-                    <a href="#">{res.phone}</a>
+                    <a style={{ fontSize: 13, fontWeight: "bold" }} href="#">
+                      {res.phone.split("x")}
+                    </a>
                   </li>
                 ))}
             </ul>
@@ -119,62 +121,15 @@ const Dashboard = () => {
         <div className="top-sales box">
           <div className="title">Top Seling Product</div>
           <ul className="top-sales-details">
-            <li>
-              <a href="#">
-                <img src={SunglassesIcon} alt="" />
-                <span className="product">Vuitton Sunglasses</span>
-              </a>
-              <span className="price">$1107</span>
-            </li>
-            <li>
-              <a href="#">
-                <img src={JeansIcon} alt="" />
-                <span className="product">Hourglass Jeans </span>
-              </a>
-              <span className="price">$1567</span>
-            </li>
-            <li>
-              <a href="#">
-                <img src={NikeIcon} alt="" />
-                <span className="product">Nike Sport Shoe</span>
-              </a>
-              <span className="price">$1234</span>
-            </li>
-            <li>
-              <a href="#">
-                <img src={Scarves} alt="" />
-                <span className="product">Hermes Silk Scarves.</span>
-              </a>
-              <span className="price">$2312</span>
-            </li>
-            <li>
-              <a href="#">
-                <img src={BlueBag} alt="" />
-                <span className="product">Succi Ladies Bag</span>
-              </a>
-              <span className="price">$1456</span>
-            </li>
-            <li>
-              <a href="#">
-                <img src={BagIcon} alt="" />
-                <span className="product">Gucci Womens's Bags</span>
-              </a>
-              <span className="price">$2345</span>
-            </li>
-            <li>
-              <a href="#">
-                <img src={Addidas} alt="" />
-                <span className="product">Addidas Running Shoe</span>
-              </a>
-              <span className="price">$2345</span>
-            </li>
-            <li>
-              <a href="#">
-                <img src={Shirt} alt="" />
-                <span className="product">Bilack Wear's Shirt</span>
-              </a>
-              <span className="price">$1245</span>
-            </li>
+            {DataProduct.map((res) => (
+              <li key={res.id}>
+                <a href="#">
+                  <img src={res.picture} alt="" />
+                  <span className="product">{res.name}</span>
+                </a>
+                <span className="price">${res.price}</span>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

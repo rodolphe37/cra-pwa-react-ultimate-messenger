@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { Fragment, useEffect, useState } from "react";
 import logo from "./logo.svg";
+import "./global-css.css";
 import "./App.css";
 import Routes from "./Utils/routes";
 import { useRecoilState } from "recoil";

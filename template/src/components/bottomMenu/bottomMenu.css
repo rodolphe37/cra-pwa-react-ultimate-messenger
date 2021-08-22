@@ -3,23 +3,12 @@
   bottom: 0;
   width: 100%;
 }
-.s-28px {
-  height: 28px;
-  width: 28px;
-}
+
 .stroke-red-pale {
   stroke: #ea4f74;
 }
 .fill-blue-primary {
   fill: #004dff;
-}
-.text-center {
-  text-align: center;
-}
-.flex-1 {
-  -webkit-box-flex: 1;
-  -ms-flex: 1 1 0%;
-  flex: 1 1 0%;
 }
 
 .font-obviously-narrow {
@@ -28,64 +17,7 @@
     Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   font-stretch: 320%;
 }
-.font-medium {
-  font-weight: 380;
-}
-.lowercase {
-  text-transform: lowercase;
-}
-.text-11 {
-  font-size: 0.6875rem;
-}
-.leading-tight {
-  line-height: 1.25;
-}
-.bg-white {
-  background-color: #fff;
-}
-.z-80 {
-  z-index: 80;
-}
-.w-full {
-  width: 100%;
-}
-.left-0 {
-  left: 0;
-}
-.top-0 {
-  top: 0;
-}
-/* .fixed {
-  position: fixed;
-} */
-.h-full {
-  height: 100%;
-}
-.text-black {
-  color: #000;
-}
-.text-gray-500 {
-  color: grey;
-}
-.p-2 {
-  padding: 0.5rem;
-}
-.block {
-  display: block;
-}
-.z-2 {
-  z-index: 2;
-}
-.relative {
-  position: relative;
-}
-.overflow-visible {
-  overflow: visible;
-}
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
+
 .MobileMenu-container a {
   background-color: transparent;
   color: inherit;
@@ -103,17 +35,7 @@
   margin: 0;
   padding: 0;
 }
-.z-20 {
-  z-index: 20;
-}
-.z-80 {
-  z-index: 80;
-}
-*,
-:after,
-:before {
-  border: 0 solid;
-}
+
 .nav-bar-publish__link {
   position: relative;
 }
@@ -136,19 +58,11 @@
   right: 0;
   background: #fff;
 }
-.font-medium {
-  font-weight: 380;
-}
-.s-34px {
-  height: 34px;
-  width: 34px;
-}
+
 .fill-yellow-sun {
   fill: #fdd330;
 }
-.relative {
-  position: relative;
-}
+
 .inner-content-nav {
   border-top: 1px solid #e3e3e3;
   box-shadow: 0 1px 4px lightgray;

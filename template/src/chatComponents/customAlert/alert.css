@@ -83,10 +83,6 @@
   padding-bottom: 10px;
 }
 
-button:hover {
-  opacity: 0.8;
-}
-
 .react-confirm-alert-button-group > button:nth-child(1) {
   background-color: #186b00;
   font-size: 14px;

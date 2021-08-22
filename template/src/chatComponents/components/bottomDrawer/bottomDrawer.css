@@ -97,10 +97,7 @@
     display: none !important;
   }
 }
-.hiddenWindows {
-  display: none;
-  animation: slide-out-br 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
-}
+
 .firstButton {
   text-transform: capitalize;
   font-size: 17px;
