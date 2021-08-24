@@ -158,8 +158,8 @@ const BaseLayoutApp = (props) => {
         <div className="wrapper-App">{children}</div>
       </main>
       <div className="MenuApp">
-        {withBottomMenu && isMobile ? <BottomMenu /> : null}
-        {withRadialMenu && isMobile ? <RadialMenu /> : null}
+        {withBottomMenu && isMobile && !isAdmin ? <BottomMenu /> : null}
+        {withRadialMenu && isMobile && !isAdmin ? <RadialMenu /> : null}
       </div>
       <Routes />
     </div>
