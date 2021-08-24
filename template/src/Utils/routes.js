@@ -16,7 +16,6 @@ import isAdminAtom from "../chatComponents/stateManager/atoms/isAdminAtom";
 import { useRecoilState } from "recoil";
 import roomIdAtom from "../chatComponents/stateManager/atoms/roomIdAtom";
 import Alert from "../chatComponents/customAlert/Alert";
-import PublicRoute from "./PublicRoute";
 import { withAdminPanel } from "../postInstallConfig/withAdmin";
 import WithAdminRoute from "./withAdminRoute";
 const Routes = () => {
@@ -35,31 +34,31 @@ const Routes = () => {
             <ButtonChat />
           </Route>
         )}
-        <PublicRoute path="/login">
+        <Route path="/login">
           <Join isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
-        </PublicRoute>
-        <PublicRoute path="/home">
+        </Route>
+        <Route path="/home">
           <HomeChat />
-        </PublicRoute>
-        <PublicRoute path={`/chat/${roomId}`}>
+        </Route>
+        <Route path={`/chat/${roomId}`}>
           <ChatRoom />
-        </PublicRoute>
-        <PublicRoute path={`/video/${roomId}`}>
+        </Route>
+        <Route path={`/video/${roomId}`}>
           <VideoChatComponent roomId={roomId} />
-        </PublicRoute>
-        <PublicRoute path="/load">
+        </Route>
+        <Route path="/load">
           <Loader />
-        </PublicRoute>
-        <PublicRoute path="/intro">
+        </Route>
+        <Route path="/intro">
           <BottomDrawer />
-        </PublicRoute>
-        <PublicRoute path="/meteo">
+        </Route>
+        <Route path="/meteo">
           <Weather />
-        </PublicRoute>
+        </Route>
         {withAdminPanel ? <WithAdminRoute /> : null}
-        <PublicRoute>
+        <Route>
           <Alert />
-        </PublicRoute>
+        </Route>
       </Switch>
     </Router>
   );

@@ -8,7 +8,7 @@ const BottomMenu = () => {
             <a href="/" className="nav-bar__link block p-2 text-black">
               <svg
                 data-id="icon-home"
-                className="nav-bar__icon block mx-auto overflow-visible stroke-red-pale s-28px"
+                className="nav-bar_icon block mx-auto overflow-visible stroke-red-pale s-28px"
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
                 y="0px"
@@ -70,7 +70,7 @@ const BottomMenu = () => {
             >
               <svg
                 data-id="icon-bottle"
-                className="nav-bar__icon block mx-auto overflow-visible fill-blue-primary s-28px"
+                className="nav-bar_icon block mx-auto overflow-visible fill-blue-primary s-28px"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 28 28"
               >
@@ -94,7 +94,7 @@ const BottomMenu = () => {
               <span className="nav-bar-publish__icon">
                 <svg
                   data-id="icon-pen"
-                  className="nav-bar__icon block mx-auto overflow-visible fill-yellow-sun s-34px lg:s-28px relative z-1"
+                  className="nav-bar_icon block mx-auto overflow-visible fill-yellow-sun s-34px lg:s-28px relative z-1"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 28 28"
                 >
@@ -127,7 +127,7 @@ const BottomMenu = () => {
             >
               <svg
                 data-id="icon-dices"
-                className="nav-bar__icon block mx-auto overflow-visible fill-pink-loterie s-28px"
+                className="nav-bar_icon block mx-auto overflow-visible fill-pink-loterie s-28px"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 28 28"
               >
@@ -168,7 +168,7 @@ const BottomMenu = () => {
             >
               <svg
                 data-id="icon-user"
-                className="nav-bar__icon block mx-auto overflow-visible fill-blue-primary s-28px"
+                className="nav-bar_icon block mx-auto overflow-visible fill-blue-primary s-28px"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 29 29"
               >
