@@ -1,12 +1,13 @@
 import Parameters from "../../../parameters/Parameters";
 
-const HeaderChatComponent = ({
-  selectedDarkTheme,
-  Bavarder,
-  t,
-  handleClickAlert,
-  handleClickedOffChat,
-}) => {
+const HeaderChatComponent = (props) => {
+  const {
+    selectedDarkTheme,
+    Bavarder,
+    t,
+    handleClickAlert,
+    handleClickedOffChat,
+  } = props;
   return (
     <div>
       <span

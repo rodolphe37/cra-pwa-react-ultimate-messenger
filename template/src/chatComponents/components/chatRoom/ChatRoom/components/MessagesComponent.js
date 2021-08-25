@@ -1,35 +1,36 @@
 import { Fragment } from "react";
 import { useAlert } from "react-alert";
 
-const MessagesComponent = ({
-  messages,
-  openVideoChat,
-  clickedSound1,
-  clickedSound2,
-  sound,
-  sound2,
-  handleClickOnName,
-  clickedOnName,
-  userAllInfos,
-  isNotAlphaNumeric,
-  setIdForDeleteButton,
-  handletoggleDeleteButton,
-  seingMedia,
-  toggleDeleteButton,
-  messagesEndRef,
-  t,
-  clickedCopyId,
-  CopyToClipboard,
-  idChatInvitation,
-  setClickedCopyId,
-  Thumb,
-  cloud,
-  Weather,
-  idForDeleteButton,
-  setMessageIsToDelete,
-  DeleteConvButton,
-}) => {
+const MessagesComponent = (props) => {
   const alert = useAlert();
+  const {
+    messages,
+    openVideoChat,
+    clickedSound1,
+    clickedSound2,
+    sound,
+    sound2,
+    handleClickOnName,
+    clickedOnName,
+    userAllInfos,
+    isNotAlphaNumeric,
+    setIdForDeleteButton,
+    handletoggleDeleteButton,
+    seingMedia,
+    toggleDeleteButton,
+    messagesEndRef,
+    t,
+    clickedCopyId,
+    CopyToClipboard,
+    idChatInvitation,
+    setClickedCopyId,
+    Thumb,
+    cloud,
+    Weather,
+    idForDeleteButton,
+    setMessageIsToDelete,
+    DeleteConvButton,
+  } = props;
   return (
     <div>
       <ol className="messages-list">

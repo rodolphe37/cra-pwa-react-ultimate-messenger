@@ -2,30 +2,31 @@ import UploadImages from "../../../ImageUploadComponent";
 import SpeechToText from "../../../speech-recognition/SpeechToText";
 import Picker, { SKIN_TONE_MEDIUM_LIGHT } from "emoji-picker-react";
 
-const BottomChatComponent = ({
-  selectedDarkTheme,
-  handleSendMessage,
-  plusSection,
-  state,
-  Thumb,
-  handleSendThumb,
-  handleKeypress,
-  setIsTaping,
-  VideoCall,
-  handleVideoChat,
-  plus,
-  handlePlusSection,
-  t,
-  handleNewMessageChange,
-  newMessage,
-  handleTypingInput,
-  isLoaded,
-  clickedOffChat,
-  setClickedParams,
-  onEmojiClick,
-  clickedChevron,
-  handleClickChevron,
-}) => {
+const BottomChatComponent = (props) => {
+  const {
+    selectedDarkTheme,
+    handleSendMessage,
+    plusSection,
+    state,
+    Thumb,
+    handleSendThumb,
+    handleKeypress,
+    setIsTaping,
+    VideoCall,
+    handleVideoChat,
+    plus,
+    handlePlusSection,
+    t,
+    handleNewMessageChange,
+    newMessage,
+    handleTypingInput,
+    isLoaded,
+    clickedOffChat,
+    setClickedParams,
+    onEmojiClick,
+    clickedChevron,
+    handleClickChevron,
+  } = props;
   return (
     <div>
       <div
