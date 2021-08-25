@@ -4,12 +4,12 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import ButtonChat from "../chatComponents/components/ButtonChat";
-import AdminPanel2 from "../adminDashboard/AdminPanel2";
-import AdminPanel from "../adminDashboard/AdminPanel";
-import isAdminAtom from "../chatComponents/stateManager/atoms/isAdminAtom";
+import ButtonChat from "chatComponents/components/ButtonChat";
+import AdminPanel2 from "adminDashboard/AdminPanel2";
+import AdminPanel from "adminDashboard/AdminPanel";
+import isAdminAtom from "chatComponents/stateManager/atoms/isAdminAtom";
 import { useRecoilState } from "recoil";
-import registerUserAtom from "../chatComponents/stateManager/atoms/registeruserAtom";
+import registerUserAtom from "chatComponents/stateManager/atoms/registeruserAtom";
 
 const WithAdminRoute = () => {
   const [isAdmin, setIsAdmin] = useRecoilState(isAdminAtom);

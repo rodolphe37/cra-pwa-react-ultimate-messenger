@@ -1,5 +1,5 @@
-import UploadImages from "../../../ImageUploadComponent";
-import SpeechToText from "../../../speech-recognition/SpeechToText";
+import UploadImages from "chatComponents/components/ImageUploadComponent";
+import SpeechToText from "chatComponents/components/speech-recognition/SpeechToText";
 import Picker, { SKIN_TONE_MEDIUM_LIGHT } from "emoji-picker-react";
 
 const BottomChatComponent = (props) => {

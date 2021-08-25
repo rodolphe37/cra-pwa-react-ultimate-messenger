@@ -1,14 +1,14 @@
 import { Fragment } from "react";
-import logo from "./logo.svg";
+import logo from "logo.svg";
 import { useRecoilState } from "recoil";
-import selectedDarkThemeAtom from "./chatComponents/stateManager/atoms/selectedDarkThemeAtom";
+import selectedDarkThemeAtom from "chatComponents/stateManager/atoms/selectedDarkThemeAtom";
 import { useTranslation } from "react-i18next";
-import pwaPass from "./chatComponents/assets/pwa-pass-3.svg";
-import isAdminAtom from "./chatComponents/stateManager/atoms/isAdminAtom";
-import RecoilSimpleExample from "./components/RecoilSimpleExample";
-import { withRecoilExample } from "./postInstallConfig/withRecoilExample";
-import Drops from "./components/drops/Drops";
-import BaseLayoutApp from "./baseLayout/BaseLayout";
+import pwaPass from "chatComponents/assets/pwa-pass-3.svg";
+import isAdminAtom from "chatComponents/stateManager/atoms/isAdminAtom";
+import RecoilSimpleExample from "components/RecoilSimpleExample";
+import { withRecoilExample } from "postInstallConfig/withRecoilExample";
+import Drops from "components/drops/Drops";
+import BaseLayoutApp from "baseLayout/BaseLayout";
 
 const HomePage = () => {
   const [isAdmin] = useRecoilState(isAdminAtom);

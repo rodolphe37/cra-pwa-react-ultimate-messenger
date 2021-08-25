@@ -1,4 +1,4 @@
-import BottomDrawer from "./bottomDrawer/BottomDrawer";
+import BottomDrawer from "chatComponents/components/bottomDrawer/BottomDrawer";
 
 const ButtonChat = () => {
   return <BottomDrawer />;

@@ -2,7 +2,7 @@
 import "./adminPanel2.css";
 import "./common-css.css";
 import { useEffect, useState } from "react";
-import Loader from "../chatComponents/components/loader/Loader";
+import Loader from "chatComponents/components/loader/Loader";
 import Product from "./components/Product";
 import useAdmin from "./hooks/useAdmin";
 import Dashboard from "./components/Dashboard";

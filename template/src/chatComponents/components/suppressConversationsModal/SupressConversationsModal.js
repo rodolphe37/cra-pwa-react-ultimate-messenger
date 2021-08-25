@@ -5,9 +5,9 @@ import { useTranslation } from "react-i18next";
 // CSS IMPORTS
 import "./supressConversationModal.css";
 // ASSETS IMPORTS
-import Yes from "../../assets/oui.svg";
-import No from "../../assets/non.svg";
-import DeleteSound from "../../assets/sounds/mixkit-paper-quick-movement-2380.mp3";
+import Yes from "chatComponents/assets/oui.svg";
+import No from "chatComponents/assets/non.svg";
+import DeleteSound from "chatComponents/assets/sounds/mixkit-paper-quick-movement-2380.mp3";
 
 const SupressConversationsModal = ({
   Delete,

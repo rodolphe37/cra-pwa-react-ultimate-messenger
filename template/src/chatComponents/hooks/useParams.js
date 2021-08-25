@@ -2,16 +2,16 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 // STATEMANAGMENT IMPORTS
-import selectedSoundAtom from "../stateManager/atoms/selectedSoundAtom";
-import selectedDarkThemeAtom from "../stateManager/atoms/selectedDarkThemeAtom";
-import selectedLightThemeAtom from "../stateManager/atoms/selectedLightThemeAtom";
-import clickedParamsAtom from "../stateManager/atoms/clickedParamsAtom";
-import clickedSoundGuitarAtom from "../stateManager/atoms/clickedSoundGuitarAtom";
-import clickedSoundSoftwareAtom from "../stateManager/atoms/clickedSoundSoftwareAtom";
-import dangerZoneAtom from "../stateManager/atoms/dangerZoneAtom";
-import seeMediaAtom from "../stateManager/atoms/seeMediaAtom";
-import roomIdAtom from "../stateManager/atoms/roomIdAtom";
-import isSoundNotificationsAtom from "../stateManager/atoms/isSoundNotifications";
+import selectedSoundAtom from "chatComponents/stateManager/atoms/selectedSoundAtom";
+import selectedDarkThemeAtom from "chatComponents/stateManager/atoms/selectedDarkThemeAtom";
+import selectedLightThemeAtom from "chatComponents/stateManager/atoms/selectedLightThemeAtom";
+import clickedParamsAtom from "chatComponents/stateManager/atoms/clickedParamsAtom";
+import clickedSoundGuitarAtom from "chatComponents/stateManager/atoms/clickedSoundGuitarAtom";
+import clickedSoundSoftwareAtom from "chatComponents/stateManager/atoms/clickedSoundSoftwareAtom";
+import dangerZoneAtom from "chatComponents/stateManager/atoms/dangerZoneAtom";
+import seeMediaAtom from "chatComponents/stateManager/atoms/seeMediaAtom";
+import roomIdAtom from "chatComponents/stateManager/atoms/roomIdAtom";
+import isSoundNotificationsAtom from "chatComponents/stateManager/atoms/isSoundNotifications";
 
 const useParams = () => {
   const [clickedParams, setClickedParams] = useRecoilState(clickedParamsAtom);

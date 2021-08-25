@@ -14,12 +14,12 @@ import {
   stories,
   love,
   win,
-} from "../constants/constants";
-import isLanguageAtom from "../stateManager/atoms/isLanguageAtom";
+} from "chatComponents/constants/constants";
+import isLanguageAtom from "chatComponents/stateManager/atoms/isLanguageAtom";
 // STATEMANAGMENT IMPORTS
-import messageForBotAtom from "../stateManager/atoms/messageForBotAtom";
-import roomIdAtom from "../stateManager/atoms/roomIdAtom";
-import weatherAtom from "../stateManager/atoms/weatherAtom";
+import messageForBotAtom from "chatComponents/stateManager/atoms/messageForBotAtom";
+import roomIdAtom from "chatComponents/stateManager/atoms/roomIdAtom";
+import weatherAtom from "chatComponents/stateManager/atoms/weatherAtom";
 
 const useChatBot = () => {
   const { t } = useTranslation;

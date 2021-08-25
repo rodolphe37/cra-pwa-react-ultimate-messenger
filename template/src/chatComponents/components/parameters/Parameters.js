@@ -5,27 +5,27 @@ import { useTranslation } from "react-i18next";
 // CSS IMPORTS
 import "./parameters.css";
 // HOOKS IMPORTS
-import useParams from "../../hooks/useParams";
+import useParams from "chatComponents/hooks/useParams";
 // STATEMANAGMENT IMPORTS
-import usernameAtom from "../../stateManager/atoms/usernameAtom";
-import validateUsernameAtom from "../../stateManager/atoms/validateUsernameAtom";
-import isSoundNotificationsAtom from "../../stateManager/atoms/isSoundNotifications";
+import usernameAtom from "chatComponents/stateManager/atoms/usernameAtom";
+import validateUsernameAtom from "chatComponents/stateManager/atoms/validateUsernameAtom";
+import isSoundNotificationsAtom from "chatComponents/stateManager/atoms/isSoundNotifications";
 // COMPONENTS IMPORTS
-import SupressConversations from "../suppressConversationsModal/SupressConversationsModal";
-import ResetModal from "../resetModal/ResetModal";
+import SupressConversations from "chatComponents/components/suppressConversationsModal/SupressConversationsModal";
+import ResetModal from "chatComponents/components/resetModal/ResetModal";
 // ASSETS IMPORTS
-import seeMedia from "../../assets/yes.svg";
-import notSeeMedia from "../../assets/no.svg";
-import ok from "../../assets/ok.svg";
-import supp from "../../assets/supp.svg";
-import ParamIcon from "../../assets/settings.png";
-import sound from "../../assets/sounds/mixkit-guitar-notification-alert-2320.mp3";
-import sound2 from "../../assets/sounds/mixkit-software-interface-back-2575.mp3";
-import soundToggleParams from "../../assets/sounds/mixkit-fast-double-click-on-mouse-275.mp3";
-import CheckIcon from "../../assets/check.png";
-import Delete from "../../assets/erase.svg";
-import Bell from "../../assets/bell.svg";
-import Disabled from "../../assets/disabled.svg";
+import seeMedia from "chatComponents/assets/yes.svg";
+import notSeeMedia from "chatComponents/assets/no.svg";
+import ok from "chatComponents/assets/ok.svg";
+import supp from "chatComponents/assets/supp.svg";
+import ParamIcon from "chatComponents/assets/settings.png";
+import sound from "chatComponents/assets/sounds/mixkit-guitar-notification-alert-2320.mp3";
+import sound2 from "chatComponents/assets/sounds/mixkit-software-interface-back-2575.mp3";
+import soundToggleParams from "chatComponents/assets/sounds/mixkit-fast-double-click-on-mouse-275.mp3";
+import CheckIcon from "chatComponents/assets/check.png";
+import Delete from "chatComponents/assets/erase.svg";
+import Bell from "chatComponents/assets/bell.svg";
+import Disabled from "chatComponents/assets/disabled.svg";
 
 const Parameters = () => {
   const [username, setUsername] = useRecoilState(usernameAtom);

@@ -1,4 +1,4 @@
-import Parameters from "../../../parameters/Parameters";
+import Parameters from "chatComponents/components/parameters/Parameters";
 
 const HeaderChatComponent = (props) => {
   const {

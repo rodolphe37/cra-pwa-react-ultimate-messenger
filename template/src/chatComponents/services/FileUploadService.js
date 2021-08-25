@@ -1,4 +1,4 @@
-import http from "../http-common";
+import http from "chatComponents/http-common";
 
 class FileUploadService {
   upload(file, onUploadProgress) {

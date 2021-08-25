@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useRecoilState } from "recoil";
-import exampleClickedAtom from "../chatComponents/stateManager/atoms/exampleClicked";
-import exampleSelector from "../chatComponents/stateManager/selectors/exampleSelector";
+import exampleClickedAtom from "chatComponents/stateManager/atoms/exampleClicked";
+import exampleSelector from "chatComponents/stateManager/selectors/exampleSelector";
 
 const RecoilSimpleExample = ({ t, logo }) => {
   // EXAMPLE OF HOW TO USE RECOIL (ATOM AND SELECTOR) WITH EASE

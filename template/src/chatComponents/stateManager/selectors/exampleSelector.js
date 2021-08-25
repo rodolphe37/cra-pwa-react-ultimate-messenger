@@ -1,9 +1,9 @@
 // THIS ONLY FOR EXAMPLE
 import { selector } from "recoil";
-import exampleUsAtom from "../atoms/exampleUsAtom";
-import exampleClickedAtom from "../atoms/exampleClicked";
-import exampleFrAtom from "../atoms/exampleFrAtom";
-import isLanguageAtom from "../atoms/isLanguageAtom";
+import exampleUsAtom from "chatComponents/stateManager/atoms/exampleUsAtom";
+import exampleClickedAtom from "chatComponents/stateManager/atoms/exampleClicked";
+import exampleFrAtom from "chatComponents/stateManager/atoms/exampleFrAtom";
+import isLanguageAtom from "chatComponents/stateManager/atoms/isLanguageAtom";
 
 const exampleSelector = selector({
   key: "exampleSelector",

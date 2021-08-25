@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRecoilState } from "recoil";
-import isOnlineAtom from "../stateManager/atoms/isOnlineAtom";
+import isOnlineAtom from "chatComponents/stateManager/atoms/isOnlineAtom";
 
 axios.defaults.baseURL = process.env.REACT_APP_JSON_PLACEHOLDER;
 

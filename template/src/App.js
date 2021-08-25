@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import "./global-css.css";
 import "./App.css";
-import HomePage from "./HomePage";
+import HomePage from "HomePage";
 
 const App = () => {
   return (

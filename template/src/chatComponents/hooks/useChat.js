@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import socketIOClient from "socket.io-client";
 // STATEMANAGMENT IMPORTS
-import roomIdAtom from "../stateManager/atoms/roomIdAtom";
-import pictCommentAtom from "../stateManager/atoms/pictComment";
-import usernameAtom from "../stateManager/atoms/usernameAtom";
+import roomIdAtom from "chatComponents/stateManager/atoms/roomIdAtom";
+import pictCommentAtom from "chatComponents/stateManager/atoms/pictComment";
+import usernameAtom from "chatComponents/stateManager/atoms/usernameAtom";
 // import { isAndroid, isIOS } from "react-device-detect";
 // ASSETS IMPORTS
-import botPict from "../assets/bot-mini.png";
+import botPict from "chatComponents/assets/bot-mini.png";
 import useChatBot from "./useChatBot";
 
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"; // Name of the event
