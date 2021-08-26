@@ -5,7 +5,7 @@ import BottomMenu from "baseLayout/shared/menuComponents/bottomMenu/BottomMenu";
 import { withBottomMenu } from "postInstallConfig/withBottomMenu";
 import { withRadialMenu } from "postInstallConfig/withRadialMenu";
 import RadialMenu from "baseLayout/shared/menuComponents/radialMenu/RadialMenu";
-import HeaderApp from "baseLayout/shared/HeaderApp";
+import HeaderApp from "baseLayout/shared/headerApp/HeaderApp";
 import isAdminAtom from "chatComponents/stateManager/atoms/isAdminAtom";
 import { useRecoilState } from "recoil";
 import axios from "axios";

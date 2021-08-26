@@ -1,6 +1,7 @@
 import { isMobile } from "react-device-detect";
 import { withAdminPanel } from "postInstallConfig/withAdmin";
 import LoginIcon from "chatComponents/assets/reglages.svg";
+import "./headerApp.css";
 
 const HeaderApp = ({ changeLanguage, handleClickIsAdmin }) => {
   const withAdmin = withAdminPanel;
