@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./baseLayoutApp.css";
 import { isMobile } from "react-device-detect";
-import BottomMenu from "components/bottomMenu/BottomMenu";
+import BottomMenu from "baseLayout/shared/menuComponents/bottomMenu/BottomMenu";
 import { withBottomMenu } from "postInstallConfig/withBottomMenu";
 import { withRadialMenu } from "postInstallConfig/withRadialMenu";
-import RadialMenu from "components/radialMenu/RadialMenu";
-import HeaderApp from "components/HeaderApp";
+import RadialMenu from "baseLayout/shared/menuComponents/radialMenu/RadialMenu";
+import HeaderApp from "baseLayout/shared/HeaderApp";
 import isAdminAtom from "chatComponents/stateManager/atoms/isAdminAtom";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import isLanguageAtom from "chatComponents/stateManager/atoms/isLanguageAtom";
-import Alert from "chatComponents/customAlert/Alert";
+import Alert from "baseLayout/shared/alertComponent/customAlert/Alert";
 import { getToken, removeUserSession, setUserSession } from "Utils/Common";
 import isOnlineAtom from "chatComponents/stateManager/atoms/isOnlineAtom";
 import useWebPush from "chatComponents/hooks/useWebPush";
 import clickedOffChatAtom from "chatComponents/stateManager/atoms/clickedOffChatAtom";
-import OfflineMessage from "chatComponents/components/offlineMessage/OfflineMessage";
+import OfflineMessage from "baseLayout/shared/offlineMessage/OfflineMessage";
 import Routes from "Utils/routes";
 import { useGeolocation } from "hooks/useGeolocation";
 

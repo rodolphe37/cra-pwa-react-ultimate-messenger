@@ -28,18 +28,18 @@ import messageForBotAtom from "chatComponents/stateManager/atoms/messageForBotAt
 import roomIdAtom from "chatComponents/stateManager/atoms/roomIdAtom";
 import usernameAtom from "chatComponents/stateManager/atoms/usernameAtom";
 import isOnlineAtom from "chatComponents/stateManager/atoms/isOnlineAtom";
-import clickedAlertAtom from "chatComponents/customAlert/clickedAlertAtom";
+import clickedAlertAtom from "baseLayout/shared/alertComponent/customAlert/clickedAlertAtom";
 import clickedOffChatAtom from "chatComponents/stateManager/atoms/clickedOffChatAtom";
 import openVideoChatAtom from "chatComponents/stateManager/atoms/openVideoChatAtom";
 // COMPONENTS IMPORTS
 import EmptyChatMessage from "./components/EmptyChatMessage";
 import Loader from "chatComponents/components/loader/Loader";
 import Weather from "chatComponents/components/weatherComponent/WeatherComponent";
-import OfflineMessage from "chatComponents/components/offlineMessage/OfflineMessage";
+import OfflineMessage from "baseLayout/shared/offlineMessage/OfflineMessage";
 import MessagesComponents from "./components/MessagesComponent";
 import BottomChatComponent from "./components/BottomChatComponent";
 import HeaderChatComponent from "./components/HeaderChatComponent";
-import Alert from "chatComponents/customAlert/Alert";
+import Alert from "baseLayout/shared/alertComponent/customAlert/Alert";
 // ASSETS IMPORTS
 import Bavarder from "chatComponents/assets/chat.svg";
 import sound from "chatComponents/assets/sounds/mixkit-guitar-notification-alert-2320.mp3";

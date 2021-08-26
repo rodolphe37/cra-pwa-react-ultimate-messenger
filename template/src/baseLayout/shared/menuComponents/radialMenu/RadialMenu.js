@@ -220,7 +220,7 @@ const RadialMenu = () => {
                 className="svg-user__horizontal"
               ></path>
             </svg>
-            <p style={{ fontSize: 11 }}>Contribute</p>
+            <p style={{ fontSize: 10 }}>Contribute</p>
           </a>
         </li>
       </ul>

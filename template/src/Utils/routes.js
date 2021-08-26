@@ -15,7 +15,7 @@ import Weather from "chatComponents/components/weatherComponent/WeatherComponent
 import isAdminAtom from "chatComponents/stateManager/atoms/isAdminAtom";
 import { useRecoilState } from "recoil";
 import roomIdAtom from "chatComponents/stateManager/atoms/roomIdAtom";
-import Alert from "chatComponents/customAlert/Alert";
+import Alert from "baseLayout/shared/alertComponent/customAlert/Alert";
 import { withAdminPanel } from "postInstallConfig/withAdmin";
 import WithAdminRoute from "./withAdminRoute";
 const Routes = () => {

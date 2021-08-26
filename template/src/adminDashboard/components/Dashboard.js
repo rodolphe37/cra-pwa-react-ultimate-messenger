@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import useAxios from "chatComponents/hooks/useAxios";
-import OfflineMessage from "chatComponents/components/offlineMessage/OfflineMessage";
+import OfflineMessage from "baseLayout/shared/offlineMessage/OfflineMessage";
 import useAdmin from "../hooks/useAdmin";
 import { DataProduct } from "../constants/DataProduct";
 

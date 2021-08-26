@@ -47,7 +47,8 @@ const HomePage = () => {
               </div>
 
               <p>
-                {t("editAppText")} <code>src/App.js</code> {t("saveAppText")}
+                {t("editAppText")} <code>src/HomePage.js</code>{" "}
+                {t("saveAppText")}
               </p>
               <a
                 className="App-link"
