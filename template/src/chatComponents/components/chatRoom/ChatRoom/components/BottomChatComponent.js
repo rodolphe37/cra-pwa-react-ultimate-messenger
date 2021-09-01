@@ -1,6 +1,7 @@
 import UploadImages from "chatComponents/components/ImageUploadComponent";
 import SpeechToText from "chatComponents/components/speech-recognition/SpeechToText";
 import Picker, { SKIN_TONE_MEDIUM_LIGHT } from "emoji-picker-react";
+import { withVideoChat } from "postInstallConfig/withVideoChat";
 
 const BottomChatComponent = (props) => {
   const {
@@ -95,18 +96,20 @@ const BottomChatComponent = (props) => {
           <img style={{ width: 25 }} src={plus} alt="plus" />
         </div>
         <div className="bottom-left-chat">
-          <img
-            onClick={handleVideoChat}
-            style={{
-              width: 28,
-              marginRight: 15,
-              cursor: "pointer",
-              marginTop: -5,
-            }}
-            src={VideoCall}
-            alt="call"
-            className={plusSection ? "" : "hiddenParams"}
-          />
+          {withVideoChat && (
+            <img
+              onClick={handleVideoChat}
+              style={{
+                width: 28,
+                marginRight: 15,
+                cursor: "pointer",
+                marginTop: -5,
+              }}
+              src={VideoCall}
+              alt="call"
+              className={plusSection ? "" : "hiddenParams"}
+            />
+          )}
           <div className={plusSection ? "upload-container" : "hiddenParams"}>
             <UploadImages
               setIsTaping={setIsTaping}
