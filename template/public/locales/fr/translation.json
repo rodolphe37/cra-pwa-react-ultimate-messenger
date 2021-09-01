@@ -64,5 +64,10 @@
   "adminAlertSubtitle":"Le username par défaut est: 'admin' et le mot de passe est 'p@ssword'",
   "adminAlertButton":"ok, j'ai compris",
   "offlineMessage": "Vous êtes hors ligne ou il y a un souci de Connexion!",
-  "chatbot":"chatbot"
+  "chatbot":"chatbot",
+  "accueil":"Accueil",
+  "prices":"Prix",
+  "sos":"S.O.S",
+  "repo":"Repo",
+  "contrib":"Contribuer"
 }

@@ -12,7 +12,7 @@ import "./ChatRoom.css";
 import useChat from "chatComponents/hooks/useChat";
 import UploadService from "chatComponents/services/FileUploadService";
 import useGetUserInfos from "chatComponents/hooks/useGetUserInfos";
-import useWebPush from "chatComponents/hooks/useWebPush";
+import useWebPush from "hooks/useWebPush";
 // STATEMANAGMENT IMPORTS
 import imageInfoAtom from "chatComponents/stateManager/atoms/imageInfoAtom";
 import seeMediaAtom from "chatComponents/stateManager/atoms/seeMediaAtom";

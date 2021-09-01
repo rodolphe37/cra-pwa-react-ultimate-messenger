@@ -64,5 +64,10 @@
   "adminAlertSubtitle":"The default username is: 'admin' and the password is 'p@ssword'.",
   "adminAlertButton":"ok, I understand",
   "offlineMessage": "You are offline or there is a connection problem!",
-   "chatbot":"botchat"
+  "chatbot":"botchat",
+  "accueil":"Home",
+  "prices":"Prices",
+  "sos":"S.O.S",
+  "repo":"Repo",
+  "contrib":"Contribute"
 }

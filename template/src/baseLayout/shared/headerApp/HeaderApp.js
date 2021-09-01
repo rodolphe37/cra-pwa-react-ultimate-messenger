@@ -41,6 +41,15 @@ const HeaderApp = ({ changeLanguage, handleClickIsAdmin }) => {
               🇬🇧
             </span>
           </span>
+          <span
+            className="tradButtonpt "
+            style={{ marginLeft: "15px" }}
+            onClick={() => changeLanguage("pt")}
+          >
+            <span role="img" aria-label="Português flag">
+              🇵🇹
+            </span>
+          </span>
         </span>
       </div>
       {withAdmin ? (

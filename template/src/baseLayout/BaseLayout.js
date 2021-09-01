@@ -14,7 +14,7 @@ import isLanguageAtom from "chatComponents/stateManager/atoms/isLanguageAtom";
 import Alert from "baseLayout/shared/alertComponent/customAlert/Alert";
 import { getToken, removeUserSession, setUserSession } from "Utils/Common";
 import isOnlineAtom from "chatComponents/stateManager/atoms/isOnlineAtom";
-import useWebPush from "chatComponents/hooks/useWebPush";
+import useWebPush from "hooks/useWebPush";
 import clickedOffChatAtom from "chatComponents/stateManager/atoms/clickedOffChatAtom";
 import OfflineMessage from "baseLayout/shared/offlineMessage/OfflineMessage";
 import Routes from "Utils/routes";

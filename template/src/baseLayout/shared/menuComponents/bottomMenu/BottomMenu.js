@@ -1,5 +1,7 @@
+import { useTranslation } from "react-i18next";
 import "./bottomMenu.css";
 const BottomMenu = () => {
+  const { t } = useTranslation();
   return (
     <div className="MobileMenu-container z-80">
       <nav className="nav-bar fixed bg-white  is-fixed inset-x-0 bottom-0 lg:static lg:w-18 z-20 border-t border-gray-300 lg:border-0">
@@ -59,7 +61,7 @@ const BottomMenu = () => {
                 ></path>
               </svg>
 
-              <span className="block relative z-2">Accueil</span>
+              <span className="block relative z-2">{t("accueil")}</span>
             </a>
           </li>
           <li className="flex-1 lg:my-4 text-center ">
@@ -82,7 +84,7 @@ const BottomMenu = () => {
                 <path d="M28 24.4c-1.2 0-1.8.7-2.3 1.4-.4.6-.7.8-1.2.8-.4 0-.7-.3-1.2-.9s-1.1-1.4-2.3-1.4c-1.3 0-1.9.8-2.4 1.4-.4.5-.7.8-1.2.8-.4 0-.7-.3-1.2-.9s-1.1-1.4-2.3-1.4c-1.3 0-1.9.8-2.3 1.4-.4.5-.7.8-1.2.8-.4 0-.7-.3-1.2-.9s-1.1-1.4-2.3-1.4c-1.3 0-1.9.8-2.3 1.4-.4.5-.7.8-1.2.8-.4 0-.7-.3-1.2-.9-.5-.6-1-1.3-2.2-1.4h-.1v1.4c.5 0 .7.3 1.1.8.6 1 1.2 1.8 2.4 1.8s1.8-.8 2.3-1.4.7-.8 1.3-.8c.5 0 .8.3 1.2.8.4.6 1.1 1.4 2.3 1.4s1.8-.8 2.3-1.4.7-.9 1.2-.9.8.3 1.2.8c.4.6 1.1 1.4 2.3 1.4s1.8-.8 2.3-1.4.7-.9 1.2-.9.8.3 1.2.8c.4.6 1.1 1.4 2.3 1.4s1.9-.8 2.3-1.4c.5-.6.7-.9 1.2-.9v-1.1"></path>
               </svg>
 
-              <span className="block relative z-2">S.O.S.</span>
+              <span className="block relative z-2">{t("sos")}</span>
             </a>
           </li>
           <li className="flex-1 lg:my-4 text-center ">
@@ -116,7 +118,7 @@ const BottomMenu = () => {
                   ></path>
                 </svg>
               </span>
-              <span className="block relative z-2">Repo</span>
+              <span className="block relative z-2">{t("repo")}</span>
             </a>
           </li>
           <li className="flex-1 lg:my-4 text-center ">
@@ -157,7 +159,7 @@ const BottomMenu = () => {
                 ></path>
               </svg>
 
-              <span className="block relative z-2">Prices</span>
+              <span className="block relative z-2">{t("prices")}</span>
             </a>
           </li>
 
@@ -187,7 +189,7 @@ const BottomMenu = () => {
                 ></path>
               </svg>
 
-              <span className="block relative z-2">Contribute</span>
+              <span className="block relative z-2">{t("contrib")}</span>
             </a>
           </li>
         </ul>
