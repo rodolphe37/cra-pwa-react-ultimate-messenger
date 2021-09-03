@@ -20,4 +20,4 @@
 > I explain how to test the online version with your local version further in the documentation...
 
 ## Install pack repository:
-**[Pack with automatic installation/configuration script](https://github.com/rodolphe37/pwa-rum-install-pack)
+**[Pack with automatic installation/configuration script](https://github.com/rodolphe37/pwa-rum-install-pack)**
