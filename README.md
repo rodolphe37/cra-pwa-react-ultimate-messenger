@@ -7,7 +7,7 @@
 
 ## Online Demo sites
 
-**You can try Classic React Ultimate Messenger**
+**You can try PWA React Ultimate Messenger**
 
 **[With Classic bottom menu](https://pwa-react-ultimate-messenger-with-bottom-menu.netlify.app/)**,
 
