@@ -5,12 +5,12 @@ import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import "./alert.css";
-import "../components/checkboxAlert/checkbox-alert.css";
+import "baseLayout/shared/alertComponent/checkboxAlert/checkbox-alert.css";
 import clickedAlertAtom from "./clickedAlertAtom";
 
-import Logo from "../../logo.svg";
-import selectedDarkThemeAtom from "../stateManager/atoms/selectedDarkThemeAtom";
-import activateDeleteConvAtom from "../components/checkboxAlert/activateDeleteConvAtom";
+import Logo from "logo.svg";
+import selectedDarkThemeAtom from "chatComponents/stateManager/atoms/selectedDarkThemeAtom";
+import activateDeleteConvAtom from "baseLayout/shared/alertComponent/checkboxAlert/activateDeleteConvAtom";
 
 const Alert = ({
   title,

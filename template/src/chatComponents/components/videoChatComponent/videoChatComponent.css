@@ -14,10 +14,21 @@
 }
 
 .video-chat-container-mobile {
-  right: -56px !important;
+  right: -72px !important;
   top: 1px !important;
   height: 90vh;
+  width: 96%;
 }
+@media screen and (max-width: 750px) {
+  .myId {
+    width: 100% !important;
+    margin-right: 0 !important;
+    border-radius: 5px !important;
+    padding: 2rem !important;
+    box-shadow: 1px 1px 4px lightgrey;
+  }
+}
+
 .video-chat-container-mobile-calling {
   top: -59px !important;
 }
@@ -47,18 +58,6 @@
   max-width: 410px;
   margin-right: 5rem;
   border-radius: 5px;
-  /* background: #c9d6ff;
-  background: -webkit-linear-gradient(
-    to right,
-    #e2e2e2,
-    #c9d6ff
-  );
-  background: linear-gradient(
-    to right,
-    #e2e2e2,
-    #c9d6ff
-  );  */
-
   padding: 2rem;
   display: grid;
   justify-content: center;

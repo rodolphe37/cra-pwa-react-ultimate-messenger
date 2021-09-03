@@ -4,9 +4,9 @@ import { useRecoilState } from "recoil";
 // CSS IMPORTS
 import "./Weather.css";
 // HOOKS & SERVICES IMPORTS
-import fetchWeather from "../../services/fetchWeather";
+import fetchWeather from "chatComponents/services/fetchWeather";
 // STATEMANAGMENT IMPORTS
-import weatherAtom from "../../stateManager/atoms/weatherAtom";
+import weatherAtom from "chatComponents/stateManager/atoms/weatherAtom";
 
 const Weather = () => {
   const [query, setQuery] = useState("");

@@ -1,6 +1,7 @@
 import { isMobile } from "react-device-detect";
-import { withAdminPanel } from "../postInstallConfig/withAdmin";
-import LoginIcon from "../chatComponents/assets/reglages.svg";
+import { withAdminPanel } from "postInstallConfig/withAdmin";
+import LoginIcon from "chatComponents/assets/reglages.svg";
+import "./headerApp.css";
 
 const HeaderApp = ({ changeLanguage, handleClickIsAdmin }) => {
   const withAdmin = withAdminPanel;
@@ -38,6 +39,15 @@ const HeaderApp = ({ changeLanguage, handleClickIsAdmin }) => {
           <span className="tradButtonen" onClick={() => changeLanguage("en")}>
             <span role="img" aria-label="england flag">
               🇬🇧
+            </span>
+          </span>
+          <span
+            className="tradButtonpt "
+            style={{ marginLeft: "15px" }}
+            onClick={() => changeLanguage("pt")}
+          >
+            <span role="img" aria-label="Português flag">
+              🇵🇹
             </span>
           </span>
         </span>

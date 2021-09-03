@@ -2,11 +2,11 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import Alert from "../../customAlert/Alert";
-import isOnlineAtom from "../../stateManager/atoms/isOnlineAtom";
-import OfflineMessage from "../offlineMessage/OfflineMessage";
+import Alert from "baseLayout/shared/alertComponent/customAlert/Alert";
+import isOnlineAtom from "chatComponents/stateManager/atoms/isOnlineAtom";
+import OfflineMessage from "baseLayout/shared/offlineMessage/OfflineMessage";
 import axios from "axios";
-import { setUserSession } from "../../../Utils/Common";
+import { setUserSession } from "Utils/Common";
 
 import "./Join.css";
 

@@ -3,74 +3,60 @@
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useSpeechRecognition } from "react-speech-recognition";
 import { Fragment, useEffect, useState, useRef } from "react";
-import Picker, { SKIN_TONE_MEDIUM_LIGHT } from "emoji-picker-react";
-import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { useTranslation } from "react-i18next";
 // import { v4 as uuidv4 } from "uuid";
 // CSS IMPORTS
 import "./ChatRoom.css";
 // HOOKS & SERVICES IMPORTS
-import useChat from "../../../hooks/useChat";
-import useVideoChat from "../../../hooks/useVideoChat";
-import UploadService from "../../../services/FileUploadService";
-import useGetUserInfos from "../../../hooks/useGetUserInfos";
+import useChat from "chatComponents/hooks/useChat";
+import UploadService from "chatComponents/services/FileUploadService";
+import useGetUserInfos from "chatComponents/hooks/useGetUserInfos";
+import useWebPush from "hooks/useWebPush";
 // STATEMANAGMENT IMPORTS
-import imageInfoAtom from "../../../stateManager/atoms/imageInfoAtom";
-import seeMediaAtom from "../../../stateManager/atoms/seeMediaAtom";
-import clickedParamsAtom from "../../../stateManager/atoms/clickedParamsAtom";
-import selectedDarkThemeAtom from "../../../stateManager/atoms/selectedDarkThemeAtom";
-import clickedSoundGuitarAtom from "../../../stateManager/atoms/clickedSoundGuitarAtom";
-import clickedSoundSoftwareAtom from "../../../stateManager/atoms/clickedSoundSoftwareAtom";
-import fileFromPictureAtom from "../../../stateManager/atoms/fileFromPictureAtom";
-import isReceivedMediasMessageToUserAtom from "../../../stateManager/atoms/receiveMediasMessageToUserAtom";
-import speechToTextAtom from "../../../stateManager/atoms/speechToTextAtom";
-import plusSectionAtom from "../../../stateManager/atoms/plusSectionAtom";
-import callEndedAtom from "../../../stateManager/atoms/callEndedAtom";
-import messageForBotAtom from "../../../stateManager/atoms/messageForBotAtom";
-import roomIdAtom from "../../../stateManager/atoms/roomIdAtom";
-import isSoundNotificationsAtom from "../../../stateManager/atoms/isSoundNotifications";
-import usernameAtom from "../../../stateManager/atoms/usernameAtom";
+import imageInfoAtom from "chatComponents/stateManager/atoms/imageInfoAtom";
+import seeMediaAtom from "chatComponents/stateManager/atoms/seeMediaAtom";
+import clickedParamsAtom from "chatComponents/stateManager/atoms/clickedParamsAtom";
+import selectedDarkThemeAtom from "chatComponents/stateManager/atoms/selectedDarkThemeAtom";
+import clickedSoundGuitarAtom from "chatComponents/stateManager/atoms/clickedSoundGuitarAtom";
+import clickedSoundSoftwareAtom from "chatComponents/stateManager/atoms/clickedSoundSoftwareAtom";
+import fileFromPictureAtom from "chatComponents/stateManager/atoms/fileFromPictureAtom";
+import isReceivedMediasMessageToUserAtom from "chatComponents/stateManager/atoms/receiveMediasMessageToUserAtom";
+import speechToTextAtom from "chatComponents/stateManager/atoms/speechToTextAtom";
+import plusSectionAtom from "chatComponents/stateManager/atoms/plusSectionAtom";
+import messageForBotAtom from "chatComponents/stateManager/atoms/messageForBotAtom";
+import roomIdAtom from "chatComponents/stateManager/atoms/roomIdAtom";
+import usernameAtom from "chatComponents/stateManager/atoms/usernameAtom";
+import isOnlineAtom from "chatComponents/stateManager/atoms/isOnlineAtom";
+import clickedAlertAtom from "baseLayout/shared/alertComponent/customAlert/clickedAlertAtom";
+import clickedOffChatAtom from "chatComponents/stateManager/atoms/clickedOffChatAtom";
+import openVideoChatAtom from "chatComponents/stateManager/atoms/openVideoChatAtom";
 // COMPONENTS IMPORTS
-import Parameters from "../../parameters/Parameters";
-import UploadImage from "../../ImageUploadComponent";
-import SpeechToText from "../../speech-recognition/SpeechToText";
-import EmptyChatMessage from "./EmptyChatMessage";
-import Loader from "../../loader/Loader";
-import Weather from "../../weatherComponent/WeatherComponent";
+import EmptyChatMessage from "./components/EmptyChatMessage";
+import Loader from "chatComponents/components/loader/Loader";
+import Weather from "chatComponents/components/weatherComponent/WeatherComponent";
+import OfflineMessage from "baseLayout/shared/offlineMessage/OfflineMessage";
+import MessagesComponents from "./components/MessagesComponent";
+import BottomChatComponent from "./components/BottomChatComponent";
+import HeaderChatComponent from "./components/HeaderChatComponent";
+import Alert from "baseLayout/shared/alertComponent/customAlert/Alert";
 // ASSETS IMPORTS
-import Bavarder from "../../../assets/chat.svg";
-import sound from "../../../assets/sounds/mixkit-guitar-notification-alert-2320.mp3";
-import sound2 from "../../../assets/sounds/mixkit-software-interface-back-2575.mp3";
-import VideoCall from "../../../assets/video-chat-icon.svg";
-import plus from "../../../assets/plus.svg";
-import cloud from "../../../assets/cloudy.svg";
-import Thumb from "../../../assets/thumbs-up-facebook.svg";
-import DeleteConvButton from "../../../assets/x-button.svg";
-import Alert from "../../../customAlert/Alert";
-import clickedAlertAtom from "../../../customAlert/clickedAlertAtom";
-import { useAlert } from "react-alert";
-import activateDeleteConvAtom from "../../checkboxAlert/activateDeleteConvAtom";
-import clickedOffChatAtom from "../../../stateManager/atoms/clickedOffChatAtom";
-import VideoChatComponent from "../../videoChatComponent/VideoChatComponent";
-import openVideoChatAtom from "../../../stateManager/atoms/openVideoChatAtom";
-import useWebPush from "../../../hooks/useWebPush";
-import isOnlineAtom from "../../../stateManager/atoms/isOnlineAtom";
-import OfflineMessage from "../../offlineMessage/OfflineMessage";
+import Bavarder from "chatComponents/assets/chat.svg";
+import sound from "chatComponents/assets/sounds/mixkit-guitar-notification-alert-2320.mp3";
+import sound2 from "chatComponents/assets/sounds/mixkit-software-interface-back-2575.mp3";
+import VideoCall from "chatComponents/assets/video-chat-icon.svg";
+import plus from "chatComponents/assets/plus.svg";
+import cloud from "chatComponents/assets/cloudy.svg";
+import Thumb from "chatComponents/assets/thumbs-up-facebook.svg";
+import DeleteConvButton from "chatComponents/assets/x-button.svg";
 
 const ChatRoom = (props) => {
   const { t } = useTranslation();
-  const alert = useAlert();
-  let history = useHistory();
   const messagesEndRef = useRef(null);
   const [roomToken, setRoomToken] = useRecoilState(roomIdAtom);
   const [isLoaded, setIsLoaded] = useState(true);
-  const [isSoundNotification, setIsSoundNotification] = useRecoilState(
-    isSoundNotificationsAtom
-  );
   let roomId = { roomToken };
-  const [username, setUsername] = useRecoilState(usernameAtom);
-  // const { customAlert, ok } = useCustomAlert();
+  const [username] = useRecoilState(usernameAtom);
   const {
     messages,
     setMessages,
@@ -96,12 +82,8 @@ const ChatRoom = (props) => {
   const [ownedByMe, setOwnedByMe] = useState(false);
   const [chosenEmoji, setChosenEmoji] = useState(null);
   const [clickedChevron, setClickedChevron] = useState(true);
-  const [clickedSound1, setClickedSound1] = useRecoilState(
-    clickedSoundGuitarAtom
-  );
-  const [clickedSound2, setClickedSound2] = useRecoilState(
-    clickedSoundSoftwareAtom
-  );
+  const [clickedSound1] = useRecoilState(clickedSoundGuitarAtom);
+  const [clickedSound2] = useRecoilState(clickedSoundSoftwareAtom);
   const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
   const [filePictFromList, setFilePictFromList] = useState([]);
   const [filePictFromMess, setFilePictFromMess] = useState("");
@@ -111,22 +93,18 @@ const ChatRoom = (props) => {
   );
   const [clickedParams, setClickedParams] = useRecoilState(clickedParamsAtom);
   const [state, setState] = useRecoilState(fileFromPictureAtom);
-  const [isImageList, setIsImageList] = useRecoilState(imageInfoAtom);
+  const [isImageList] = useRecoilState(imageInfoAtom);
   const [seingMedia] = useRecoilState(seeMediaAtom);
   const [speechToTextConversion, setSpeechToTextConversion] =
     useRecoilState(speechToTextAtom);
-  const { response, userInfos, ipAddress, setClickedOnApp } = useGetUserInfos();
-  const [callEnded, setCallEnded] = useRecoilState(callEndedAtom);
+  const { userInfos, ipAddress, setClickedOnApp } = useGetUserInfos();
   const { resetTranscript } = useSpeechRecognition();
-
   const [messageForBot, setMessageForBot] = useRecoilState(messageForBotAtom);
-
   const [clickedCopyId, setClickedCopyId] = useState(false);
   const [idChatInvitation, setIdChatInvitation] = useState("");
   const [toggleDeleteButton, setToggleDeleteButton] = useState(false);
   const [isSendThumb, setIsSendThumb] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [isOnline, setIsOnline] = useRecoilState(isOnlineAtom);
+  const [isOnline] = useRecoilState(isOnlineAtom);
 
   // const { me } = useVideoChat();
   // if you want to catch roomId from URL
@@ -144,6 +122,7 @@ const ChatRoom = (props) => {
   //   };
   // }, []);
 
+  // set date for each message
   let d = new Date();
   let n = d.toLocaleString();
 
@@ -153,7 +132,7 @@ const ChatRoom = (props) => {
   useEffect(() => {
     // CHECK THE MESSAGE CONTENT
     const youAreCalled = messages.map((res) => res.body);
-    // CHECK THE USERNAME FROM USERNAMEATOM STATE
+    // CHECK THE USERNAME FROM USERNAME ATOM STATE
     const yourUserName = username;
     // ONLY IF THE CHAT WINDOW IS REDUCED
     if (clickedOffChat === true) {
@@ -172,6 +151,7 @@ const ChatRoom = (props) => {
   }, [username, messages]);
   // END OF WEBPUSH SECTION
 
+  //  Primitif useEffect hook for roomToken gestion (state & session storage)
   useEffect(() => {
     if (!roomToken && sessionStorage.getItem("roomName") !== null) {
       setRoomToken(sessionStorage.getItem("roomName"));
@@ -183,11 +163,13 @@ const ChatRoom = (props) => {
       const roomId = props.match.params; // Gets roomId from URL
       setRoomToken(roomId.roomToken);
     }
+    // Loader time at the first render
     if (isLoaded) {
       setTimeout(() => {
         setIsLoaded(false);
       }, 3500);
     }
+    // Function equal to componentDidUnmount
     return () => {
       setRoomToken("");
       sessionStorage.removeItem("roomName");
@@ -195,16 +177,20 @@ const ChatRoom = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Scroll to bottom messages list function
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
   useEffect(() => {
+    // If messages List is more than 4 --> auto scrool to the bottom
     if (messages.length >= 4) {
       scrollToBottom();
     }
+    // Video chat invitation (receiver only), when the id is clicked --> auto delete of the last message( invitation)
     if (clickedCopyId) {
       messages.pop();
-
+      //  And redirect to video chat component with roomName in url
       setTimeout(() => {
         window.location.replace(`/video/${roomToken}`);
       }, 1200);
@@ -212,15 +198,19 @@ const ChatRoom = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages, userAllInfos]);
 
+  // New message section
   const handleNewMessageChange = (event) => {
+    // If not media, set the new message with the target value
     if (!isReceiveMediaToUser) {
       setNewMessage(event.target.value);
     }
+    // If is media (picture) then set the new message with the name of the picture
     if (isReceiveMediaToUser && isImageList) {
       setNewMessage(state.currentFile?.name);
     }
   };
 
+  // Plus function for extand & reduce bottom chat tools section
   const handlePlusSection = () => {
     if (plusSection) {
       setplusSection(false);
@@ -230,22 +220,28 @@ const ChatRoom = (props) => {
     }
   };
 
+  // Function to send content message input with one click to the enter key on keyboard
   const handleKeypress = (e) => {
     //it triggers by pressing the enter key
     if (e.code === "Enter" || e.code === "NumpadEnter") {
       handleSendMessage();
     }
   };
+
+  // Close chat window boolean value for the custom alert
   const [clickedAlert, setClickedAlert] = useRecoilState(clickedAlertAtom);
 
   const handleClickAlert = () => {
     setClickedAlert(true);
   };
 
+  // Function for sending NewMessage to messages array
   const handleSendMessage = (e) => {
+    //  If the input is empty, is equal to preventDefault()
     if (newMessage === "") {
       return;
     }
+    //  If newMessage(input field) is not empty, send message
     if (newMessage !== "") {
       setplusSection(false);
       setDateTime(n);
@@ -257,6 +253,8 @@ const ChatRoom = (props) => {
       setIsReceiveMediaToUser(false);
       resetTranscript();
     }
+    // If the input content (newMessage) is picture name,
+    // then you have an comment picture input for displaying text at the same time of the picture
     if (pictComment !== "") {
       setplusSection(false);
       setNewMessage("");
@@ -266,11 +264,14 @@ const ChatRoom = (props) => {
       }, 200);
     }
   };
+  // Thumbs up facebook message functionality, set the values here
   const handleSendThumb = () => {
     setIsSendThumb(true);
     setNewMessage("thumbs-up-facebook.svg");
   };
 
+  // If you click on name of the message sender,
+  // you have the ip that display for 15 seconds and then display the name automaticly
   const handleClickOnName = () => {
     if (clickedOnName) {
       setClickedOnName(false);
@@ -283,6 +284,7 @@ const ChatRoom = (props) => {
     }
   };
 
+  //  Function with boolean values for reduce chat window
   const handleClickedOffChat = () => {
     if (clickedOffChat) {
       setClickedOffChat(false);
@@ -292,6 +294,7 @@ const ChatRoom = (props) => {
     }
   };
 
+  // Primitif hook for displaying picture on the messages list after is sended to the server
   useEffect(() => {
     UploadService.getFiles().then((response) => {
       setState({
@@ -300,6 +303,7 @@ const ChatRoom = (props) => {
     });
   }, [setState]);
 
+  // This function is for display or hidden the emoji's section
   const handleClickChevron = () => {
     if (!clickedChevron) {
       setClickedChevron(true);
@@ -308,6 +312,7 @@ const ChatRoom = (props) => {
       setClickedChevron(false);
       setplusSection(false);
     }
+    // If the emoji's section is open, that display the typing animation for the other chat users
     if (clickedChevron) {
       setIsTaping(true);
     }
@@ -315,6 +320,8 @@ const ChatRoom = (props) => {
       setIsTaping(false);
     }
   };
+
+  // The typing animation function
   const handleTypingInput = () => {
     if (!isTaping) {
       setplusSection(false);
@@ -325,6 +332,7 @@ const ChatRoom = (props) => {
     }
   };
   useEffect(() => {
+    // Thumbs up facebook message functionality, send the message here
     if (newMessage.includes("thumbs-up-facebook.svg")) {
       setTimeout(() => {
         sendMessage(newMessage);
@@ -334,6 +342,7 @@ const ChatRoom = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newMessage]);
 
+  //  Function for getting the users infos & construct the object here
   function allInfos() {
     userInfos.map((res) =>
       setUserAllInfos({
@@ -353,14 +362,18 @@ const ChatRoom = (props) => {
   }
 
   useEffect(() => {
+    // For knowing if the message is sended by you or the other user
     messages.map((message, i) => setOwnedByMe(message.ownedByCurrentUser));
+    // Function for getting time for each message
     function getDateTime() {
       setDateTime(n);
     }
     getDateTime();
 
+    // Set to the localStorage the messages array of objects
     localStorage.setItem("messages", JSON.stringify(messages));
 
+    // If the current file (picture) name exist, then --> automatic set The newMessage state with the picture name
     if (state.currentFile?.name) {
       setNewMessage(state.currentFile?.name);
     }
@@ -394,15 +407,19 @@ const ChatRoom = (props) => {
     state,
   ]);
 
+  // Function for setting the newMessage with emoji
   const onEmojiClick = (event, emojiObject) => {
     setChosenEmoji(emojiObject);
+    //  If you have already one message text --> add emoji to the text
     if (newMessage) {
       setNewMessage(newMessage + emojiObject.emoji);
+      // If you don't have any message text, then set the emoji to newMessage state
     } else if (!newMessage) {
       setNewMessage(emojiObject.emoji);
     }
   };
 
+  // Typing animation function with conditions & return div that content the dot-typing animation
   function IsTyping() {
     if (clickedChevron) {
       setTimeout(() => {
@@ -422,26 +439,29 @@ const ChatRoom = (props) => {
     return <div className="dot-typing" />;
   }
 
+  // Boolean state for opening the video chat window
   const [openVideoChat, setOpenVideChat] = useRecoilState(openVideoChatAtom);
+  // Open video chat function
   const handleVideoChat = () => {
     if (openVideoChat) {
       setOpenVideChat(false);
     }
     if (!openVideoChat) {
       setOpenVideChat(true);
-      // if(window.location.pathname === `"/video/${roomId}`){
-      //   return <VideoChatComponent />
-      // }
     }
   };
 
   useEffect(() => {
+    // If the message come from speech to text functionality
+    //  That set NewMessage state with the transcription content
     if (speechToTextConversion !== "") {
       setNewMessage(speechToTextConversion);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speechToTextConversion]);
 
+  // Bot chat messages --> If # is include in the newMessage state
+  //  Then send that for chatbot
   useEffect(() => {
     if (newMessage.includes("#")) {
       setMessageForBot(newMessage);
@@ -463,6 +483,7 @@ const ChatRoom = (props) => {
     }
     setMessages(newMessages);
   }
+  //  Function for displaying the delete bubble conversation on each bubble chat
   const handletoggleDeleteButton = () => {
     // setIdForDeleteButton(newMessage.id);
     if (toggleDeleteButton) {
@@ -511,56 +532,13 @@ const ChatRoom = (props) => {
           }
         `}
       >
-        <span
-          className={
-            !selectedDarkTheme
-              ? "room-name light-background"
-              : "room-name dark-background"
-          }
-        >
-          <img src={Bavarder} alt="icon" />
-          <span className="head-text-chat">
-            <h1>React Ultimate Messenger</h1>
-            <sub>{t("subTitle")}</sub>
-          </span>
-
-          <div className="close-and-reduce-button">
-            <Parameters />
-            <div className="section-right-top-button">
-              <button
-                onClick={handleClickAlert}
-                className={
-                  !selectedDarkTheme
-                    ? "closed-button-container black"
-                    : "closed-button-container white"
-                }
-              >
-                X
-              </button>
-              <span className="reduceIcon-chat">
-                <div
-                  onClick={handleClickedOffChat}
-                  className="icon-menuRight icon-right-chat"
-                >
-                  <svg
-                    style={{ marginLeft: 6 }}
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                  >
-                    <path
-                      filrule="evenodd"
-                      clipRule="evenodd"
-                      d="M18.3334 13H5.66675C5.11441 13 4.66675 12.5523 4.66675 12C4.66675 11.4477 5.11441 11 5.66675 11H18.3334C18.8857 11 19.3334 11.4477 19.3334 12C19.3334 12.5523 18.8857 13 18.3334 13Z"
-                      fill={selectedDarkTheme ? "#ffffff" : "#000000"}
-                    ></path>
-                  </svg>
-                </div>
-              </span>
-            </div>
-          </div>
-        </span>
+        <HeaderChatComponent
+          selectedDarkTheme={selectedDarkTheme}
+          Bavarder={Bavarder}
+          t={t}
+          handleClickAlert={handleClickAlert}
+          handleClickedOffChat={handleClickedOffChat}
+        />
         {isOnline === "offline" ? (
           <OfflineMessage type="warning" content="offlineMessage" />
         ) : null}
@@ -589,278 +567,34 @@ const ChatRoom = (props) => {
             {messages.length === 0 ? (
               <EmptyChatMessage messages={messages} />
             ) : null}
-            <ol className="messages-list">
-              {messages.map((message, i) => {
-                return (
-                  <span key={i} className="messages-section">
-                    <span>
-                      {!message.ownedByCurrentUser && !openVideoChat ? (
-                        <span>
-                          {clickedSound1 && (
-                            <audio autoPlay>
-                              <source src={sound} />
-                            </audio>
-                          )}
-                        </span>
-                      ) : null}
-
-                      {!message.ownedByCurrentUser && !openVideoChat ? (
-                        <span>
-                          {clickedSound2 && (
-                            <audio autoPlay>
-                              <source src={sound2} />
-                            </audio>
-                          )}
-                        </span>
-                      ) : null}
-
-                      <ul className="message-date">{message.timeStamp}</ul>
-                      <p
-                        onClick={handleClickOnName}
-                        style={{
-                          fontSize: 11,
-                          marginBottom: -20,
-                          marginTop: 5,
-                        }}
-                        className={`message-item ${
-                          message.ownedByCurrentUser
-                            ? "my-message-name"
-                            : "received-message-name"
-                        }`}
-                      >
-                        {" "}
-                        {!clickedOnName && message.username && message.ip
-                          ? userAllInfos &&
-                            userAllInfos.flag + " - " + message.username
-                          : clickedOnName && message.username
-                          ? userAllInfos &&
-                            message.ip &&
-                            userAllInfos.flag + "- Adresse ip :" + message.ip
-                          : null}
-                        {!clickedOnName && !message.username
-                          ? userAllInfos &&
-                            message.ip &&
-                            userAllInfos.flag + "- Adresse ip :" + message.ip
-                          : clickedOnName && !message.username
-                          ? userAllInfos &&
-                            message.ip &&
-                            userAllInfos.flag + "- Adresse ip :" + message.ip
-                          : null}
-                        {!message.ip && "ChatBot"}
-                      </p>
-                      <li
-                        style={{ position: "relative" }}
-                        className={`message-item ${
-                          isNotAlphaNumeric(message.body)
-                            ? "height45 jello"
-                            : ""
-                        } ${
-                          message.ownedByCurrentUser
-                            ? "my-message"
-                            : "received-message"
-                        }`}
-                        onClick={() => {
-                          setIdForDeleteButton(message.id);
-                          handletoggleDeleteButton();
-                        }}
-                      >
-                        {message.picture && (
-                          <span className="messagesContent">
-                            <img
-                              className="chatbot-img"
-                              src={message.picture}
-                              alt="botPicture"
-                            />
-                            {isNotAlphaNumeric(message.body) ? (
-                              <p
-                                style={{
-                                  fontSize: 23,
-                                  marginTop: 0,
-                                  marginBottom: 0,
-                                }}
-                              >
-                                {message.body}
-                              </p>
-                            ) : (
-                              <p
-                                style={{ marginTop: 0, marginBottom: 0 }}
-                                className="chatbot-text"
-                              >
-                                {message.body}
-                              </p>
-                            )}
-                          </span>
-                        )}
-                        {message.body?.includes("jpg", 0) ||
-                        message.body?.includes("JPG", 0) ||
-                        message.body?.includes("jpeg", 0) ||
-                        message.body?.includes("JPEG", 0) ||
-                        message.body?.includes("png", 0) ||
-                        message.body?.includes("PNG", 0) ? (
-                          <Fragment>
-                            {seingMedia ? (
-                              <span className="display-picture">
-                                <img
-                                  style={{
-                                    borderRadius: 11,
-                                    maxWidth: 186,
-                                    maxHeight: 200,
-                                  }}
-                                  src={`${process.env.REACT_APP_UPLOAD_WEBSERVICE}/files/${message.body}`}
-                                  alt=""
-                                />
-                                {message.comment && (
-                                  <Fragment>
-                                    <p style={{ textAlign: "center" }}>
-                                      {message.comment}
-                                    </p>
-                                  </Fragment>
-                                )}
-                                {!toggleDeleteButton && (
-                                  <div ref={messagesEndRef} />
-                                )}
-                              </span>
-                            ) : (
-                              <span
-                                className="button-display-picture"
-                                style={{ textAlign: "center" }}
-                              >
-                                {message.ownedByCurrentUser ? (
-                                  <h2 className="seingMedia-title">
-                                    {t("sendPicture")}
-                                  </h2>
-                                ) : (
-                                  <h2 className="seingMedia-title">
-                                    {t("receivePicture")}
-                                  </h2>
-                                )}
-
-                                <sub
-                                  style={{
-                                    fontWeight: "bold",
-                                    fontSize: 10,
-                                    color: "rgb(40 38 38)",
-                                  }}
-                                >
-                                  {t("desactivatePicture")}
-                                </sub>
-                                <p className="seingMedia-text">
-                                  {t("functionSettingPicture")}
-                                </p>
-                                {!toggleDeleteButton && (
-                                  <div ref={messagesEndRef} />
-                                )}
-                              </span>
-                            )}
-                          </Fragment>
-                        ) : !message.picture &&
-                          isNotAlphaNumeric(message.body) ? (
-                          <p
-                            style={{
-                              fontSize: 23,
-                              marginTop: 0,
-                              marginBottom: 0,
-                            }}
-                          >
-                            {message.body}
-                          </p>
-                        ) : (
-                          !message.picture &&
-                          !message.body.includes("thumbs-up-facebook.svg") &&
-                          message.body
-                        )}
-                        {message.body.includes("Invitation vidéo") ||
-                        message.body.includes("Video invitation")
-                          ? !message.ownedByCurrentUser &&
-                            (!clickedCopyId ? (
-                              <CopyToClipboard text={idChatInvitation}>
-                                <button
-                                  disabled={clickedCopyId ? true : false}
-                                  className={
-                                    clickedCopyId
-                                      ? "idForCallInvitation-clicked"
-                                      : "idForCallInvitation"
-                                  }
-                                  onClick={() => {
-                                    setClickedCopyId(true);
-                                    alert.success(
-                                      `${t(
-                                        "youHaveCopiedId"
-                                      )}: ${idChatInvitation}.`
-                                    );
-                                  }}
-                                >
-                                  Copiez
-                                </button>
-                              </CopyToClipboard>
-                            ) : (
-                              <Fragment>
-                                <p>Le chat vidéo est entrain de démarrer...</p>
-                              </Fragment>
-                            ))
-                          : null}
-                        {message.body.includes("thumbs-up-facebook.svg") && (
-                          <img
-                            className="shake-bottom"
-                            style={{ width: 40, cursor: "pointer" }}
-                            src={Thumb}
-                            alt="thumb"
-                          />
-                        )}
-                        {message.body.includes("&météo") ? (
-                          <div
-                            className={
-                              message.ownedByCurrentUser
-                                ? "weather-content"
-                                : ""
-                            }
-                          >
-                            <img
-                              src={cloud}
-                              alt="cloud"
-                              className="weatherIcon"
-                            />
-                            <Weather />
-                          </div>
-                        ) : null}
-
-                        {message.id === idForDeleteButton ? (
-                          <button
-                            className={
-                              message.ownedByCurrentUser
-                                ? toggleDeleteButton
-                                  ? "deleteIconBubble scale-in-center"
-                                  : "deleteIconBubble hiddenParams"
-                                : toggleDeleteButton
-                                ? "deleteIconBubble leftBubble scale-in-center "
-                                : "deleteIconBubble hiddenparams"
-                            }
-                            onClick={() => {
-                              setMessageIsToDelete(message.id);
-                            }}
-                          >
-                            <img
-                              style={{
-                                width: 24,
-                              }}
-                              src={DeleteConvButton}
-                              alt="del"
-                              className={
-                                message.id && toggleDeleteButton
-                                  ? "delete-bubble"
-                                  : "hiddenParams"
-                              }
-                            />
-                          </button>
-                        ) : null}
-                      </li>
-                      {!toggleDeleteButton && <div ref={messagesEndRef} />}
-                    </span>
-                    {!toggleDeleteButton && <div ref={messagesEndRef} />}
-                  </span>
-                );
-              })}
-            </ol>
+            <MessagesComponents
+              messages={messages}
+              openVideoChat={openVideoChat}
+              clickedSound1={clickedSound1}
+              sound={sound}
+              clickedSound2={clickedSound2}
+              sound2={sound2}
+              handleClickOnName={handleClickOnName}
+              clickedOnName={clickedOnName}
+              userAllInfos={userAllInfos}
+              isNotAlphaNumeric={isNotAlphaNumeric}
+              setIdForDeleteButton={setIdForDeleteButton}
+              handletoggleDeleteButton={handletoggleDeleteButton}
+              seingMedia={seingMedia}
+              toggleDeleteButton={toggleDeleteButton}
+              messagesEndRef={messagesEndRef}
+              t={t}
+              clickedCopyId={clickedCopyId}
+              CopyToClipboard={CopyToClipboard}
+              idChatInvitation={idChatInvitation}
+              setClickedCopyId={setClickedCopyId}
+              Thumb={Thumb}
+              cloud={cloud}
+              Weather={Weather}
+              idForDeleteButton={idForDeleteButton}
+              setMessageIsToDelete={setMessageIsToDelete}
+              DeleteConvButton={DeleteConvButton}
+            />
           </div>
         )}
 
@@ -869,144 +603,30 @@ const ChatRoom = (props) => {
             <IsTyping />
           </div>
         ) : null}
-        <div
-          className={` ${clickedOffChat ? "emoji-chat-closed-off" : ""}
-            ${
-              clickedChevron
-                ? "emoji-chat-closed"
-                : selectedDarkTheme
-                ? "emoji-chat-open emoji-chat-open-dark"
-                : "emoji-chat-open"
-            }
-          `}
-        >
-          <button onClick={handleClickChevron} className="chevron">
-            {!clickedChevron ? "👍🏼" : "😀"}
-          </button>
-          <Picker
-            onEmojiClick={onEmojiClick}
-            disableAutoFocus={true}
-            skinTone={SKIN_TONE_MEDIUM_LIGHT}
-            groupNames={{ smileys_people: "PEOPLE" }}
-            native
-          />
-        </div>
-        <div
-          onClick={() => setClickedParams(false)}
-          className={
-            !clickedOffChat
-              ? "sending-message-container"
-              : "sending-message-container-closed"
-          }
-        >
-          <span
-            className={
-              state.currentFile
-                ? "not-visible"
-                : plusSection
-                ? "reduceInput"
-                : ""
-            }
-          >
-            <input
-              disabled={isLoaded ? true : false}
-              autoComplete="off"
-              onSelect={handleTypingInput}
-              id="chat-message-input"
-              onKeyPress={handleKeypress}
-              value={newMessage}
-              onChange={handleNewMessageChange}
-              placeholder={t("placeholderInputChat")}
-              className={
-                !selectedDarkTheme
-                  ? "new-message-input-field light-background"
-                  : "new-message-input-field dark-background"
-              }
-            />
-          </span>
-          <div
-            onClick={handlePlusSection}
-            className={
-              !plusSection
-                ? selectedDarkTheme
-                  ? "plusBottomChat ml37-mt5 dark-background"
-                  : "plusBottomChat ml37-mt5 light-background"
-                : selectedDarkTheme
-                ? "plusBottomChat margin-right14 dark-background"
-                : "plusBottomChat margin-right14 light-background"
-            }
-          >
-            <img style={{ width: 25 }} src={plus} alt="plus" />
-          </div>
-          <div className="bottom-left-chat">
-            <img
-              onClick={handleVideoChat}
-              style={{
-                width: 28,
-                marginRight: 15,
-                cursor: "pointer",
-                marginTop: -5,
-              }}
-              src={VideoCall}
-              alt="call"
-              className={plusSection ? "" : "hiddenParams"}
-            />
-            <div className={plusSection ? "upload-container" : "hiddenParams"}>
-              <UploadImage
-                setIsTaping={setIsTaping}
-                handleKeypress={handleKeypress}
-                handleSendMessage={handleSendMessage}
-              />
-            </div>
-            <span className={plusSection ? "" : "hiddenParams"}>
-              <SpeechToText />
-            </span>
-            <span
-              className={plusSection ? "" : "hiddenParams"}
-              onClick={handleSendThumb}
-            >
-              <img
-                style={{ width: 27, cursor: "pointer", marginRight: 15 }}
-                src={Thumb}
-                alt="thumb"
-              />
-            </span>
-            <span
-              className={
-                state.currentFile
-                  ? "not-visible"
-                  : !plusSection
-                  ? "margin-left22"
-                  : ""
-              }
-            >
-              <button
-                onClick={handleSendMessage}
-                className="send-message-button"
-              >
-                <svg width="22px" height="22px" viewBox="0 0 22 22">
-                  <g
-                    stroke="none"
-                    strokeWidth="1"
-                    fill="none"
-                    fillRule="evenodd"
-                  >
-                    <g
-                      transform="translate(-5.000000, -5.000000)"
-                      fill={selectedDarkTheme ? "#ffffff" : "#4d4d4d"}
-                    >
-                      <g>
-                        <g transform="translate(5.000000, 5.000000)">
-                          <path d="M2.0300068,0.145970044 L20.9662955,9.37015518 C22.3445682,10.0420071 22.3445682,11.9582654 20.9662955,12.6296618 L2.0300068,21.853847 C1.09728834,22.3084288 0,21.6475087 0,20.6317597 L0.806953417,13.8945654 C0.882225434,13.2659853 1.39089595,12.7699536 2.03608467,12.6957083 L12.0229514,11.6795038 C12.8612292,11.5943266 12.8612292,10.4054904 12.0229514,10.3203132 L2.03608467,9.30410872 C1.39089595,9.23031889 0.882225434,8.7342872 0.806953417,8.10525162 L0,1.36805729 C0,0.352308292 1.09728834,-0.3081563 2.0300068,0.145970044"></path>
-                        </g>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
-              </button>
-            </span>
-          </div>
-        </div>
+        <BottomChatComponent
+          selectedDarkTheme={selectedDarkTheme}
+          handleSendMessage={handleSendMessage}
+          plusSection={plusSection}
+          state={state}
+          Thumb={Thumb}
+          handleSendThumb={handleSendThumb}
+          handleKeypress={handleKeypress}
+          setIsTaping={setIsTaping}
+          VideoCall={VideoCall}
+          handleVideoChat={handleVideoChat}
+          plus={plus}
+          handlePlusSection={handlePlusSection}
+          t={t}
+          handleNewMessageChange={handleNewMessageChange}
+          newMessage={newMessage}
+          handleTypingInput={handleTypingInput}
+          isLoaded={isLoaded}
+          clickedOffChat={clickedOffChat}
+          setClickedParams={setClickedParams}
+          onEmojiClick={onEmojiClick}
+          clickedChevron={clickedChevron}
+          handleClickChevron={handleClickChevron}
+        />
       </div>
     </Fragment>
   );

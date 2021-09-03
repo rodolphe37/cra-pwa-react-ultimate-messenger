@@ -6,22 +6,22 @@ import { useRecoilState } from "recoil";
 // CSS IMPORTS
 import "./videoChatComponent.css";
 // HOOKS IMPORTS
-import useVideoChat from "../../hooks/useVideoChat";
+import useVideoChat from "chatComponents/hooks/useVideoChat";
 // STATEMANAGMENT IMPORTS
-import roomIdAtom from "../../stateManager/atoms/roomIdAtom";
+import roomIdAtom from "chatComponents/stateManager/atoms/roomIdAtom";
 // COMPONENTS IMPORTS
-import ChatRoom from "../chatRoom/ChatRoom/ChatRoom";
-import Loader from "../loader/Loader";
+import ChatRoom from "chatComponents/components/chatRoom/ChatRoom/ChatRoom";
+import Loader from "chatComponents/components/loader/Loader";
 // ASSETS IMPORTS
-import CallIcon from "../../assets/callTo.svg";
-import CallFrom from "../../assets/callFrom.svg";
-import HangUpCall from "../../assets/hang-up.svg";
-import Assignement from "../../assets/assignment.svg";
-import AssignementWhite from "../../assets/assignment-white.svg";
-import Bell from "../../assets/sounds/mixkit-fairy-bells-583.mp3";
-import selectedDarkThemeAtom from "../../stateManager/atoms/selectedDarkThemeAtom";
+import CallIcon from "chatComponents/assets/callTo.svg";
+import CallFrom from "chatComponents/assets/callFrom.svg";
+import HangUpCall from "chatComponents/assets/hang-up.svg";
+import Assignement from "chatComponents/assets/assignment.svg";
+import AssignementWhite from "chatComponents/assets/assignment-white.svg";
+import Bell from "chatComponents/assets/sounds/mixkit-fairy-bells-583.mp3";
+import selectedDarkThemeAtom from "chatComponents/stateManager/atoms/selectedDarkThemeAtom";
 import { useAlert } from "react-alert";
-import useMobile from "../../hooks/useMobile";
+import useMobile from "chatComponents/hooks/useMobile";
 
 const VideoChatComponent = () => {
   const alert = useAlert();

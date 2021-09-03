@@ -8,10 +8,10 @@ import { useRecoilState } from "recoil";
 // HOOKS IMPORTS
 import useChat from "./useChat";
 // STATEMANAGMENT IMPORTS
-import isListeningAtom from "../stateManager/atoms/isListeningAtom";
-import speechToTextAtom from "../stateManager/atoms/speechToTextAtom";
-import roomIdAtom from "../stateManager/atoms/roomIdAtom";
-import isLanguageAtom from "../stateManager/atoms/isLanguageAtom";
+import isListeningAtom from "chatComponents/stateManager/atoms/isListeningAtom";
+import speechToTextAtom from "chatComponents/stateManager/atoms/speechToTextAtom";
+import roomIdAtom from "chatComponents/stateManager/atoms/roomIdAtom";
+import isLanguageAtom from "chatComponents/stateManager/atoms/isLanguageAtom";
 
 const useSpeechToText = () => {
   const [isListening, setIsListening] = useRecoilState(isListeningAtom);

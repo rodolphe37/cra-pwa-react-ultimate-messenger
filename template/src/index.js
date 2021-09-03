@@ -5,7 +5,7 @@ import { RecoilRoot } from "recoil";
 import "./i18n";
 import App from "./App";
 import { positions, Provider } from "react-alert";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import * as serviceWorkerRegistration from "serviceWorkerRegistration";
 import AlertTemplate from "react-alert-template-basic";
 import { BrowserRouter as Router } from "react-router-dom";
 

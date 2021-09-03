@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
 import { useRecoilState } from "recoil";
-import isAdminAtom from "../../chatComponents/stateManager/atoms/isAdminAtom";
-import isOnlineAtom from "../../chatComponents/stateManager/atoms/isOnlineAtom";
-import selectedDarkThemeAtom from "../../chatComponents/stateManager/atoms/selectedDarkThemeAtom";
-import { removeUserSession } from "../../Utils/Common";
+import isAdminAtom from "chatComponents/stateManager/atoms/isAdminAtom";
+import isOnlineAtom from "chatComponents/stateManager/atoms/isOnlineAtom";
+import selectedDarkThemeAtom from "chatComponents/stateManager/atoms/selectedDarkThemeAtom";
+import { removeUserSession } from "Utils/Common";
 
 const useAdmin = () => {
   // eslint-disable-next-line no-unused-vars

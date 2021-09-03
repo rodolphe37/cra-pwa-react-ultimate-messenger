@@ -5,10 +5,10 @@ import io from "socket.io-client";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 // STATEMANAGMENT IMPORTS
-import usernameAtom from "../stateManager/atoms/usernameAtom";
-import callEndedAtom from "../stateManager/atoms/callEndedAtom";
-import messagesAtom from "../stateManager/atoms/messagesAtom";
-import roomIdAtom from "../stateManager/atoms/roomIdAtom";
+import usernameAtom from "chatComponents/stateManager/atoms/usernameAtom";
+import callEndedAtom from "chatComponents/stateManager/atoms/callEndedAtom";
+import messagesAtom from "chatComponents/stateManager/atoms/messagesAtom";
+import roomIdAtom from "chatComponents/stateManager/atoms/roomIdAtom";
 
 const socket = io.connect(process.env.REACT_APP_VIDEO_CHAT_WEBSERVICE);
 

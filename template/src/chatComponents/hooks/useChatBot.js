@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 // MODULES IMPORTS
 import { useState, useEffect } from "react";
+import { isMobile } from "react-device-detect";
+import { useTranslation } from "react-i18next";
 import { useRecoilState } from "recoil";
 // CONSTANTS IMPORTS
 import {
@@ -12,13 +14,16 @@ import {
   stories,
   love,
   win,
-} from "../constants/constants";
+} from "chatComponents/constants/constants";
+import isLanguageAtom from "chatComponents/stateManager/atoms/isLanguageAtom";
 // STATEMANAGMENT IMPORTS
-import messageForBotAtom from "../stateManager/atoms/messageForBotAtom";
-import roomIdAtom from "../stateManager/atoms/roomIdAtom";
-import weatherAtom from "../stateManager/atoms/weatherAtom";
+import messageForBotAtom from "chatComponents/stateManager/atoms/messageForBotAtom";
+import roomIdAtom from "chatComponents/stateManager/atoms/roomIdAtom";
+import weatherAtom from "chatComponents/stateManager/atoms/weatherAtom";
 
 const useChatBot = () => {
+  const { t } = useTranslation;
+  const [language] = useRecoilState(isLanguageAtom);
   const [messageForBot] = useRecoilState(messageForBotAtom);
   let [infosUser, setInfosUser] = useState(
     JSON.parse(sessionStorage.getItem("infos user"))
@@ -27,14 +32,17 @@ const useChatBot = () => {
   const [roomToken] = useRecoilState(roomIdAtom);
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useRecoilState(weatherAtom);
+  const [cityLocation, setCityLocation] = useState(
+    JSON.parse(localStorage.getItem("cityInfos"))
+  );
 
   let product;
   // GET HOUR FOR HORLOGE COMMAND TO BOTCHAT
   let today = new Date();
-  let time = `${today.getHours()} heures ${today.getMinutes()} minutes et  ${today.getSeconds()} secondes`;
+  let time = `${today.getHours()} hours ${today.getMinutes()} minutes and  ${today.getSeconds()} seconds`;
   // GET DATE - TIME FOR COMMAND TO BOTCHAT
   let d = new Date();
-  let n = d.toLocaleString();
+  let n = d.toLocaleDateString("en-US");
 
   useEffect(() => {}, [infosUser, userName]);
 
@@ -48,11 +56,12 @@ const useChatBot = () => {
     .replace(/[\d]/gi, "")
     .trim();
   text = text
-    .replace(/ un /g, " ") // 'tell me a story' -> 'tell me story'
-    .replace(/je crois /g, "")
-    .replace(/quoi/g, "qu'est-ce que")
-    .replace(/s'il te plait /g, "")
-    .replace(/ s'il te plait/g, "");
+    .replace(/ a /g, " ") // 'tell me a story' -> 'tell me story'
+    .replace(/i feel /g, "")
+    .replace(/whats/g, "what is")
+    .replace(/please /g, "")
+    .replace(/ please/g, "")
+    .replace(/r u/g, "are you");
 
   function compare(promptsArray, repliesArray, string) {
     let reply;
@@ -78,48 +87,59 @@ const useChatBot = () => {
   if (compare(prompts, replies, text)) {
     // Search for exact match in `prompts`
     product = compare(prompts, replies, text);
-  } else if (text.match(/chatbot|chatbotté/gi) && !userName) {
-    product = `Que puis-je faire pour toi?`;
-  } else if (text.match(/room|quelle room/gi) && roomToken) {
-    product = `Tu es dans la room - ${roomToken} 😉`;
-  } else if (text.match(/room|quelle room/gi) && !roomToken) {
-    product = `Je crain que tu ne soit plus connecté à une room 😕. Reconnecte toi en ré-ouvrant le chat 😝`;
-  } else if (text.match(/chatbot|chatbotté/gi) && userName) {
-    product = `Que puis-je faire pour toi ${userName}?`;
-  } else if (text.match(/merci|super|génial/gi)) {
-    product = "Pas de souci 😁";
-  } else if (text.match(/connard|niqué|gueule/gi)) {
-    product = "Hooo, pas d'insultes 🤬 jeune branleur!!!😡";
-  } else if (text.match(/horloge|quelle heure/gi)) {
-    product = `il est exactement ${time}`;
-  } else if (text.match(/calendrier|quel jour/gi)) {
-    product = `Nous somme le ${n}`;
-  } else if (text.match(/qui je suis|qui suis-je|j'suis qui/gi)) {
-    infosUser &&
-      (product = `Tu t'appelle : ${userName}, ton drapeau est ${infosUser.flag},
+  } else if (text.match(/chatbot|botchat|bootedchat/gi) && !userName) {
+    product = `What can I do for you?`;
+  } else if (text.match(/room|which room/gi) && roomToken) {
+    product = `You are in the room - ${roomToken} 😉`;
+  } else if (text.match(/room|wich room/gi) && !roomToken) {
+    product = `I'm looking at you not being connected to a room anymore 😕. Reconnect by reopening the chat 😝`;
+  } else if (text.match(/chatbot|botchat|bootedchat/gi) && userName) {
+    product = `What can I do for you ${userName}?`;
+  } else if (text.match(/thanx|thank you|super|great|awesome/gi)) {
+    product = "You're welcome! 😁";
+  } else if (text.match(/asshole|fucking|fucked/gi)) {
+    product = "Hooo, no insults 🤬 young wanker!!!😡";
+  } else if (text.match(/clock|What time/gi)) {
+    product = `it is exactly ${time}`;
+  } else if (text.match(/calendar|schedule|what day/gi)) {
+    product = `We are the ${n}`;
+  } else if (text.match(/who I am|I am who/gi)) {
+    if (infosUser) {
+      !isMobile &&
+        (product = `Your name is : ${userName}, your country is ${infosUser.flag} - ${cityLocation.results[0].locations[0].adminArea1},
+    your city is :${cityLocation.results[0].locations[0].adminArea5}, postal code : ${cityLocation.results[0].locations[0].postalCode},
+    your street is :${cityLocation.results[0].locations[0].street},
+    your ip is : ${infosUser.ip},
+    your browser is  ${infosUser.navigator},
+    your Operating System is ${infosUser.os} 😊😎`);
+      isMobile &&
+        (product = `Your name is : ${userName}, your country is ${infosUser.flag} - ${cityLocation.results[0].locations[0].adminArea1},
+    your city is :${cityLocation.results[0].locations[0].adminArea5}, code postal : ${cityLocation.results[0].locations[0].postalCode},
+    your street is :${cityLocation.results[0].locations[0].street},
     ton ip est : ${infosUser.ip},
-    ton navigateur est  ${infosUser.navigator},
-    ton Système d'exploitation est ${infosUser.os}
-    et ta time zone est : ${infosUser.timezone}`);
+    your mobile device is${infosUser.device}
+    of brand : ${infosUser.trade},
+    your OS is : ${infosUser.os},
+    your browser is  ${infosUser.navigator} 😊😎,
+    `);
+    }
   } else if (text.match(/fuck/gi)) {
-    product = "Fuck toi même, petit impoli 🖕🏼🖕🏼";
+    product = "Fuck yourself, rude boy 🖕🏼🖕🏼";
   } else if (text.match(/(corona|covid|virus)/gi)) {
     // If no match, check if message contains `coronavirus`
     product = coronavirus[Math.floor(Math.random() * coronavirus.length)];
-  } else if (text.match(/(on joue|jouons ensemble|pierre|papier|ciseaux)/gi)) {
+  } else if (
+    text.match(/(we play|let's play together|stone|rock|paper|scissors)/gi)
+  ) {
     // If no match, check if message contains `rock paper scissors`
     product = rock[Math.floor(Math.random() * rock.length)];
-  } else if (text.match(/(aime|kiff|love|génial)/gi)) {
+  } else if (text.match(/love|kiff|lovely|great/gi)) {
     // If no match, check if message contains `love conversation`
     product = love[Math.floor(Math.random() * love.length)];
-  } else if (
-    text.match(
-      /(raconte moi une blague|blague|fais moi rire|encore une autre|une autre)/gi
-    )
-  ) {
+  } else if (text.match(/tell me a joke|joke|make me laugh|another one/gi)) {
     // If no match, check if message contains `joke`
     product = stories[Math.floor(Math.random() * stories.length)];
-  } else if (text.match(/(j'ai gagné|yeah|qui le vainquer|super|)/gi)) {
+  } else if (text.match(/I won|yeah|who beat him|super/gi)) {
     // If no match, check if message contains `game win conversation`
     product = win[Math.floor(Math.random() * win.length)];
   } else {

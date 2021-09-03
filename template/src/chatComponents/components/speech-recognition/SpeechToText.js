@@ -1,9 +1,9 @@
 // CSS IMPORTS
 import "./speechToText.css";
 // HOOKS IMPORTS
-import useSpeechToText from "../../hooks/useSpeechToText";
+import useSpeechToText from "chatComponents/hooks/useSpeechToText";
 // ASSETS IMPORTS
-import microPhoneIcon from "../../assets/micro.png";
+import microPhoneIcon from "chatComponents/assets/micro.png";
 
 const SpeechToText = () => {
   const { isListening, microphoneRef, handleListing, stopHandle } =

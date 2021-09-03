@@ -4,20 +4,19 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import HomeChat from "../chatComponents/components/chatRoom/HomeChat/HomeChat";
-import ChatRoom from "../chatComponents/components/chatRoom/ChatRoom/ChatRoom";
-import Join from "../chatComponents/components/Join/Join";
-import ButtonChat from "../chatComponents/components/ButtonChat";
-import VideoChatComponent from "../chatComponents/components/videoChatComponent/VideoChatComponent";
-import Loader from "../chatComponents/components/loader/Loader";
-import BottomDrawer from "../chatComponents/components/bottomDrawer/BottomDrawer";
-import Weather from "../chatComponents/components/weatherComponent/WeatherComponent";
-import isAdminAtom from "../chatComponents/stateManager/atoms/isAdminAtom";
+import HomeChat from "chatComponents/components/chatRoom/HomeChat/HomeChat";
+import ChatRoom from "chatComponents/components/chatRoom/ChatRoom/ChatRoom";
+import Join from "chatComponents/components/Join/Join";
+import ButtonChat from "chatComponents/components/ButtonChat";
+import VideoChatComponent from "chatComponents/components/videoChatComponent/VideoChatComponent";
+import Loader from "chatComponents/components/loader/Loader";
+import BottomDrawer from "chatComponents/components/bottomDrawer/BottomDrawer";
+import Weather from "chatComponents/components/weatherComponent/WeatherComponent";
+import isAdminAtom from "chatComponents/stateManager/atoms/isAdminAtom";
 import { useRecoilState } from "recoil";
-import roomIdAtom from "../chatComponents/stateManager/atoms/roomIdAtom";
-import Alert from "../chatComponents/customAlert/Alert";
-import PublicRoute from "./PublicRoute";
-import { withAdminPanel } from "../postInstallConfig/withAdmin";
+import roomIdAtom from "chatComponents/stateManager/atoms/roomIdAtom";
+import Alert from "baseLayout/shared/alertComponent/customAlert/Alert";
+import { withAdminPanel } from "postInstallConfig/withAdmin";
 import WithAdminRoute from "./withAdminRoute";
 const Routes = () => {
   const [isAdmin, setIsAdmin] = useRecoilState(isAdminAtom);
@@ -35,31 +34,31 @@ const Routes = () => {
             <ButtonChat />
           </Route>
         )}
-        <PublicRoute path="/login">
+        <Route path="/login">
           <Join isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
-        </PublicRoute>
-        <PublicRoute path="/home">
+        </Route>
+        <Route path="/home">
           <HomeChat />
-        </PublicRoute>
-        <PublicRoute path={`/chat/${roomId}`}>
+        </Route>
+        <Route path={`/chat/${roomId}`}>
           <ChatRoom />
-        </PublicRoute>
-        <PublicRoute path={`/video/${roomId}`}>
+        </Route>
+        <Route path={`/video/${roomId}`}>
           <VideoChatComponent roomId={roomId} />
-        </PublicRoute>
-        <PublicRoute path="/load">
+        </Route>
+        <Route path="/load">
           <Loader />
-        </PublicRoute>
-        <PublicRoute path="/intro">
+        </Route>
+        <Route path="/intro">
           <BottomDrawer />
-        </PublicRoute>
-        <PublicRoute path="/meteo">
+        </Route>
+        <Route path="/meteo">
           <Weather />
-        </PublicRoute>
+        </Route>
         {withAdminPanel ? <WithAdminRoute /> : null}
-        <PublicRoute>
+        <Route>
           <Alert />
-        </PublicRoute>
+        </Route>
       </Switch>
     </Router>
   );

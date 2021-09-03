@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import "./adminPanel.css";
 import Logo from "../chatComponents/assets/chat.svg";
 import { useRecoilState } from "recoil";
-import selectedDarkThemeAtom from "../chatComponents/stateManager/atoms/selectedDarkThemeAtom";
+import selectedDarkThemeAtom from "chatComponents/stateManager/atoms/selectedDarkThemeAtom";
 
 import useMobile from "../chatComponents/hooks/useMobile";
 // import usernameAtom from "../chatComponents/stateManager/atoms/usernameAtom";

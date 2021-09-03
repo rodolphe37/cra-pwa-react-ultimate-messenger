@@ -6,18 +6,18 @@ import { useTranslation } from "react-i18next";
 // CSS IMPORTS
 import "./bottomDrawer.css";
 // STATEMANAGMENT IMPORTS
-import selectedDarkThemeAtom from "../../stateManager/atoms/selectedDarkThemeAtom";
-import usernameAtom from "../../stateManager/atoms/usernameAtom";
-import selectedLightThemeAtom from "../../stateManager/atoms/selectedLightThemeAtom";
-import validateUsernameAtom from "../../stateManager/atoms/validateUsernameAtom";
-import roomIdAtom from "../../stateManager/atoms/roomIdAtom";
-import clickedGuestAtom from "../../stateManager/atoms/clickedGuestAtom";
+import selectedDarkThemeAtom from "chatComponents/stateManager/atoms/selectedDarkThemeAtom";
+import usernameAtom from "chatComponents/stateManager/atoms/usernameAtom";
+import selectedLightThemeAtom from "chatComponents/stateManager/atoms/selectedLightThemeAtom";
+import validateUsernameAtom from "chatComponents/stateManager/atoms/validateUsernameAtom";
+import roomIdAtom from "chatComponents/stateManager/atoms/roomIdAtom";
+import clickedGuestAtom from "chatComponents/stateManager/atoms/clickedGuestAtom";
 // ASSETS IMPORTS
-import ok from "../../assets/ok.svg";
-import supp from "../../assets/supp.svg";
-import Bavarder from "../../assets/chat.svg";
-import logIn from "../../assets/user.svg";
-import logInWhite from "../../assets/user-white.svg";
+import ok from "chatComponents/assets/ok.svg";
+import supp from "chatComponents/assets/supp.svg";
+import Bavarder from "chatComponents/assets/chat.svg";
+import logIn from "chatComponents/assets/user.svg";
+import logInWhite from "chatComponents/assets/user-white.svg";
 
 const BottomDrawer = () => {
   const { t } = useTranslation();

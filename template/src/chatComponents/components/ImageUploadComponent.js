@@ -3,19 +3,19 @@
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 // HOOKS & SERVICES IMPORTS
-import useChat from "../hooks/useChat";
-import UploadService from "../services/FileUploadService";
+import useChat from "chatComponents/hooks/useChat";
+import UploadService from "chatComponents/services/FileUploadService";
 // STATEMANAGMENT IMPORTS
-import selectedDarkThemeAtom from "../stateManager/atoms/selectedDarkThemeAtom";
-import seeMediaAtom from "../stateManager/atoms/seeMediaAtom";
-import plusSectionAtom from "../stateManager/atoms/plusSectionAtom";
-import roomIdAtom from "../stateManager/atoms/roomIdAtom";
-import fileFromPictureAtom from "../stateManager/atoms/fileFromPictureAtom";
-import isReceivedMediasMessageToUserAtom from "../stateManager/atoms/receiveMediasMessageToUserAtom";
-import imageInfoAtom from "../stateManager/atoms/imageInfoAtom";
+import selectedDarkThemeAtom from "chatComponents/stateManager/atoms/selectedDarkThemeAtom";
+import seeMediaAtom from "chatComponents/stateManager/atoms/seeMediaAtom";
+import plusSectionAtom from "chatComponents/stateManager/atoms/plusSectionAtom";
+import roomIdAtom from "chatComponents/stateManager/atoms/roomIdAtom";
+import fileFromPictureAtom from "chatComponents/stateManager/atoms/fileFromPictureAtom";
+import isReceivedMediasMessageToUserAtom from "chatComponents/stateManager/atoms/receiveMediasMessageToUserAtom";
+import imageInfoAtom from "chatComponents/stateManager/atoms/imageInfoAtom";
 // ASSETS IMPORTS
-import camera from "../assets/Group 54437@2x.png";
-import upArrow from "../assets/up-arrow.svg";
+import camera from "chatComponents/assets/Group 54437@2x.png";
+import upArrow from "chatComponents/assets/up-arrow.svg";
 
 const UploadImages = ({ handleSendMessage, setIsTaping }) => {
   const [state, setState] = useRecoilState(fileFromPictureAtom);

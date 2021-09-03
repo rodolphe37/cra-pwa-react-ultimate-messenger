@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import visitorInfo from "visitor-info";
 import { useRecoilState } from "recoil";
-import isOnlineAtom from "../stateManager/atoms/isOnlineAtom";
+import isOnlineAtom from "chatComponents/stateManager/atoms/isOnlineAtom";
 
 const useGetUserInfos = () => {
   const [latitude, setLatitude] = useState(0);

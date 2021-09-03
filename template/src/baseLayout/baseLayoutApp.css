@@ -1,0 +1,9 @@
+.bottomAppLayout {
+  display: inherit !important;
+  position: relative;
+  z-index: 999;
+}
+
+.bottomLayout-none {
+  display: none !important;
+}
