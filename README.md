@@ -7,8 +7,10 @@
 
 ## Online Demo sites
 
-**You can try Classic React Ultimate Messenger** **
+**You can try Classic React Ultimate Messenger**
+
 [With Classic bottom menu](https://pwa-react-ultimate-messenger-with-bottom-menu.netlify.app/)**,
+
 [With Radial burger menu](https://pwa-react-ultimate-messenger-with-radial-menu.netlify.app/)**,
 
 (The demo is not fully functional without the server started locally*)
