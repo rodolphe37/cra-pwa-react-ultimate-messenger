@@ -18,3 +18,6 @@
 
 > *you can only send/receive messages if you have the server locally on your machine -
 > I explain how to test the online version with your local version further in the documentation...
+
+## Install pack repository:
+**[Pack with automatic installation/configuration script](https://github.com/rodolphe37/pwa-rum-install-pack)
