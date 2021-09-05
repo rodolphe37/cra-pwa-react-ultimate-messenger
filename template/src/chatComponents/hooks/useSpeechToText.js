@@ -33,7 +33,8 @@ const useSpeechToText = () => {
     setIsTaping(true);
     SpeechRecognition.startListening({
       continuous: true,
-      language: isLanguage === "fr" ? "fr-FR" : "en-GB",
+      language:
+        isLanguage === "fr" ? "fr-FR" : isLanguage === "pt" ? "pt-br" : "en-GB",
     });
   };
   const stopHandle = () => {
@@ -44,7 +45,9 @@ const useSpeechToText = () => {
     resetTranscript();
   };
 
-  useEffect(() => {}, [speechToTextConversion, transcript, resetTranscript]);
+  useEffect(() => {
+    console.log(isLanguage);
+  }, [transcript, isLanguage, resetTranscript]);
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
