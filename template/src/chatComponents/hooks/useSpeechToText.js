@@ -17,7 +17,7 @@ const useSpeechToText = () => {
   const [isListening, setIsListening] = useRecoilState(isListeningAtom);
   const microphoneRef = useRef(null);
   const { setIsTaping, setNewMessage } = useChat(roomIdAtom);
-  // const { i18n, t } = useTranslation();
+  // eslint-disable-next-line no-unused-vars
   const [speechToTextConversion, setSpeechToTextConversion] =
     useRecoilState(speechToTextAtom);
   const [isLanguage] = useRecoilState(isLanguageAtom);
