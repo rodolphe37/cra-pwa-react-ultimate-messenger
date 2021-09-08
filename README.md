@@ -8,7 +8,7 @@
 
 ---
 
-## PWA RUM & Classic RUM version's
+## PWA RUM & Classic RUM quick view
 >![RUM PWA](demo/all-version.png)
 
 ---
