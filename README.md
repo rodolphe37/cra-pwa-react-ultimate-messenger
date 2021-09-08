@@ -13,7 +13,7 @@
 
 ---
 
-## PWA Overview
+## PWA ChatApp component Overview
 
 >![RUM PWA](demo/step3.png)
 
