@@ -78,7 +78,9 @@ Enjoy the World :smirk:
 I put almost everything open-source I can, and try to accommodate anyone who needs help using these projects. Obviously,
 this takes time. You can use this service for free.
 
-However, if you are using this project and are happy with it or just want to encourage me to keep creating: -
+However, if you are using this project and are happy with it or just want to encourage me to keep creating:
+
+- You can make donation in [This page](https://react-ultimate-messenger-documentation.netlify.app/prices#open-modal2) for support the project
 
 - Put a star and share the project :rocket:
 
