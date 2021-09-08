@@ -52,7 +52,7 @@
 
 > *you can only send/receive messages if you have the server locally on your machine -
 
- I explain how to test the online version with your local version further in the documentation site...
+ I explain how to test the online version with your local version in the documentation site...
 
  ---
 
