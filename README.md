@@ -13,7 +13,7 @@
 
 ---
 
-## Overview
+## PWA Overview
 
 >![RUM PWA](demo/step3.png)
 
@@ -27,7 +27,7 @@
 
 ---
 
-## Online Demo sites
+## PWA Online Demo sites
 
 **You can try PWA React Ultimate Messenger**
 
@@ -56,6 +56,6 @@
 
  ---
 
-## Install pack repository:
+## PWA Install pack repository:
 **[Pack with automatic installation/configuration script](https://github.com/rodolphe37/pwa-rum-install-pack)**
 >![RUM Install script](demo/step5.png)
