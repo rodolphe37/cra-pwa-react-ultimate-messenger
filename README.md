@@ -1,5 +1,13 @@
 # PWA React Ultimate Messenger template for React (create-react-app tools)
 
+## Mutlilingual App!
+
+> ***This PWA Application is multilingual by default.***
+>
+>***Languages :  🇨🇵 🇬🇧 🇵🇹***
+
+---
+
 ## PWA RUM & Classic RUM version's
 >![RUM PWA](demo/all-version.png)
 
@@ -9,6 +17,8 @@
 
 >![RUM PWA](demo/step3.png)
 
+---
+
 ## Full documentation site
 
 **You can go directly to the complete documentation site about the application and its different versions available.** **[here](https://react-ultimate-messenger-documentation.netlify.app/docs/pwa-version/pwa-version-installation)**,
@@ -16,7 +26,6 @@
 ![RUM Documentation](demo/documentation.png)
 
 ---
-
 
 ## Online Demo sites
 
@@ -42,7 +51,10 @@
 
 
 > *you can only send/receive messages if you have the server locally on your machine -
-> I explain how to test the online version with your local version further in the documentation...
+
+ I explain how to test the online version with your local version further in the documentation site...
+
+ ---
 
 ## Install pack repository:
 **[Pack with automatic installation/configuration script](https://github.com/rodolphe37/pwa-rum-install-pack)**
